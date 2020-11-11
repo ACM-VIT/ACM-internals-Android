@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Ideas"
+        android:enabled="true"
+        android:icon="@drawable/ic_lamp_1"
+        android:id="@+id/idea"/>
+    <item
+        android:title="Members"
+        android:enabled="true"
+        android:icon="@drawable/ic_members_icon"
+        android:id="@+id/members"/>
+    <item
+        android:title="Notifications"
+        android:enabled="true"
+        android:icon="@drawable/ic_notification"
+        android:id="@+id/notifications"/>
+    <item
+        android:title="Profile"
+        android:enabled="true"
+        android:icon="@drawable/ic_user_icon"
+        android:id="@+id/profile"/>
+</menu>

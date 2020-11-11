@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ACM_app</string>
+    <string name="welcome">Welcome Back,</string>
+    <string name="dashboard">Dashboard</string>
+    <string name="notification">Notifications</string>
+    <string name="ideas">Ideas</string>
+    <string name="core_members">Core<br />Committee<br />Members</string>
+</resources>
