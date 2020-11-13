@@ -5,4 +5,15 @@
     <string name="notification">Notifications</string>
     <string name="ideas">Ideas</string>
     <string name="core_members">Core<br />Committee<br />Members</string>
+
+    //Added
+    <string name="welcome_slider_1_text">Pitch your idea and add interested people to your project</string>
+    <string name="welcome_slider_1_header">Idea</string>
+    <string name="welcome_slider_2_text">Get to see all Core members\' details in one place</string>
+    <string name="welcome_slider_2_header">Members</string>
+    <string name="welcome_slider_3_text">Get notified about progress and get invites from others</string>
+    <string name="welcome_slider_3_header">Collaborate</string>
+    <string name="Continue">Continue</string>
+    <string name="Skip">Skip</string>
+
 </resources>
