@@ -57,8 +57,7 @@ public class WelcomeActivity extends AppCompatActivity {
         }
     }
 
-    private void launchAuthActivity()
-    {
+    private void launchAuthActivity() {
         startActivity(new Intent(WelcomeActivity.this, MainActivity.class));
         finish();
     }

@@ -18,8 +18,7 @@ public class WelcomeAdapter extends PagerAdapter {
     Context context;
     LayoutInflater layoutInflater;
 
-    public WelcomeAdapter(Context context)
-    {
+    public WelcomeAdapter(Context context) {
         this.context = context;
     }
 
@@ -42,8 +41,7 @@ public class WelcomeAdapter extends PagerAdapter {
     };
 
     @Override
-    public int getCount()
-    {
+    public int getCount() {
         return 3;
     }
 
@@ -58,7 +56,7 @@ public class WelcomeAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.welcome_slider, container, false);
         ImageView sliderImage = view.findViewById(R.id.welcome_slider_image);
-        TextView sliderHeader=view.findViewById(R.id.welcome_slider_header);
+        TextView sliderHeader = view.findViewById(R.id.welcome_slider_header);
         TextView sliderText = view.findViewById(R.id.welcome_slider_text);
         sliderImage.setImageResource(slideImages[position]);
         sliderHeader.setText(slideHeader[position]);

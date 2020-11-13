@@ -4,10 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".onBoarding.WelcomeActivity"
     android:background="@color/colorBackground"
     android:fitsSystemWindows="true"
-    >
+    tools:context=".onBoarding.WelcomeActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_welcome"
@@ -43,30 +42,29 @@
         <Button
             android:id="@+id/next"
             android:layout_width="240dp"
-            android:background="@drawable/primary_button_ripple_effect"
             android:layout_height="60dp"
             android:layout_gravity="center"
+            android:background="@drawable/primary_button_ripple_effect"
             android:fontFamily="@font/inter_font"
-            android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:textStyle="bold"
-            android:textSize="16sp"
             android:lineHeight="30dp"
-            android:text="@string/Continue" />
+            android:text="@string/Continue"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/skip"
+            style="@style/TextButton"
             android:layout_width="60dp"
             android:layout_height="50dp"
+            android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="20dp"
-            android:layout_gravity="center"
+            android:background="@color/colorBackground"
             android:fontFamily="@font/inter_font"
             android:text="@string/Skip"
-            style="@style/TextButton"
-            android:textColor="@color/colorBlue"
-            android:background="@color/colorBackground"
-            />
+            android:textColor="@color/colorBlue" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
