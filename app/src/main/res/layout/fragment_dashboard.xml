@@ -55,7 +55,7 @@
         android:fontFamily="@font/inter_font"
         android:text="@string/dashboard"
         android:textColor="@color/white"
-        android:textSize="29sp"
+        android:textSize="27sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcome_back_ll" />
@@ -262,10 +262,10 @@
             app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/ongoing_viewpager"
+            android:id="@+id/dashboard_viewpager"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="26dp"
+            android:layout_marginTop="10dp"
             android:layout_marginBottom="6dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
