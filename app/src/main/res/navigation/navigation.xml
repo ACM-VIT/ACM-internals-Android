@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/idea"
-        android:name="com.acmvit.acm_app.IdeaFragment"
+        android:name="com.acmvit.acm_app.DashboardFragment"
         android:label="idea_fragment"
         tools:layout="@layout/fragment_dashboard" />
     <fragment

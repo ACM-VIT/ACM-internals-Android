@@ -12,12 +12,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class IdeaFragment extends Fragment {
+public class DashboardFragment extends Fragment {
 
     private IdeaViewModel mViewModel;
 
-    public static IdeaFragment newInstance() {
-        return new IdeaFragment();
+    public static DashboardFragment newInstance() {
+        return new DashboardFragment();
     }
 
     @Override
