@@ -4,42 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".IdeaFragment"
-    android:background="@color/colorBackground">
+    android:background="@color/colorBackground"
+    tools:context=".IdeaFragment">
 
     <LinearLayout
+        android:id="@+id/welcome_back_ll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="48dp"
         android:orientation="horizontal"
-        android:id="@+id/welcome_back_ll"
-        >
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/cerebri_sans_regular"
-            android:text="@string/welcome"
-            android:layout_gravity="center"
             android:gravity="center"
+            android:text="@string/welcome"
             android:textColor="@color/white"
-            android:textSize="23sp"
-             />
+            android:textSize="23sp" />
 
         <TextView
+            android:id="@+id/welcome_back_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_marginStart="8dp"
             android:fontFamily="@font/cerebri_sans_regular"
-            android:layout_gravity="center"
             android:gravity="center"
             android:text="Dinesh!"
-            android:id="@+id/welcome_back_name"
             android:textColor="@color/white"
             android:textSize="23sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -49,16 +47,16 @@
 
 
     <TextView
+        android:id="@+id/dashboard_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
         android:fontFamily="@font/inter_font"
         android:text="@string/dashboard"
-        android:textStyle="bold"
         android:textColor="@color/white"
-        android:id="@+id/dashboard_tv"
         android:textSize="29sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcome_back_ll" />
 
@@ -66,22 +64,22 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@color/colorBackground"
         android:layout_marginTop="70dp"
+        android:background="@color/colorBackground"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/dashboard_tv">
 
         <LinearLayout
+            android:id="@+id/dashboard_headers"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:orientation="horizontal"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
-            android:id="@+id/dashboard_headers"
-            android:background="@color/colorBackground"
             android:layout_marginBottom="10dp"
+            android:background="@color/colorBackground"
+            android:orientation="horizontal"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -91,55 +89,52 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/colorBackground"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="15dp"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    app:cardElevation="0dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@color/colorBottomNav"
-                    >
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp">
+
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/dashboard_ideas_header_card"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:orientation="vertical"
-                        android:id="@+id/dashboard_ideas_header_card"
-                        android:background="@color/colorBottomNav"
-                        >
+                        android:background="@color/colorBlue"
+                        android:orientation="vertical">
 
                         <ImageView
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
                             android:layout_gravity="center"
+                            android:padding="10dp"
                             android:src="@drawable/ic_dashboard_ideas"
-                            />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
 
 
-            <TextView
-                android:id="@+id/dashboard_idea_header_tv"
-                style="@style/TitleText"
-                android:layout_width="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:textSize="13dp"
-                android:textColor="@color/white"
-                android:lineHeight="30dp"
-                android:fontFamily="@font/cerebri_sans_bold"
-                android:text="Ideas" />
+                <TextView
+                    android:id="@+id/dashboard_idea_header_tv"
+                    style="@style/TitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/cerebri_sans_bold"
+                    android:gravity="center"
+                    android:lineHeight="30dp"
+                    android:text="Ideas"
+                    android:textColor="@color/colorBlue"
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
@@ -148,37 +143,34 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/colorBackground"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="15dp"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    app:cardElevation="0dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@color/colorBottomNav"
-                    >
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp">
+
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/dashboard_current_projects_header_card"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:orientation="vertical"
-                        android:id="@+id/dashboard_current_projects_header_card"
                         android:background="@color/colorBottomNav"
-                        >
+                        android:orientation="vertical">
 
                         <ImageView
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
                             android:layout_gravity="center"
+                            android:padding="10dp"
                             android:src="@drawable/ic_dashboard_ideas"
-                            />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -188,15 +180,15 @@
                     android:id="@+id/dashboard_current_projects_header_tv"
                     style="@style/TitleText"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/cerebri_sans_bold"
                     android:gravity="center"
                     android:lineHeight="30dp"
-                    android:textSize="13dp"
-                    android:fontFamily="@font/cerebri_sans_bold"
+                    android:text="Current Projects"
                     android:textColor="@color/white"
-                    android:text="Current Projects" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
@@ -205,37 +197,34 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@color/colorBackground"
-                android:orientation="vertical"
-                >
+                android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="15dp"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    app:cardElevation="0dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@color/colorBottomNav"
-                    >
+                    app:cardCornerRadius="15dp"
+                    app:cardElevation="0dp">
+
                     <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/dashboard_all_projects_header_card"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:orientation="vertical"
-                        android:id="@+id/dashboard_all_projects_header_card"
                         android:background="@color/colorBottomNav"
-                        >
+                        android:orientation="vertical">
 
                         <ImageView
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:padding="10dp"
                             android:layout_gravity="center"
+                            android:padding="10dp"
                             android:src="@drawable/ic_dashboard_all_projects"
-                            />
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -245,32 +234,32 @@
                     android:id="@+id/dashboard_all_projects_header_tv"
                     style="@style/TitleText"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="10dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:lineHeight="30dp"
-                    android:textSize="13dp"
+                    android:layout_marginTop="10dp"
                     android:fontFamily="@font/cerebri_sans_bold"
                     android:gravity="center"
+                    android:lineHeight="30dp"
+                    android:text="All Projects"
                     android:textColor="@color/white"
-                    android:text="All Projects" />
+                    android:textSize="13dp" />
 
             </LinearLayout>
 
         </LinearLayout>
 
         <View
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toTopOf="@+id/guideline"
+            android:id="@+id/dashboard_divder_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="20dp"
             android:alpha="0.8"
-            android:id="@+id/dashboard_divder_line"
-            android:background="@android:color/darker_gray"/>
+            android:background="@android:color/darker_gray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline" />
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/ongoing_viewpager"
