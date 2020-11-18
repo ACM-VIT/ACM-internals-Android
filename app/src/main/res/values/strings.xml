@@ -15,5 +15,6 @@
     <string name="welcome_slider_3_header">Collaborate</string>
     <string name="Continue">Continue</string>
     <string name="Skip">Skip</string>
+    <string name="dashboard_fake_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
 
 </resources>
