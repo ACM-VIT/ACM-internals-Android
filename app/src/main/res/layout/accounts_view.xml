@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="accountImg"
+            type="int" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp">
+
+        <TextView
+            android:id="@+id/acc_name"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:gravity="center_vertical"
+            android:paddingStart="16dp"
+            android:text="@string/no_account"
+            android:textColor="#5184A3"
+            android:textSize="25sp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/acc_img"
+            app:layout_constraintEnd_toStartOf="@+id/acc_status"
+            app:layout_constraintStart_toEndOf="@+id/acc_img"
+            app:layout_constraintTop_toTopOf="@+id/acc_img" />
+
+        <ImageView
+            android:id="@+id/acc_status"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:adjustViewBounds="true"
+            app:layout_constraintBottom_toBottomOf="@+id/acc_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/acc_name"
+            app:srcCompat="@drawable/ic_warning" />
+
+        <ImageView
+            android:id="@+id/acc_img"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:src="@{accountImg}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_github" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
