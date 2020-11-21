@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 
-import com.acmvit.acm_app.model.AuthData;
+import com.acmvit.acm_app.model.UserData;
 import com.acmvit.acm_app.network.BackendNetworkCall;
 import com.acmvit.acm_app.network.BackendResponse;
 import com.acmvit.acm_app.network.BackendService;
@@ -31,16 +31,16 @@ public class AuthRepository {
         return instance;
     }
 
-    public LiveData<Resource<AuthData>> loginByGoogle(String idToken){
+    public LiveData<Resource<UserData>> loginByGoogle(String idToken){
         String bearerToken = "Bearer " + idToken;
-        MutableLiveData<Resource<AuthData>> resource = new MutableLiveData<>();
+        MutableLiveData<Resource<UserData>> resource = new MutableLiveData<>();
         baseService.getAccessToken(bearerToken).enqueue(new BackendNetworkCall<>(resource));
         return resource;
     }
 
     //Synchronous refresh access call
     @WorkerThread
-    public Response<BackendResponse<AuthData>> refreshAccessToken(String accessToken, String refreshToken) throws IOException {
+    public Response<BackendResponse<UserData>> refreshAccessToken(String accessToken, String refreshToken) throws IOException {
         String bearerAccessToken = "Bearer " + accessToken;
         HashMap<String, String> refresh = new HashMap<>();
         refresh.put("refreshToken", refreshToken);

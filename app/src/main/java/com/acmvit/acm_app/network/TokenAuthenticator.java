@@ -3,7 +3,7 @@ package com.acmvit.acm_app.network;
 import android.util.Log;
 
 import com.acmvit.acm_app.AcmApp;
-import com.acmvit.acm_app.model.AuthData;
+import com.acmvit.acm_app.model.UserData;
 import com.acmvit.acm_app.model.AuthToken;
 import com.acmvit.acm_app.pref.SessionManager;
 import com.acmvit.acm_app.repository.AuthRepository;
@@ -48,7 +48,7 @@ public class TokenAuthenticator implements Authenticator {
 
             // We need a new client, since we don't want to make another call using our client with access token
             try {
-                retrofit2.Response<BackendResponse<AuthData>> tokenResponse =
+                retrofit2.Response<BackendResponse<UserData>> tokenResponse =
                         authRepository.refreshAccessToken(authToken.getAccessToken(), authToken.getRefreshToken());
                 if (tokenResponse.code() == 200) {
                     AuthToken newToken = tokenResponse.body().getData().getToken();

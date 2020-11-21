@@ -2,14 +2,14 @@ package com.acmvit.acm_app.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class AuthData {
+public class UserData {
     @SerializedName("user")
     private User user;
 
     @SerializedName("tokens")
     private AuthToken token;
 
-    public AuthData(User user, AuthToken token) {
+    public UserData(User user, AuthToken token) {
         this.user = user;
         this.token = token;
     }
