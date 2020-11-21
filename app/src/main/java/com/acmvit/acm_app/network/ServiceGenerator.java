@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
     private static ServiceGenerator instance;
     private final Retrofit baseClient;
-    private Retrofit backendClient;
+    private final Retrofit backendClient;
 
     public static ServiceGenerator getInstance() {
         if(instance == null){
@@ -31,9 +31,17 @@ public class ServiceGenerator {
                 .addInterceptor(loggingInterceptor);
 
         baseClient = retrofitBuilder.client(clientBuilder.build()).build();
+
+        clientBuilder.addInterceptor(new TokenInterceptor())
+                .authenticator(new TokenAuthenticator());
+
+        backendClient = retrofitBuilder.client(clientBuilder.build()).build();
     }
 
     public <S> S createService(Class<S> serviceClass) {
         return baseClient.create(serviceClass);
+    }
+    public <S> S createTokenizedService(Class<S> serviceClass) {
+        return backendClient.create(serviceClass);
     }
 }
