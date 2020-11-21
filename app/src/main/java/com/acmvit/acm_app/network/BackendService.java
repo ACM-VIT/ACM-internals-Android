@@ -16,5 +16,7 @@ public interface BackendService {
     @POST("/App/v1/access/login/google")
     Call<BackendResponse<AuthData>> getAccessToken(@Header("Authorization") String token);
 
-
+    @POST("/App/v1/access/token/refresh")
+    Call<BackendResponse<AuthData>> refreshAccessToken(@Header("Authorization") String token,
+                                                       @Body HashMap<String, String> refreshToken);
 }
