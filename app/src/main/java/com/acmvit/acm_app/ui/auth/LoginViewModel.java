@@ -1,12 +1,20 @@
 package com.acmvit.acm_app.ui.auth;
 
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
 
 import com.acmvit.acm_app.AcmApp;
+import com.acmvit.acm_app.model.AuthData;
+import com.acmvit.acm_app.model.User;
 import com.acmvit.acm_app.pref.SessionManager;
+import com.acmvit.acm_app.repository.AuthRepository;
 import com.acmvit.acm_app.ui.base.ActivityViewModel;
 import com.acmvit.acm_app.ui.base.BaseViewModel;
+import com.acmvit.acm_app.util.Resource;
+import com.acmvit.acm_app.util.Status;
 
 public class LoginViewModel extends BaseViewModel {
     public enum State{
@@ -15,13 +23,16 @@ public class LoginViewModel extends BaseViewModel {
         GET_ACCESS_CODE,
         ERROR
     }
+
     private final SessionManager sessionManager = AcmApp.getSessionManager();
     private final ActivityViewModel activityViewModel;
+    private final AuthRepository authRepository;
     private final MutableLiveData<State> state = new MutableLiveData<>(State.STANDBY);
 
     public LoginViewModel(ActivityViewModel activityViewModel) {
         super(activityViewModel);
         this.activityViewModel = activityViewModel;
+        authRepository = AuthRepository.getInstance();
     }
 
     public void signInWithGoogle(){
@@ -32,8 +43,22 @@ public class LoginViewModel extends BaseViewModel {
         }
     }
 
-    public void getAccessCode(String authCode){
-
+    public void getAccessCode(String idToken){
+        if(idToken != null && !sessionManager.getAuthState()){
+            state.setValue(State.GET_ACCESS_CODE);
+            activityViewModel.setIsLoading(true);
+            LiveData<Resource<AuthData>> authData = authRepository.loginByGoogle(idToken);
+            authData.observeForever(authDataResource -> {
+                AuthData data = authDataResource.data;
+                if(authDataResource.status == Status.SUCCESS && data != null){
+                    sessionManager.addUserDetails(data.getUser());
+                    sessionManager.addToken(data.getToken());
+                    state.setValue(State.STANDBY);
+                }else{
+                    state.setValue(State.ERROR);
+                }
+            });
+        }
     }
 
     public void setError() {

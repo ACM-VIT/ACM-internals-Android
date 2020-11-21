@@ -27,7 +27,6 @@ public class LoginActivity extends BaseActivity {
     private AcmApp acmApp;
     private ActivityLoginBinding binding;
     private GoogleSignInClient googleSignInClient;
-    private SessionManager sessionManager;
     private LoginViewModel loginViewModel;
 
     @Override
@@ -39,7 +38,6 @@ public class LoginActivity extends BaseActivity {
 
         acmApp = ((AcmApp) getApplicationContext());
         googleSignInClient = acmApp.getmGoogleSignInClient();
-        sessionManager = AcmApp.getSessionManager();
         loginViewModel = new ViewModelProvider(this, new BaseViewModelFactory(this))
             .get(LoginViewModel.class);
         initObservers();
@@ -51,19 +49,25 @@ public class LoginActivity extends BaseActivity {
             //Navigate to MainActivity
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 
     private void initObservers() {
         loginViewModel.getState().observe(this, state -> {
-            if(state == LoginViewModel.State.LOG_IN){
-                Intent signInIntent = googleSignInClient.getSignInIntent();
-                startActivityForResult(signInIntent, RC_GOOGLE);
+            switch (state){
+                case LOG_IN:
+                    Intent signInIntent = googleSignInClient.getSignInIntent();
+                    startActivityForResult(signInIntent, RC_GOOGLE);
+                    break;
+
+                case ERROR:
+                    googleSignInClient.signOut();
+                    break;
             }
         });
     }
 
-    @SuppressLint("DefaultLocale")
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
@@ -71,10 +75,11 @@ public class LoginActivity extends BaseActivity {
                 loginViewModel.setError();
                 return;
             }
-            loginViewModel.getAccessCode();
+            loginViewModel.getAccessCode(account.getIdToken());
 
         } catch (ApiException e) {
             // The ApiException status code indicates the detailed failure reason.
+            loginViewModel.setError();
             Log.e(TAG, "handleSignInResult: " + e.getStatusCode(), e);
         }
     }
