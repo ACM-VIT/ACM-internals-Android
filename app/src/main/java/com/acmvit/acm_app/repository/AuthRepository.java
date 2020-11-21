@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.acmvit.acm_app.model.AuthData;
 import com.acmvit.acm_app.network.BackendNetworkCall;
+import com.acmvit.acm_app.network.BackendResponse;
 import com.acmvit.acm_app.network.BackendService;
 import com.acmvit.acm_app.network.ServiceGenerator;
 import com.acmvit.acm_app.util.Resource;
@@ -37,5 +38,12 @@ public class AuthRepository {
         return resource;
     }
 
-
+    //Synchronous refresh access call
+    @WorkerThread
+    public Response<BackendResponse<AuthData>> refreshAccessToken(String accessToken, String refreshToken) throws IOException {
+        String bearerAccessToken = "Bearer " + accessToken;
+        HashMap<String, String> refresh = new HashMap<>();
+        refresh.put("refreshToken", refreshToken);
+        return baseService.refreshAccessToken(bearerAccessToken, refresh).execute();
+    }
 }
