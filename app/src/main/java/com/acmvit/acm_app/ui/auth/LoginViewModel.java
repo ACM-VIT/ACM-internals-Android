@@ -1,14 +1,10 @@
 package com.acmvit.acm_app.ui.auth;
 
-import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 
 import com.acmvit.acm_app.AcmApp;
-import com.acmvit.acm_app.model.AuthData;
-import com.acmvit.acm_app.model.User;
+import com.acmvit.acm_app.model.UserData;
 import com.acmvit.acm_app.pref.SessionManager;
 import com.acmvit.acm_app.repository.AuthRepository;
 import com.acmvit.acm_app.ui.base.ActivityViewModel;
@@ -47,9 +43,9 @@ public class LoginViewModel extends BaseViewModel {
         if(idToken != null && !sessionManager.getAuthState()){
             state.setValue(State.GET_ACCESS_CODE);
             activityViewModel.setIsLoading(true);
-            LiveData<Resource<AuthData>> authData = authRepository.loginByGoogle(idToken);
+            LiveData<Resource<UserData>> authData = authRepository.loginByGoogle(idToken);
             authData.observeForever(authDataResource -> {
-                AuthData data = authDataResource.data;
+                UserData data = authDataResource.data;
                 if(authDataResource.status == Status.SUCCESS && data != null){
                     sessionManager.addUserDetails(data.getUser());
                     sessionManager.addToken(data.getToken());
