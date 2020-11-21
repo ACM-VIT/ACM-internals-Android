@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.akribase.oauthloginimplementation.model.AuthToken;
-import com.akribase.oauthloginimplementation.model.User;
+import com.acmvit.acm_app.model.AuthToken;
+import com.acmvit.acm_app.model.User;
 import com.google.gson.Gson;
 
 public class SessionManager {
