@@ -34,12 +34,14 @@ public class LoginActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        binding.setLifecycleOwner(this);
 
         acmApp = ((AcmApp) getApplicationContext());
         googleSignInClient = acmApp.getmGoogleSignInClient();
         loginViewModel = new ViewModelProvider(this, new BaseViewModelFactory(this))
             .get(LoginViewModel.class);
+
+        binding.setLifecycleOwner(this);
+        binding.setViewmodel(loginViewModel);
         initObservers();
     }
 
