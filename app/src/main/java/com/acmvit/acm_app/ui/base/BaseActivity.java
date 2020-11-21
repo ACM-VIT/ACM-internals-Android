@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 public abstract class BaseActivity extends AppCompatActivity {
-    private ActivityViewModel activityViewModel;
+    protected ActivityViewModel activityViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,5 +19,6 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public abstract void onLoginStateChanged(boolean isLoggedIn);
-    public abstract void onNetworkStateChanged(boolean isConnected);
+    public void onNetworkStateChanged(boolean isConnected) {}
+    public void onLoadingStateChanged(boolean isLoading) {}
 }
