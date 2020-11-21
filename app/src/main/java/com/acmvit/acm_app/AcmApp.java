@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -16,7 +17,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 public class AcmApp extends Application {
     private GoogleSignInClient mGoogleSignInClient;
     private static SessionManager sessionManager;
-    private static MutableLiveData<Boolean> isConnected;
+    private static final MutableLiveData<Boolean> isConnected = new MutableLiveData<>(false);
 
     @Override
     public void onCreate() {

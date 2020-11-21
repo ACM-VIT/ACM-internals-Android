@@ -22,5 +22,4 @@ public class NetworkChangeReceiver extends BroadcastReceiver {
         final android.net.NetworkInfo netWorkInfo = connMgr.getActiveNetworkInfo();
         AcmApp.setIsConnected((netWorkInfo != null && netWorkInfo.isConnected()));
     }
-
 }
