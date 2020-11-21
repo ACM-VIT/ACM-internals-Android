@@ -10,9 +10,19 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
+import androidx.work.Constraints;
+import androidx.work.Data;
+import androidx.work.NetworkType;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
+import androidx.work.WorkRequest;
+import androidx.work.Worker;
 
 import com.acmvit.acm_app.MainActivity;
 import com.acmvit.acm_app.R;
+import com.acmvit.acm_app.SendFCMTokenWork;
+import com.acmvit.acm_app.pref.BasePreferenceManager;
+import com.acmvit.acm_app.repository.UserRepository;
 import com.acmvit.acm_app.util.Constants;
 import com.acmvit.acm_app.util.GeneralUtils;
 import com.google.firebase.iid.FirebaseInstanceIdService;
@@ -24,11 +34,18 @@ import java.util.UUID;
 
 public class NotificationService extends FirebaseMessagingService {
     private static final String TAG = "NotificationService";
+    private UserRepository userRepository;
+
+    public NotificationService() {
+        userRepository = UserRepository.getInstance();
+    }
 
     @Override
-    public void onNewToken(@NonNull String s) {
-        //TODO: Send Token to the backend
-        super.onNewToken(s);
+    public void onNewToken(@NonNull String newToken) {
+        super.onNewToken(newToken);
+
+        //Send the token using WorkManager for Reliable sending
+        sendTokenUsingWM(newToken);
     }
 
     @Override
@@ -75,6 +92,24 @@ public class NotificationService extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(channel);
         }
         notificationManager.notify(GeneralUtils.generateUniqueId(), notification);
+    }
+
+    private void sendTokenUsingWM(String token) {
+        Data data = new Data.Builder()
+                .putString(SendFCMTokenWork.TOKEN_KEY, token)
+                .build();
+
+        Constraints constraints = new Constraints.Builder()
+                .setRequiredNetworkType(NetworkType.CONNECTED)
+                .build();
+
+        WorkRequest sendTokenWork =
+                new OneTimeWorkRequest.Builder(SendFCMTokenWork.class)
+                        .setConstraints(constraints)
+                        .setInputData(data)
+                        .build();
+
+        WorkManager.getInstance(this).enqueue(sendTokenWork);
     }
 
 }
