@@ -13,4 +13,8 @@ public class BaseViewModel extends ViewModel {
     public BaseViewModel(ActivityViewModel activityViewModel) {
         this.activityViewModel = activityViewModel;
     }
+
+    public ActivityViewModel getActivityViewModel() {
+        return activityViewModel;
+    }
 }
