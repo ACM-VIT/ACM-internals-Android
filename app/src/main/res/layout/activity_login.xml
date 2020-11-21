@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorBackground"
-        tools:context=".ui.auth.LoginActivity">
+        tools:context=".ui.auth.LoginActivity"
+        android:animateLayoutChanges="true">
 
         <ImageView
             android:id="@+id/imageView2"
@@ -75,10 +76,12 @@
 
         <TextView
             android:id="@+id/textView3"
+            style="@style/no_internet_bar"
             android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:background="#EF5350"
-            android:text="TextView"
+            android:layout_height="45dp"
+            android:text="@string/no_internet_connection"
+            android:visibility="@{viewmodel.activityViewModel.networkState ?
+            View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
