@@ -70,22 +70,6 @@ public class LoginActivity extends BaseActivity {
         });
     }
 
-    private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
-        try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            if(account == null){
-                loginViewModel.setError();
-                return;
-            }
-            loginViewModel.getAccessCode(account.getIdToken());
-
-        } catch (ApiException e) {
-            // The ApiException status code indicates the detailed failure reason.
-            loginViewModel.setError();
-            Log.e(TAG, "handleSignInResult: " + e.getStatusCode(), e);
-        }
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -93,8 +77,7 @@ public class LoginActivity extends BaseActivity {
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_GOOGLE) {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            handleSignInResult(task);
+            loginViewModel.handleSignInResult(task);
         }
     }
-
 }

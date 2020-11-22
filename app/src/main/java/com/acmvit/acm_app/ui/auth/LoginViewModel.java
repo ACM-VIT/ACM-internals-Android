@@ -1,5 +1,8 @@
 package com.acmvit.acm_app.ui.auth;
 
+import android.app.Application;
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -11,8 +14,12 @@ import com.acmvit.acm_app.ui.base.ActivityViewModel;
 import com.acmvit.acm_app.ui.base.BaseViewModel;
 import com.acmvit.acm_app.util.Resource;
 import com.acmvit.acm_app.util.Status;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.Task;
 
 public class LoginViewModel extends BaseViewModel {
+    private static final String TAG = "LoginViewModel";
     public enum State{
         STANDBY,
         LOG_IN,
@@ -21,13 +28,11 @@ public class LoginViewModel extends BaseViewModel {
     }
 
     private final SessionManager sessionManager = AcmApp.getSessionManager();
-    private final ActivityViewModel activityViewModel;
     private final AuthRepository authRepository;
     private final MutableLiveData<State> state = new MutableLiveData<>(State.STANDBY);
 
-    public LoginViewModel(ActivityViewModel activityViewModel) {
-        super(activityViewModel);
-        this.activityViewModel = activityViewModel;
+    public LoginViewModel(ActivityViewModel activityViewModel, Application application) {
+        super(activityViewModel, application);
         authRepository = AuthRepository.getInstance();
     }
 
@@ -54,6 +59,21 @@ public class LoginViewModel extends BaseViewModel {
                     state.setValue(State.ERROR);
                 }
             });
+        }
+    }
+
+    public void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
+        try {
+            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            if(account == null){
+                setError();
+                return;
+            }
+            getAccessCode(account.getIdToken());
+
+        } catch (ApiException e) {
+            setError();
+            Log.e(TAG, "handleSignInResult: " + e.getStatusCode(), e);
         }
     }
 
