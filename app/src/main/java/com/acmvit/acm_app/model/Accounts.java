@@ -7,9 +7,9 @@ public class Accounts {
     private Object google;
 
     @SerializedName("discord")
-    private Object discord;
+    private Discord discord;
 
-    public Accounts(Object google, Object discord) {
+    public Accounts(Object google, Discord discord) {
         this.google = google;
         this.discord = discord;
     }
@@ -22,11 +22,11 @@ public class Accounts {
         this.google = google;
     }
 
-    public Object getDiscord() {
+    public Discord getDiscord() {
         return discord;
     }
 
-    public void setDiscord(Object discord) {
+    public void setDiscord(Discord discord) {
         this.discord = discord;
     }
 
