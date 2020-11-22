@@ -7,6 +7,14 @@
         <variable
             name="accountImg"
             type="int" />
+
+        <variable
+            name="onClick"
+            type="java.util.concurrent.Callable" />
+
+        <variable
+            name="accountName"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,7 +22,8 @@
         android:layout_height="wrap_content"
         android:background="@color/colorBackground"
         android:paddingTop="16dp"
-        android:paddingBottom="16dp">
+        android:paddingBottom="16dp"
+        android:onClick="@{() -> onClick.call()}">
 
         <TextView
             android:id="@+id/acc_name"
@@ -22,7 +31,7 @@
             android:layout_height="0dp"
             android:gravity="center_vertical"
             android:paddingStart="16dp"
-            android:text="@string/no_account"
+            android:text="@{accountName}"
             android:textColor="#5184A3"
             android:textSize="25sp"
             android:textStyle="italic"

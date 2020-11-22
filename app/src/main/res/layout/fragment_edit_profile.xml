@@ -5,6 +5,9 @@
 
     <data>
         <import type="com.acmvit.acm_app.R"/>
+        <variable
+            name="viewmodel"
+            type="com.acmvit.acm_app.ui.profile.EditProfileViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/inter_font"
-            android:text="Add Accounts"
+            android:text="@string/edit_profile"
             android:textColor="@color/white"
             android:textSize="28sp"
             android:textStyle="bold"
@@ -71,12 +74,15 @@
             <include
                 android:id="@+id/github_acc"
                 layout="@layout/accounts_view"
-                app:accountImg="@{R.drawable.ic_github}" />
+                app:accountImg="@{R.drawable.ic_github}"/>
 
             <include
                 android:id="@+id/discord_acc"
                 layout="@layout/accounts_view"
-                app:accountImg="@{R.drawable.ic_discord}"/>
+                app:accountImg="@{R.drawable.ic_discord}"
+                app:onClick="@{() -> viewmodel.signInWithDiscord()}"
+                app:accountName="@{viewmodel.accounts.discord != null ?
+                viewmodel.accounts.discord.username : context.getString(R.string.no_account)}"/>
 
         </LinearLayout>
 
