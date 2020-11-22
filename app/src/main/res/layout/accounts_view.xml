@@ -10,7 +10,7 @@
 
         <variable
             name="onClick"
-            type="java.util.concurrent.Callable" />
+            type="com.acmvit.acm_app.util.Callback" />
 
         <variable
             name="accountName"

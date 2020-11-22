@@ -74,15 +74,15 @@
             <include
                 android:id="@+id/github_acc"
                 layout="@layout/accounts_view"
-                app:accountImg="@{R.drawable.ic_github}"/>
+                app:accountImg="@{R.drawable.ic_github}"
+                app:onClick="@{() -> null}"/>
 
             <include
                 android:id="@+id/discord_acc"
                 layout="@layout/accounts_view"
                 app:accountImg="@{R.drawable.ic_discord}"
                 app:onClick="@{() -> viewmodel.signInWithDiscord()}"
-                app:accountName="@{viewmodel.accounts.discord != null ?
-                viewmodel.accounts.discord.username : context.getString(R.string.no_account)}"/>
+                app:accountName="@{viewmodel.accounts.discord != null ? viewmodel.accounts.discord.username : context.getString(R.string.no_account)}"/>
 
         </LinearLayout>
 
