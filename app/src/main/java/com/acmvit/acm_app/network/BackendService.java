@@ -23,4 +23,7 @@ public interface BackendService {
     @PUT("/App/v1/user/update")
     Call<BackendResponse<UserData>> updateUser(@Body HashMap<String, String> changeBody);
 
+    @POST("/App/v1/access/login/discord")
+    Call<BackendResponse<UserData>> addDiscord(@Header("discord_token") String discordToken);
+
 }
