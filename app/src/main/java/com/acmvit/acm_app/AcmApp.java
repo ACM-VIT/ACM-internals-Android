@@ -10,9 +10,12 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.acmvit.acm_app.pref.SessionManager;
 import com.acmvit.acm_app.service.NetworkChangeReceiver;
+import com.acmvit.acm_app.util.Constants;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.messaging.FirebaseMessaging;
+import com.google.firebase.messaging.FirebaseMessagingService;
 
 public class AcmApp extends Application {
     private GoogleSignInClient mGoogleSignInClient;
@@ -22,6 +25,9 @@ public class AcmApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        //Setup Firebase Notification
+        FirebaseMessaging.getInstance().subscribeToTopic(Constants.ProjectNotification.TOPIC);
 
         //Setup SessionManager
         sessionManager = new SessionManager(this);
