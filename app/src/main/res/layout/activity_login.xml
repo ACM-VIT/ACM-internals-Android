@@ -70,8 +70,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
-            android:visibility="@{viewmodel.activityViewModel.isLoading ?
-            View.VISIBLE : View.INVISIBLE}"
+            android:visibility="@{viewmodel.activityViewModel.isLoading ? View.VISIBLE : View.INVISIBLE}"
             app:lottie_rawRes="@raw/loading_lottie" />
 
         <TextView
@@ -80,8 +79,7 @@
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:text="@string/no_internet_connection"
-            android:visibility="@{viewmodel.activityViewModel.networkState ?
-            View.GONE : View.VISIBLE}"
+            android:visibility="@{viewmodel.activityViewModel.networkState ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
