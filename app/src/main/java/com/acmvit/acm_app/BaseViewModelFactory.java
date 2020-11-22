@@ -1,6 +1,8 @@
 package com.acmvit.acm_app;
 
 import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
@@ -14,11 +16,14 @@ import java.lang.reflect.InvocationTargetException;
 
 public class BaseViewModelFactory extends ViewModelProvider.NewInstanceFactory {
  
-    private ActivityViewModel activityViewModel;
+    private final ActivityViewModel activityViewModel;
+    private final Application application;
 
     public BaseViewModelFactory(Activity activity) {
         activityViewModel = new ViewModelProvider((ViewModelStoreOwner) activity)
                 .get(ActivityViewModel.class);
+
+        application = activity.getApplication();
     }
  
     @NonNull
@@ -26,7 +31,8 @@ public class BaseViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (BaseViewModel.class.isAssignableFrom(modelClass)) {
             try {
-                return modelClass.getConstructor(BaseViewModel.class).newInstance(activityViewModel);
+                return modelClass.getConstructor(BaseViewModel.class)
+                        .newInstance(activityViewModel, application);
             } catch (InstantiationException | IllegalAccessException
                     | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
