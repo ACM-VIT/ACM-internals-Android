@@ -3,26 +3,18 @@ package com.acmvit.acm_app.ui.auth;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.BaseViewModelFactory;
 import com.acmvit.acm_app.MainActivity;
-import com.acmvit.acm_app.SendFCMTokenWork;
 import com.acmvit.acm_app.databinding.ActivityLoginBinding;
-import com.acmvit.acm_app.pref.SessionManager;
 import com.acmvit.acm_app.ui.base.BaseActivity;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.messaging.FirebaseMessaging;
-import com.google.firebase.messaging.FirebaseMessagingService;
 
 public class LoginActivity extends BaseActivity {
     private static final String TAG = "LoginActivity";

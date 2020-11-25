@@ -1,10 +1,9 @@
-package com.acmvit.acm_app;
+package com.acmvit.acm_app.work;
 
 import android.content.Context;
 
 import androidx.annotation.NonNull;
 import androidx.work.Constraints;
-import androidx.work.Data;
 import androidx.work.ListenableWorker;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;

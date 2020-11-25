@@ -1,4 +1,4 @@
-package com.acmvit.acm_app;
+package com.acmvit.acm_app.work;
 
 import android.content.Context;
 
@@ -12,7 +12,6 @@ import androidx.work.WorkRequest;
 import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
-import com.acmvit.acm_app.repository.AuthRepository;
 import com.acmvit.acm_app.repository.UserRepository;
 
 import org.jetbrains.annotations.NotNull;
