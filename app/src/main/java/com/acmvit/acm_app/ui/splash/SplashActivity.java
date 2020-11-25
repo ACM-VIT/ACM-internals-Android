@@ -22,7 +22,7 @@ public class SplashActivity extends AppCompatActivity {
 
         BasePreferenceManager basePreferenceManager = new BasePreferenceManager(this);
         boolean isFirstTime = basePreferenceManager.getIsFirstTime();
-        final Class<?> targetActivityClass = isFirstTime ? WelcomeActivity.class : MainActivity.class;
+        final Class<?> targetActivityClass = isFirstTime ? MainActivity.class : MainActivity.class;
 
         Runnable startActivityRunnable = () -> {
             Intent intent = new Intent(SplashActivity.this, targetActivityClass);
