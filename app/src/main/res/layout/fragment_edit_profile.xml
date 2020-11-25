@@ -64,18 +64,13 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_name"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/text_input_layout_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:focusedByDefault="false"
                     android:hint="@string/name"
-                    android:textColorHint="#EFFDFF"
-                    app:boxStrokeColor="@color/text_input_color_selector"
                     app:counterEnabled="true"
                     app:counterMaxLength="30"
-                    app:counterTextColor="@color/colorDisp"
                     app:errorText="@{TextUtils.isEmpty(viewmodel.name) ? R.string.required_field_error : 0}"
-                    app:hintTextColor="@color/colorBlueDark"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toTopOf="@+id/guideline4">
@@ -83,7 +78,6 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:focusedByDefault="false"
                         android:maxLength="30"
                         android:singleLine="true"
                         android:text="@={viewmodel.name}"
@@ -93,17 +87,13 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_description"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/text_input_layout_style"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:hint="@string/status"
-                    android:textColorHint="#EFFDFF"
-                    app:boxStrokeColor="@color/text_input_color_selector"
                     app:counterEnabled="true"
                     app:counterMaxLength="50"
-                    app:counterTextColor="@color/colorDisp"
-                    app:hintTextColor="@color/colorBlueDark"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toBottomOf="@+id/input_name">
