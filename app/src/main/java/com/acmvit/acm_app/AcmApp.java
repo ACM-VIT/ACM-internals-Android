@@ -3,6 +3,7 @@ package com.acmvit.acm_app;
 import android.app.Application;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
@@ -42,7 +43,12 @@ public class AcmApp extends Application {
         //Init Connection status
         ConnectivityManager connectivityManager =
                 (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-        setIsConnected(connectivityManager.getActiveNetworkInfo().isConnected());
+        NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
+        if(networkInfo != null){
+            setIsConnected(networkInfo.isConnected());
+        }else{
+            setIsConnected(false);
+        }
         registerReceiver(new NetworkChangeReceiver(),
                 new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
