@@ -18,6 +18,7 @@ import androidx.work.WorkManager;
 import androidx.work.WorkRequest;
 import androidx.work.Worker;
 
+import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.MainActivity;
 import com.acmvit.acm_app.R;
 import com.acmvit.acm_app.SendFCMTokenWork;
@@ -43,9 +44,10 @@ public class NotificationService extends FirebaseMessagingService {
     @Override
     public void onNewToken(@NonNull String newToken) {
         super.onNewToken(newToken);
-
-        //Send the token using WorkManager for Reliable sending
-        sendTokenUsingWM(newToken);
+        if(AcmApp.getSessionManager().getToken() != null) {
+            //Send the token using WorkManager for Reliable sending
+            userRepository.sendFCMTokenUsingWM(this);
+        }
     }
 
     @Override
@@ -92,24 +94,6 @@ public class NotificationService extends FirebaseMessagingService {
             notificationManager.createNotificationChannel(channel);
         }
         notificationManager.notify(GeneralUtils.generateUniqueId(), notification);
-    }
-
-    private void sendTokenUsingWM(String token) {
-        Data data = new Data.Builder()
-                .putString(SendFCMTokenWork.TOKEN_KEY, token)
-                .build();
-
-        Constraints constraints = new Constraints.Builder()
-                .setRequiredNetworkType(NetworkType.CONNECTED)
-                .build();
-
-        WorkRequest sendTokenWork =
-                new OneTimeWorkRequest.Builder(SendFCMTokenWork.class)
-                        .setConstraints(constraints)
-                        .setInputData(data)
-                        .build();
-
-        WorkManager.getInstance(this).enqueue(sendTokenWork);
     }
 
 }
