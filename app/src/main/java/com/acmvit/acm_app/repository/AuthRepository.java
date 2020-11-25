@@ -52,7 +52,12 @@ public class AuthRepository {
 
     public LiveData<Resource<Void>> logout(){
         MutableLiveData<Resource<Void>> resource = new MutableLiveData<>();
-        tokenizedService.logout().enqueue(new BackendNetworkCall<>(resource));
+        tokenizedService.logout().enqueue(new BackendNetworkCall<Void>(resource){
+            @Override
+            public void performIfSuccess(Void data) {
+                sessionManager.truncateSession();
+            }
+        });
         return resource;
     }
 
