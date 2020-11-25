@@ -1,16 +1,13 @@
 package com.acmvit.acm_app.ui.profile;
 
-import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,26 +16,18 @@ import com.acmvit.acm_app.BaseViewModelFactory;
 import com.acmvit.acm_app.R;
 import com.acmvit.acm_app.databinding.FragmentEditProfileBinding;
 import com.acmvit.acm_app.service.AuthService;
-import com.acmvit.acm_app.util.Constants;
+import com.acmvit.acm_app.ui.base.BaseActivity;
+import com.google.android.material.snackbar.Snackbar;
 
-import net.openid.appauth.AuthorizationException;
-import net.openid.appauth.AuthorizationRequest;
-import net.openid.appauth.AuthorizationResponse;
-import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.AuthorizationServiceConfiguration;
-import net.openid.appauth.ResponseTypeValues;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.BiConsumer;
+import org.jetbrains.annotations.NotNull;
 
 public class EditProfileFragment extends Fragment {
+    private static final String TAG = "EditProfileFragment";
 
     private FragmentEditProfileBinding binding;
-    private static final int RC_LOGIN = 101;
-    private AuthorizationServiceConfiguration authServiceConfig;
-    private AuthService authService;
+    private static final int RC_REQUEST = 101;
     private EditProfileViewModel viewModel;
 
     public EditProfileFragment() {
@@ -46,39 +35,42 @@ public class EditProfileFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.d(TAG, "onCreateView: ");
 
         binding = FragmentEditProfileBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.inputName.getEditText().clearFocus();
 
         return binding.getRoot();
     }
 
     @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-
-        authService = AuthService.getInstance();
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
         //Init Viewmodel
-        BaseViewModelFactory factory = new BaseViewModelFactory(getActivity());
+        BaseViewModelFactory factory = new BaseViewModelFactory((BaseActivity) getActivity());
         viewModel = new ViewModelProvider(this, factory).get(EditProfileViewModel.class);
 
+        binding.setViewmodel(viewModel);
         initObservers();
     }
 
     private void initObservers() {
         viewModel.getStartResultActivity().observe(getViewLifecycleOwner(), intent -> {
-            startActivityForResult(intent, RC_LOGIN);
+            startActivityForResult(intent, RC_REQUEST);
         });
+
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == RC_LOGIN){
-            viewModel.sendTokenFromIntent(data);
+        if(requestCode == RC_REQUEST){
+            viewModel.processIntent(data);
+            Log.d(TAG, "onActivityResult: "+ data);
         }
     }
 }
