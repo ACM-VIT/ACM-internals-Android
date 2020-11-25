@@ -48,10 +48,17 @@ public class EditProfileViewModel extends BaseViewModel {
         super(activityViewModel, application);
         userRepository = UserRepository.getInstance();
         sessionManager = AcmApp.getSessionManager();
+        initializeData();
+    }
+
+    private void initializeData() {
         User user = sessionManager.getUserDetails();
         if (user != null) {
             accounts.setValue(user.getAccounts());
             this.user.setValue(user);
+            name.setValue(user.getName());
+            disp.setValue(user.getDisp());
+            dp.setValue(user.getDp());
         }
     }
 
