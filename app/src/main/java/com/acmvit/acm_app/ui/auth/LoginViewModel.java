@@ -10,6 +10,7 @@ import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.model.UserData;
 import com.acmvit.acm_app.pref.SessionManager;
 import com.acmvit.acm_app.repository.AuthRepository;
+import com.acmvit.acm_app.repository.UserRepository;
 import com.acmvit.acm_app.ui.base.ActivityViewModel;
 import com.acmvit.acm_app.ui.base.BaseViewModel;
 import com.acmvit.acm_app.util.Resource;
@@ -29,11 +30,17 @@ public class LoginViewModel extends BaseViewModel {
 
     private final SessionManager sessionManager = AcmApp.getSessionManager();
     private final AuthRepository authRepository;
+    private final UserRepository userRepository;
     private final MutableLiveData<State> state = new MutableLiveData<>(State.STANDBY);
 
     public LoginViewModel(ActivityViewModel activityViewModel, Application application) {
         super(activityViewModel, application);
         authRepository = AuthRepository.getInstance();
+        userRepository = UserRepository.getInstance();
+    }
+
+    public void sendFCMToken(){
+        userRepository.sendFCMTokenUsingWM(application);
     }
 
     public void signInWithGoogle(){
@@ -51,9 +58,8 @@ public class LoginViewModel extends BaseViewModel {
             LiveData<Resource<UserData>> authData = authRepository.loginByGoogle(idToken);
             authData.observeForever(authDataResource -> {
                 UserData data = authDataResource.data;
+                activityViewModel.setIsLoading(false);
                 if(authDataResource.status == Status.SUCCESS && data != null){
-                    sessionManager.addUserDetails(data.getUser());
-                    sessionManager.addToken(data.getToken());
                     state.setValue(State.STANDBY);
                 }else{
                     state.setValue(State.ERROR);
