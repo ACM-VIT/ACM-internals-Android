@@ -31,10 +31,12 @@ public class SplashActivity extends AppCompatActivity {
         boolean isFirstTime = basePreferenceManager.getIsFirstTime();
         final Class<?> targetActivityClass = isFirstTime ? MainActivity.class : MainActivity.class;
 
-        splashViewModel.getCanNavigate().observe(this, aBoolean -> {
-            Intent intent = new Intent(SplashActivity.this, targetActivityClass);
-            startActivity(intent);
-            finish();
+        splashViewModel.getCanNavigate().observe(this, canNav -> {
+            if(canNav) {
+                Intent intent = new Intent(SplashActivity.this, targetActivityClass);
+                startActivity(intent);
+                finish();
+            }
         });
 
         splashViewModel.fetchUserDetails();
