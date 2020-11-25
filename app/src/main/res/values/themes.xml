@@ -25,6 +25,14 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/colorBackground</item>
     </style>
+
+    <style name="text_input_layout_style"
+        parent = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:textColorHint">#EFFDFF</item>
+        <item name="counterTextColor">@color/colorDisp</item>
+        <item name="hintTextColor">@color/colorBlueDark</item>
+        <item name="boxStrokeColor">@color/text_input_color_selector</item>
+    </style>
     
     <style name="no_internet_bar" parent="Widget.MaterialComponents.TextView">
         <item name="android:layout_height">50dp</item>
