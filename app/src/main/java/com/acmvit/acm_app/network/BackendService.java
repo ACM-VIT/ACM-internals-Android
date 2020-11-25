@@ -15,7 +15,6 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface BackendService {
-    //Get Google Access Token
     @POST("/App/v1/access/login/google")
     Call<BackendResponse<UserData>> getAccessToken(@Header("Authorization") String token);
 
