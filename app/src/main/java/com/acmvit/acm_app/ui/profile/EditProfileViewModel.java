@@ -135,8 +135,6 @@ public class EditProfileViewModel extends BaseViewModel {
                 return;
             }
             new UserDataObserver().attachTo(updateUser);
-        }else {
-            setState(State.STANDBY);
         }
     }
 
