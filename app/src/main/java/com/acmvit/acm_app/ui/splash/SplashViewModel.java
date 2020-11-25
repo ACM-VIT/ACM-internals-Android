@@ -42,7 +42,7 @@ public class SplashViewModel extends AndroidViewModel {
 
     public void fetchUserDetails(){
         if(sessionManager.getAuthState()){
-            userRepository.sendFCMTokenUsingWM(application);
+            userRepository.fetchUserUsingWM(application);
         }
     }
 
