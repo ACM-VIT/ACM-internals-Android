@@ -7,9 +7,11 @@ import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface BackendService {
     //Get Google Access Token
@@ -25,5 +27,8 @@ public interface BackendService {
 
     @POST("/App/v1/access/login/discord")
     Call<BackendResponse<UserData>> addDiscord(@Header("discord_token") String discordToken);
+
+    @GET("/App/v1/user/fetch/byId/{id}")
+    Call<BackendResponse<UserData>> fetchUserById(@Path("id") String id);
 
 }
