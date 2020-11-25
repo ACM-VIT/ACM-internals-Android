@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/idea">
+    app:startDestination="@id/editProfileFragment">
 
     <fragment
         android:id="@+id/idea"
@@ -25,4 +25,8 @@
         android:name="com.acmvit.acm_app.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.acmvit.acm_app.ui.profile.EditProfileFragment"
+        android:label="EditProfileFragment" />
 </navigation>
