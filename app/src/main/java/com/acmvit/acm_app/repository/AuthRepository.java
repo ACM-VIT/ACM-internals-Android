@@ -22,6 +22,7 @@ import retrofit2.Response;
 public class AuthRepository {
     private static AuthRepository instance;
     private static BackendService baseService;
+    private static BackendService tokenizedService;
     private static ServiceGenerator serviceGenerator;
     private static SessionManager sessionManager;
 
@@ -30,6 +31,7 @@ public class AuthRepository {
             instance = new AuthRepository();
             serviceGenerator = ServiceGenerator.getInstance();
             baseService = serviceGenerator.createService(BackendService.class);
+            tokenizedService = serviceGenerator.createTokenizedService(BackendService.class);
             sessionManager = AcmApp.getSessionManager();
         }
         return instance;
@@ -48,6 +50,12 @@ public class AuthRepository {
         return resource;
     }
 
+    public LiveData<Resource<Void>> logout(){
+        MutableLiveData<Resource<Void>> resource = new MutableLiveData<>();
+        tokenizedService.logout().enqueue(new BackendNetworkCall<>(resource));
+        return resource;
+    }
+
     //Synchronous refresh access call
     @WorkerThread
     public Response<BackendResponse<UserData>> refreshAccessToken(String accessToken, String refreshToken) throws IOException {
@@ -56,4 +64,5 @@ public class AuthRepository {
         refresh.put("refreshToken", refreshToken);
         return baseService.refreshAccessToken(bearerAccessToken, refresh).execute();
     }
+
 }

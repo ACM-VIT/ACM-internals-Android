@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -30,5 +31,8 @@ public interface BackendService {
 
     @GET("/App/v1/user/fetch/byId/{id}")
     Call<BackendResponse<UserData>> fetchUserById(@Path("id") String id);
+
+    @DELETE("/App/v1/access/logout")
+    Call<BackendResponse<Void>> logout();
 
 }
