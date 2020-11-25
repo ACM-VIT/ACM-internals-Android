@@ -19,12 +19,18 @@ public class User {
     @SerializedName("accounts_connected")
     private Accounts accounts;
 
-    public User(String id, String name, String verified, String email, Accounts accounts) {
+    private String dp;
+
+    private String disp;
+
+    public User(String id, String name, String verified, String email, Accounts accounts, String dp, String disp) {
         this.id = id;
         this.name = name;
         this.verified = verified;
         this.email = email;
         this.accounts = accounts;
+        this.dp = dp;
+        this.disp = disp;
     }
 
     public String getId() {
@@ -76,5 +82,21 @@ public class User {
                 ", email='" + email + '\'' +
                 ", accounts=" + accounts +
                 '}';
+    }
+
+    public String getDp() {
+        return dp;
+    }
+
+    public void setDp(String dp) {
+        this.dp = dp;
+    }
+
+    public String getDisp() {
+        return disp;
+    }
+
+    public void setDisp(String disp) {
+        this.disp = disp;
     }
 }
