@@ -46,12 +46,12 @@ public class UserDetailsFetchWork extends Worker {
                 .setRequiredNetworkType(NetworkType.CONNECTED)
                 .build();
 
-        WorkRequest sendTokenWork =
-                new OneTimeWorkRequest.Builder(SendFCMTokenWork.class)
+        WorkRequest fetchUserWork =
+                new OneTimeWorkRequest.Builder(UserDetailsFetchWork.class)
                         .setConstraints(constraints)
                         .build();
 
-        WorkManager.getInstance(context).enqueue(sendTokenWork);
+        WorkManager.getInstance(context).enqueue(fetchUserWork);
     }
 
 }
