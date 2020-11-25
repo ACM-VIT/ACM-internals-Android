@@ -21,5 +21,12 @@
     <string name="sign_in_with_google">Sign In with Google</string>
     <string name="no_internet_connection">No Internet Connection</string>
     <string name="edit_profile">Edit Profile</string>
+    <string name="asset_statements" translatable="false">[{ \"include\": \"https://auth.expo.io/.well-known/assetlinks.json\" }]</string>
+    <string name="update">Update</string>
+    <string name="basic">Basic</string>
+    <string name="accounts">Accounts</string>
+    <string name="name">Name</string>
+    <string name="status">Status</string>
+    <string name="required_field_error">This field is required</string>
 
 </resources>

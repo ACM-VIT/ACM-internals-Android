@@ -6,13 +6,27 @@ import androidx.databinding.BindingAdapter;
 import androidx.databinding.BindingMethod;
 import androidx.databinding.BindingMethods;
 
+import com.bumptech.glide.Glide;
+import com.google.android.material.textfield.TextInputLayout;
+
 @BindingMethods({
         @BindingMethod(type = ImageView.class,
                 attribute = "android:src",
                 method = "setImageResource"),
 })
 public class BindingAdapters {
+    @BindingAdapter("imageUrl")
+    public static void loadImage(ImageView view, String url) {
+        Glide.with(view.getContext()).load(url).circleCrop().into(view);
+    }
 
-
+    @BindingAdapter("app:errorText")
+    public static void setErrorMessage(TextInputLayout view, int errorMessage) {
+        if(errorMessage == 0){
+            view.setError(null);
+            return;
+        }
+        view.setError(view.getContext().getText(errorMessage));
+    }
 
 }
