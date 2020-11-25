@@ -12,18 +12,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class IdeaFragment extends Fragment {
+public class DashboardFragment extends Fragment {
 
     private IdeaViewModel mViewModel;
 
-    public static IdeaFragment newInstance() {
-        return new IdeaFragment();
+    public static DashboardFragment newInstance() {
+        return new DashboardFragment();
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.idea_fragment, container, false);
+        return inflater.inflate(R.layout.fragment_dashboard, container, false);
     }
 
     @Override

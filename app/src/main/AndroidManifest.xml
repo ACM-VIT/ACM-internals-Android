@@ -14,12 +14,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ACM_app">
+
         <meta-data
             android:name="asset_statements"
             android:resource="@string/asset_statements" />
 
         <activity android:name=".ui.WelcomeActivity" />
+        <activity android:name=".onBoarding.WelcomeActivity" />
         <activity android:name=".ui.splash.SplashActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -27,9 +30,7 @@
         </activity>
         <activity android:name=".ui.auth.LoginActivity" />
         <activity android:name=".MainActivity"
-            android:windowSoftInputMode="stateHidden|adjustResize">
-
-        </activity>
+            android:windowSoftInputMode="stateHidden|adjustResize"/>
 
         <activity
             android:name="net.openid.appauth.RedirectUriReceiverActivity"

@@ -50,7 +50,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void showSnackBar(String msg) {
         Snackbar snackbar = Snackbar.make(binding.bottomNavigationView, msg,
-                BaseTransientBottomBar.LENGTH_SHORT);
+                Snackbar.LENGTH_SHORT);
         snackbar.setAnchorView(binding.bottomNavigationView);
         snackbar.show();
     }
