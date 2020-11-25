@@ -10,19 +10,19 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 
 import com.acmvit.acm_app.ui.base.ActivityViewModel;
+import com.acmvit.acm_app.ui.base.BaseActivity;
 import com.acmvit.acm_app.ui.base.BaseViewModel;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class BaseViewModelFactory extends ViewModelProvider.NewInstanceFactory {
+public class BaseViewModelFactory implements ViewModelProvider.Factory {
  
     private final ActivityViewModel activityViewModel;
     private final Application application;
 
-    public BaseViewModelFactory(Activity activity) {
-        activityViewModel = new ViewModelProvider((ViewModelStoreOwner) activity)
-                .get(ActivityViewModel.class);
-
+    public BaseViewModelFactory(BaseActivity activity) {
+        activityViewModel = new ViewModelProvider(activity,
+                new ViewModelProvider.NewInstanceFactory()).get(ActivityViewModel.class);
         application = activity.getApplication();
     }
  
@@ -31,14 +31,14 @@ public class BaseViewModelFactory extends ViewModelProvider.NewInstanceFactory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
         if (BaseViewModel.class.isAssignableFrom(modelClass)) {
             try {
-                return modelClass.getConstructor(BaseViewModel.class)
+                return modelClass.getConstructor(ActivityViewModel.class, Application.class)
                         .newInstance(activityViewModel, application);
             } catch (InstantiationException | IllegalAccessException
                     | InvocationTargetException | NoSuchMethodException e) {
                 e.printStackTrace();
             }
         }
-        return super.create(modelClass);
+        return null;
     }
     
 }
