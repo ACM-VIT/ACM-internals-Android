@@ -19,7 +19,7 @@ public class ActivityViewModel extends ViewModel {
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>();
 
     public boolean canRunNetworkTask(){
-        return networkState.getValue() && loginState.getValue();
+        return networkState.getValue() && !isLoading.getValue();
     }
 
     public LiveData<Boolean> getLoginState() {
