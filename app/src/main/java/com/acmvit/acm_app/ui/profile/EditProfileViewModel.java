@@ -70,6 +70,7 @@ public class EditProfileViewModel extends BaseViewModel {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
         startResultActivity.setValue(intent);
     }
 
@@ -101,7 +102,7 @@ public class EditProfileViewModel extends BaseViewModel {
 
     private void setDpFromIntent(Intent data) {
         dp.setValue(data.getData().toString());
-        state.setValue(State.STANDBY);
+        setState(State.STANDBY);
     }
 
     private void sendDiscordTokenFromIntent(Intent data) {
