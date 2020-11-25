@@ -14,12 +14,15 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.Task;
 
+import net.openid.appauth.AppAuthConfiguration;
 import net.openid.appauth.AuthorizationException;
 import net.openid.appauth.AuthorizationRequest;
 import net.openid.appauth.AuthorizationResponse;
 import net.openid.appauth.AuthorizationService;
 import net.openid.appauth.AuthorizationServiceConfiguration;
 import net.openid.appauth.ResponseTypeValues;
+import net.openid.appauth.browser.BrowserWhitelist;
+import net.openid.appauth.browser.VersionedBrowserMatcher;
 
 public class AuthService {
     private AuthorizationService authService;
@@ -36,7 +39,7 @@ public class AuthService {
     private AuthService() {
     }
 
-    public void configDiscord(Context context){
+    private void configDiscord(Context context){
         AuthorizationServiceConfiguration authServiceConfig = new AuthorizationServiceConfiguration(
                 Uri.parse(Constants.Discord.AUTH_URL),
                 Uri.parse(Constants.Discord.TOKEN_URL));
@@ -61,17 +64,20 @@ public class AuthService {
 
     public void getDiscordAccessTokenFromIntent(Context context,
                                                 Intent data, TokenCallback tokenCallback){
+        if(authService == null){
+            configDiscord(context);
+        }
         AuthorizationResponse authResponse = AuthorizationResponse.fromIntent(data);
         AuthorizationException authException = AuthorizationException.fromIntent(data);
 
         if(authException == null && authResponse !=null){
-            String authCode = authResponse.authorizationCode;
             authService.performTokenRequest(
                     authResponse.createTokenExchangeRequest(), (resp, ex) -> {
                         tokenCallback.call(resp == null ? null : resp.accessToken);
                     });
+        }else {
+            tokenCallback.call(null);
         }
-        tokenCallback.call(null);
     }
 
 
