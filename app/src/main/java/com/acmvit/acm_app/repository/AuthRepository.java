@@ -5,11 +5,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 
+import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.model.UserData;
 import com.acmvit.acm_app.network.BackendNetworkCall;
 import com.acmvit.acm_app.network.BackendResponse;
 import com.acmvit.acm_app.network.BackendService;
 import com.acmvit.acm_app.network.ServiceGenerator;
+import com.acmvit.acm_app.pref.SessionManager;
 import com.acmvit.acm_app.util.Resource;
 
 import java.io.IOException;
@@ -21,12 +23,14 @@ public class AuthRepository {
     private static AuthRepository instance;
     private static BackendService baseService;
     private static ServiceGenerator serviceGenerator;
+    private static SessionManager sessionManager;
 
     public static AuthRepository getInstance() {
         if(instance == null){
             instance = new AuthRepository();
             serviceGenerator = ServiceGenerator.getInstance();
             baseService = serviceGenerator.createService(BackendService.class);
+            sessionManager = AcmApp.getSessionManager();
         }
         return instance;
     }
@@ -34,7 +38,13 @@ public class AuthRepository {
     public LiveData<Resource<UserData>> loginByGoogle(String idToken){
         String bearerToken = "Bearer " + idToken;
         MutableLiveData<Resource<UserData>> resource = new MutableLiveData<>();
-        baseService.getAccessToken(bearerToken).enqueue(new BackendNetworkCall<>(resource));
+        baseService.getAccessToken(bearerToken).enqueue(new BackendNetworkCall<UserData>(resource){
+            @Override
+            public void performIfSuccess(UserData data) {
+                sessionManager.addUserDetails(data.getUser());
+                sessionManager.addToken(data.getToken());
+            }
+        });
         return resource;
     }
 
