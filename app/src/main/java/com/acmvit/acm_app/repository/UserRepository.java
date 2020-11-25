@@ -5,14 +5,13 @@ import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.acmvit.acm_app.AcmApp;
-import com.acmvit.acm_app.SendFCMTokenWork;
-import com.acmvit.acm_app.UserDetailsFetchWork;
+import com.acmvit.acm_app.work.SendFCMTokenWork;
+import com.acmvit.acm_app.work.UserDetailsFetchWork;
 import com.acmvit.acm_app.model.UserData;
 import com.acmvit.acm_app.network.BackendNetworkCall;
 import com.acmvit.acm_app.network.BackendResponse;
@@ -22,9 +21,6 @@ import com.acmvit.acm_app.pref.SessionManager;
 import com.acmvit.acm_app.service.AuthService;
 import com.acmvit.acm_app.util.Constants;
 import com.acmvit.acm_app.util.Resource;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;

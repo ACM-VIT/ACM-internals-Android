@@ -10,28 +10,17 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
-import androidx.work.Constraints;
-import androidx.work.Data;
-import androidx.work.NetworkType;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
-import androidx.work.WorkRequest;
-import androidx.work.Worker;
 
 import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.MainActivity;
 import com.acmvit.acm_app.R;
-import com.acmvit.acm_app.SendFCMTokenWork;
-import com.acmvit.acm_app.pref.BasePreferenceManager;
 import com.acmvit.acm_app.repository.UserRepository;
 import com.acmvit.acm_app.util.Constants;
 import com.acmvit.acm_app.util.GeneralUtils;
-import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import java.util.Map;
-import java.util.UUID;
 
 public class NotificationService extends FirebaseMessagingService {
     private static final String TAG = "NotificationService";
