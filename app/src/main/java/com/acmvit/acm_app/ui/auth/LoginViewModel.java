@@ -13,6 +13,7 @@ import com.acmvit.acm_app.repository.AuthRepository;
 import com.acmvit.acm_app.repository.UserRepository;
 import com.acmvit.acm_app.ui.base.ActivityViewModel;
 import com.acmvit.acm_app.ui.base.BaseViewModel;
+import com.acmvit.acm_app.util.Action;
 import com.acmvit.acm_app.util.Resource;
 import com.acmvit.acm_app.util.Status;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -62,6 +63,8 @@ public class LoginViewModel extends BaseViewModel {
                 if(authDataResource.status == Status.SUCCESS && data != null){
                     state.setValue(State.STANDBY);
                 }else{
+                    activityViewModel.setAction(new Action(Action.MainEvent.SNACKBAR,
+                            "Unable to Signin"));
                     state.setValue(State.ERROR);
                 }
             });
@@ -80,6 +83,8 @@ public class LoginViewModel extends BaseViewModel {
         } catch (ApiException e) {
             setError();
             Log.e(TAG, "handleSignInResult: " + e.getStatusCode(), e);
+            activityViewModel.setAction(new Action(Action.MainEvent.SNACKBAR,
+                    "Unable to Signin"));
         }
     }
 
