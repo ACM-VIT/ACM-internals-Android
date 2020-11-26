@@ -135,7 +135,7 @@ public class EditProfileViewModel extends BaseViewModel {
             LiveData<Resource<UserData>> updateUser;
             if (!TextUtils.isEmpty(dpv) && !dpv.equals(user.getDp())) {
                 updateUser = userRepository.updateUser(namev, dispv, dpv);
-            } else if (!namev.equals(user.getName()) &&
+            } else if (!namev.equals(user.getName()) ||
                     !dispv.equals(user.getDisp())) {
                 updateUser = userRepository.updateUser(namev, dispv);
             } else {
