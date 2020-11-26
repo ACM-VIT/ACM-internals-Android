@@ -58,7 +58,7 @@ public class UserRepository {
         HashMap<String, String> uploadBody = new HashMap<>();
 
         uploadBody.put("full_name", name);
-        uploadBody.put("about", disp);
+        uploadBody.put("description", disp);
 
         tokenizedService.updateUser(uploadBody)
                 .enqueue(new BackendNetworkCall<UserData>(resource) {
@@ -92,8 +92,8 @@ public class UserRepository {
                 return;
             }
             uploadBody.put("full_name", name);
-            uploadBody.put("about", disp);
-            uploadBody.put("picture", uri.toString());
+            uploadBody.put("description", disp);
+            uploadBody.put("profilePic", uri.toString());
 
             tokenizedService.updateUser(uploadBody)
                     .enqueue(new BackendNetworkCall<UserData>(resource) {

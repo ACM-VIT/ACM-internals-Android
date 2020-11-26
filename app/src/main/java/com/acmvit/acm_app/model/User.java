@@ -13,15 +13,17 @@ public class User {
     @SerializedName("verified")
     private String verified;
 
+    @SerializedName("profilePic")
+    private String dp;
+
+    @SerializedName("description")
+    private String disp;
+
     @SerializedName("email")
     private String email;
 
     @SerializedName("accounts_connected")
     private Accounts accounts;
-
-    private String dp;
-
-    private String disp;
 
     public User(String id, String name, String verified, String email, Accounts accounts, String dp, String disp) {
         this.id = id;
