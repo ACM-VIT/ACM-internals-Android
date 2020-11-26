@@ -1,13 +1,20 @@
 package com.acmvit.acm_app.binding;
 
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.databinding.BindingAdapter;
 import androidx.databinding.BindingMethod;
 import androidx.databinding.BindingMethods;
 
 import com.acmvit.acm_app.R;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.textfield.TextInputLayout;
 
 @BindingMethods({
@@ -25,7 +32,7 @@ public class BindingAdapters {
                 .into(view);
     }
 
-    @BindingAdapter("app:errorText")
+    @BindingAdapter("errorText")
     public static void setErrorMessage(TextInputLayout view, int errorMessage) {
         if(errorMessage == 0){
             view.setError(null);
