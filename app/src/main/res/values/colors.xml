@@ -10,5 +10,6 @@
 
     //Added
     <color name="colorRipple">#D210141C</color>
+    <color name="darkGrey">#AAAAAA</color>
 
 </resources>

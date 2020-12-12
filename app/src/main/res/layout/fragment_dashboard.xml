@@ -251,18 +251,44 @@
 
         </LinearLayout>
 
-        <View
-            android:id="@+id/dashboard_divder_line"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/dashboard_divider_line"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            >
+        <View
+            android:id="@+id/dashboard_divider_line_1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="1dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="20dp"
             android:alpha="0.8"
             android:background="@android:color/darker_gray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline" />
+             />
+            <View
+                android:id="@+id/dashboard_divider_line_2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:alpha="0.8"
+                android:background="@android:color/darker_gray"
+                />
+            <View
+                android:id="@+id/dashboard_divider_line_3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="20dp"
+                android:alpha="0.8"
+                android:background="@android:color/darker_gray"
+                />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/dashboard_viewpager"
@@ -273,7 +299,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dashboard_divder_line">
+            app:layout_constraintTop_toBottomOf="@+id/dashboard_divider_line">
 
         </androidx.viewpager2.widget.ViewPager2>
 
