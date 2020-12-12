@@ -6,7 +6,6 @@
     <string name="ideas">Ideas</string>
     <string name="core_members">Core<br />Committee<br />Members</string>
 
-    //Added
     <string name="welcome_slider_1_text">Pitch your idea and add interested people to your project</string>
     <string name="welcome_slider_1_header">Idea</string>
     <string name="welcome_slider_2_text">Get to see all Core members\' details in one place</string>
@@ -15,6 +14,19 @@
     <string name="welcome_slider_3_header">Collaborate</string>
     <string name="Continue">Continue</string>
     <string name="Skip">Skip</string>
+
     <string name="dashboard_fake_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_account">No Account</string>
+    <string name="sign_in_with_google">Sign In with Google</string>
+    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="asset_statements" translatable="false">[{ \"include\": \"https://auth.expo.io/.well-known/assetlinks.json\" }]</string>
+    <string name="update">Update</string>
+    <string name="basic">Basic</string>
+    <string name="accounts">Accounts</string>
+    <string name="name">Name</string>
+    <string name="status">Status</string>
+    <string name="required_field_error">This field is required</string>
 
 </resources>
