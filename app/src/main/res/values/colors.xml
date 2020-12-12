@@ -9,8 +9,8 @@
     <color name="colorBottomNav">#252E3B</color>
     <color name="colorError">#EF5350</color>
 
-    //Added
     <color name="colorRipple">#D210141C</color>
+    <color name="darkGrey">#AAAAAA</color>
     <color name="colorDisp">#7C7C7C</color>
 
 </resources>
