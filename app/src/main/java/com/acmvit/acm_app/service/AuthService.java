@@ -25,6 +25,8 @@ import net.openid.appauth.browser.BrowserWhitelist;
 import net.openid.appauth.browser.VersionedBrowserMatcher;
 
 public class AuthService {
+    private static final String TAG = "AuthService";
+
     private AuthorizationService authService;
     private AuthorizationRequest.Builder builder;
     private static AuthService instance;
@@ -59,7 +61,9 @@ public class AuthService {
         if(authService == null){
             configDiscord(context);
         }
-        return authService.getAuthorizationRequestIntent(builder.build());
+        AuthorizationRequest req = builder.build();
+        Log.d(TAG, "getDiscordFlowIntent: "+ req.toUri());
+        return authService.getAuthorizationRequestIntent(req);
     }
 
     public void getDiscordAccessTokenFromIntent(Context context,
