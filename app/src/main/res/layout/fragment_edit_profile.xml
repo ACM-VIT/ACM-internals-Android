@@ -71,7 +71,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/name"
                     app:counterEnabled="true"
-                    app:counterMaxLength="30"
+                    app:counterMaxLength="25"
                     app:errorText="@{TextUtils.isEmpty(viewmodel.name) ? R.string.required_field_error : 0}"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -80,7 +80,7 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLength="30"
+                        android:maxLength="25"
                         android:singleLine="true"
                         android:text="@={viewmodel.name}"
                         android:textColor="#B9D3D6" />
@@ -95,7 +95,7 @@
                     android:layout_marginTop="8dp"
                     android:hint="@string/status"
                     app:counterEnabled="true"
-                    app:counterMaxLength="50"
+                    app:counterMaxLength="40"
                     app:layout_constraintEnd_toStartOf="@+id/guideline3"
                     app:layout_constraintStart_toStartOf="@+id/guideline2"
                     app:layout_constraintTop_toBottomOf="@+id/input_name">
@@ -103,7 +103,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:maxLength="50"
+                        android:inputType="textNoSuggestions|textFilter"
+                        android:maxLength="40"
                         android:text="@={viewmodel.disp}"
                         android:textColor="#B9D3D6" />
 
@@ -115,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:orientation="horizontal"
-                    app:layout_constraintGuide_percent="0.36" />
+                    app:layout_constraintGuide_begin="250dp" />
 
                 <Button
                     android:id="@+id/update_btn"
