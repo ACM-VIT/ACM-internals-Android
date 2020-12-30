@@ -16,7 +16,7 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/inter_font"
         android:letterSpacing="0.08"
-        android:text="ACM Internal Ecosystem"
+        android:text="@string/acm_internal_ecosystem"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="16sp"
