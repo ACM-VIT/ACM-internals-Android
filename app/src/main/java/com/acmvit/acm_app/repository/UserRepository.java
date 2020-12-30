@@ -151,12 +151,6 @@ public class UserRepository {
         return userData;
     }
 
-    public LiveData<Resource<UserData>> fetchUserByID(String id) {
-        MutableLiveData<Resource<UserData>> userData = new MutableLiveData<>();
-        tokenizedService.fetchUserById(id).enqueue(new BackendNetworkCall<>(userData));
-        return userData;
-    }
-
     //Synchronous update of FCM token
     @WorkerThread
     public boolean sendFCMToken(String token) throws IOException {
@@ -175,8 +169,10 @@ public class UserRepository {
         String id = sessionManager.getUserDetails().getId();
         Response<BackendResponse<UserData>> response =
                 tokenizedService.fetchUserById(id).execute();
-        if (response.isSuccessful() && response.body() != null) {
-            return response.body().getStatusCode().equals(Constants.Backend.SUCCESS_STATUS);
+        BackendResponse<UserData> body = response.body();
+        if (response.isSuccessful() && body != null) {
+            sessionManager.addUserDetails(body.getData().getUser());
+            return body.getStatusCode().equals(Constants.Backend.SUCCESS_STATUS);
         }
         return false;
     }
