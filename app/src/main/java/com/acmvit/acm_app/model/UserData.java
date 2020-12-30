@@ -1,4 +1,4 @@
-package com.acmvit.acm_app.model;
+  package com.acmvit.acm_app.model;
 
 import com.google.gson.annotations.SerializedName;
 
