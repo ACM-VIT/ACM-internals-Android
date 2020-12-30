@@ -42,9 +42,9 @@
                 <category android:name="android.intent.category.BROWSABLE" />
 
                 <data
-                    android:scheme="https"
-                    android:host="auth.expo.io"
-                    android:path="/@madrigal1/acminternalapprn" />
+                    android:scheme="oli"
+                    android:host="auth"
+                    />
             </intent-filter>
         </activity>
 

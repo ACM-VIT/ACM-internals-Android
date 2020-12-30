@@ -21,7 +21,7 @@ public class Constants {
     }
 
     public static class Discord{
-        public static final String REDIRECT_URL = "https://auth.expo.io/@madrigal1/acminternalapprn";
+        public static final String REDIRECT_URL = "oli://auth";
         public static final String AUTH_URL = "https://discord.com/api/oauth2/authorize";
         public static final String TOKEN_URL = "https://discord.com/api/oauth2/token";
         public static final String[] SCOPES = {"identify", "email"};
