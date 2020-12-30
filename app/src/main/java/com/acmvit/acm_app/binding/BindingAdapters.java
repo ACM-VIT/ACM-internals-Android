@@ -26,6 +26,7 @@ public class BindingAdapters {
     @BindingAdapter("imageUrl")
     public static void loadImage(ImageView view, String url) {
         Glide.with(view.getContext())
+                .asBitmap()
                 .load(url)
                 .placeholder(R.drawable.ic_worker)
                 .circleCrop()
