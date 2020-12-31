@@ -5,6 +5,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Looper;
+import android.transition.Fade;
+import android.transition.Transition;
+import android.transition.TransitionManager;
+import android.view.ViewGroup;
 
 import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.BaseViewModelFactory;
@@ -47,8 +54,10 @@ public class LoginActivity extends BaseActivity {
             //Send FCM token once logged in
             loginViewModel.sendFCMToken();
 
+            TransitionManager.endTransitions((ViewGroup) binding.getRoot());
             //Navigate to MainActivity
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this,
+                    MainActivity.class);
             startActivity(intent);
             finish();
         }

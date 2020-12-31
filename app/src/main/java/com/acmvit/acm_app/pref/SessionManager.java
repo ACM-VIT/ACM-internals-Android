@@ -23,8 +23,8 @@ public class SessionManager {
     private static final String AUTH_TOKEN = "AuthToken";
     private static final String USER = "User";
 
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
+    private final SharedPreferences pref;
+    private final SharedPreferences.Editor editor;
     private final MutableLiveData<Boolean> authStateNotifier = new MutableLiveData<>();
 
     @SuppressLint("CommitPrefEdits")
@@ -44,18 +44,25 @@ public class SessionManager {
         String json = gson.toJson(user);
         editor.putString(USER, json);
         editor.commit();
+        if(user == null){
+            addToken(null);
+        }
     }
 
-    public void addToken(@NonNull AuthToken token){
+    public void addToken(AuthToken token){
         String json = gson.toJson(token);
         editor.putString(AUTH_TOKEN, json);
         editor.commit();
-        authStateNotifier.postValue(!token.isNull());
+        authStateNotifier.postValue(token != null && !token.isNull());
     }
 
     public User getUserDetails(){
         String json = pref.getString(USER, "");
-        return gson.fromJson(json, User.class);
+        User user = gson.fromJson(json, User.class);
+        if(user == null){
+            addToken(null);
+        }
+        return user;
     }
 
     public AuthToken getToken(){

@@ -41,21 +41,18 @@ public class EditProfileViewModel extends BaseViewModel {
     public final MutableLiveData<String> disp = new MutableLiveData<>("");
     public final MutableLiveData<String> dp = new MutableLiveData<>("");
     private final MutableLiveData<Accounts> accounts = new MutableLiveData<>();
-    private final MutableLiveData<User> user = new MutableLiveData<>();
     private final SingleLiveEvent<Intent> startResultActivity = new SingleLiveEvent<>();
 
     public EditProfileViewModel(ActivityViewModel activityViewModel, Application application) {
         super(activityViewModel, application);
         userRepository = UserRepository.getInstance();
         sessionManager = AcmApp.getSessionManager();
-        initializeData();
+        initializeData(sessionManager.getUserDetails());
     }
 
-    private void initializeData() {
-        User user = sessionManager.getUserDetails();
+    private void initializeData(User user) {
         if (user != null) {
             accounts.setValue(user.getAccounts());
-            this.user.setValue(user);
             name.setValue(user.getName());
             disp.setValue(user.getDisp());
             dp.setValue(user.getDp());
@@ -158,10 +155,6 @@ public class EditProfileViewModel extends BaseViewModel {
         return accounts;
     }
 
-    public LiveData<User> getUser() {
-        return user;
-    }
-
     public void setState(State state) {
         this.state.setValue(state);
         activityViewModel.setIsLoading(!(state == State.ERROR || state == State.STANDBY));
@@ -176,7 +169,7 @@ public class EditProfileViewModel extends BaseViewModel {
         public void onReceived(Resource<UserData> userResource) {
             UserData userData = userResource.data;
             if (userResource.status == Status.SUCCESS && userData != null) {
-                accounts.setValue(userData.getUser().getAccounts());
+                initializeData(userData.getUser());
                 activityViewModel.setAction(new Action(Action.MainEvent.SNACKBAR,
                         "Updated Successfully"));
                 setState(State.STANDBY);

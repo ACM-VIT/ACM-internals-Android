@@ -11,8 +11,8 @@ public class BasePreferenceManager {
     private static final String PREF_NAME = "BasePref";
     private static final String IS_FIRST_TIME = "IsFirstTime";
 
-    private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
+    private final SharedPreferences pref;
+    private final SharedPreferences.Editor editor;
 
     @SuppressLint("CommitPrefEdits")
     public BasePreferenceManager(Context context) {
