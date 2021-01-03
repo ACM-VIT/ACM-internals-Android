@@ -1,0 +1,26 @@
+name: Lint Fix
+
+on:
+  schedule:
+    - cron: "0 2 * * 0-6"
+  workflow_dispatch:
+
+jobs:
+  fix-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          token:  ${{ secrets.PAT }}
+      
+      - name: Setup node  
+        uses: actions/setup-node@v2
+      - run: npm install prettier-plugin-java --save-dev
+      - run: npx prettier --write "**/*.java" --tab-width 4
+        
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: 'style(core): Format java code'
+          file_pattern: '**/*.java' 
+    
