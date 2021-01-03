@@ -7,6 +7,7 @@ import android.preference.Preference;
 import android.util.Log;
 
 public class BasePreferenceManager {
+
     private static final int PRIVATE_MODE = 0;
     private static final String PREF_NAME = "BasePref";
     private static final String IS_FIRST_TIME = "IsFirstTime";
@@ -20,7 +21,7 @@ public class BasePreferenceManager {
         editor = pref.edit();
     }
 
-    public void setIsFirstTime(boolean isFirstTime){
+    public void setIsFirstTime(boolean isFirstTime) {
         editor.putBoolean(IS_FIRST_TIME, isFirstTime);
         editor.commit();
     }

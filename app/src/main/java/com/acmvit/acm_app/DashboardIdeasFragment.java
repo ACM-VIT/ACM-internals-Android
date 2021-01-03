@@ -7,19 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import java.util.ArrayList;
 
 public class DashboardIdeasFragment extends Fragment {
 
     private static final String IDEAS_KEY = "IDEAS";
-    ArrayList<Idea> items=new ArrayList<>();
+    ArrayList<Idea> items = new ArrayList<>();
     RecyclerView recyclerView;
 
     public DashboardIdeasFragment() {
@@ -43,22 +41,33 @@ public class DashboardIdeasFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(
+        LayoutInflater inflater,
+        ViewGroup container,
+        Bundle savedInstanceState
+    ) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_dashboard_ideas, container, false);
+        return inflater.inflate(
+            R.layout.fragment_dashboard_ideas,
+            container,
+            false
+        );
     }
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(
+        @NonNull View view,
+        @Nullable Bundle savedInstanceState
+    ) {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.ideas_rv);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(
+            getContext()
+        );
         recyclerView.setLayoutManager(linearLayoutManager);
         //Log.i("UpcomingAllFragment", "UpcomingAllFragment contestsAll : " + contestsAll.size());
-        if(items!=null && items.size()!=0)
-        {
+        if (items != null && items.size() != 0) {
             recyclerView.setAdapter(new DashboardIdeasAdapter(items));
             //overlayFrame.displayOverlay(false);
         }
@@ -74,7 +83,6 @@ public class DashboardIdeasFragment extends Fragment {
         });*/
 
     }
-
     /*private void showSelectedContestDetail(Idea items) {
         //Log.i("UpcomingAllFragment", "on click contestsAll.getpos platform name is : " + contestsAll.getResource().getName());
         Intent intentContestDetail = new Intent(getActivity(), ContestDetail.class);

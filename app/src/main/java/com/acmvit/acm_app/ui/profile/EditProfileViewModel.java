@@ -3,10 +3,8 @@ package com.acmvit.acm_app.ui.profile;
 import android.app.Application;
 import android.content.Intent;
 import android.text.TextUtils;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.model.Accounts;
 import com.acmvit.acm_app.model.User;
@@ -23,6 +21,7 @@ import com.acmvit.acm_app.util.SingleTimeObserver;
 import com.acmvit.acm_app.util.Status;
 
 public class EditProfileViewModel extends BaseViewModel {
+
     private static final String TAG = "EditProfileViewModel";
 
     public enum State {
@@ -31,10 +30,12 @@ public class EditProfileViewModel extends BaseViewModel {
         SEND_TOKEN,
         ERROR,
         PIC_CHOOSE,
-        UPDATE_USER
+        UPDATE_USER,
     }
 
-    private final MutableLiveData<State> state = new MutableLiveData<>(State.STANDBY);
+    private final MutableLiveData<State> state = new MutableLiveData<>(
+        State.STANDBY
+    );
     private final UserRepository userRepository;
     private final SessionManager sessionManager;
     public final MutableLiveData<String> name = new MutableLiveData<>("");
@@ -43,7 +44,10 @@ public class EditProfileViewModel extends BaseViewModel {
     private final MutableLiveData<Accounts> accounts = new MutableLiveData<>();
     private final SingleLiveEvent<Intent> startResultActivity = new SingleLiveEvent<>();
 
-    public EditProfileViewModel(ActivityViewModel activityViewModel, Application application) {
+    public EditProfileViewModel(
+        ActivityViewModel activityViewModel,
+        Application application
+    ) {
         super(activityViewModel, application);
         userRepository = UserRepository.getInstance();
         sessionManager = AcmApp.getSessionManager();
@@ -73,10 +77,10 @@ public class EditProfileViewModel extends BaseViewModel {
 
     public void signInWithDiscord() {
         if (activityViewModel.canRunAuthenticatedNetworkTask() && canRun()) {
-
             setState(State.DISCORD_LOG_IN);
-            Intent i = AuthService.getInstance()
-                    .getDiscordFlowIntent(application);
+            Intent i = AuthService
+                .getInstance()
+                .getDiscordFlowIntent(application);
             if (i != null) {
                 startResultActivity.setValue(i);
             } else {
@@ -105,17 +109,19 @@ public class EditProfileViewModel extends BaseViewModel {
     private void sendDiscordTokenFromIntent(Intent data) {
         if (activityViewModel.canRunAuthenticatedNetworkTask()) {
             setState(State.SEND_TOKEN);
-            LiveData<Resource<UserData>> authData =
-                    userRepository.addDiscordUsingIntent(application, data);
+            LiveData<Resource<UserData>> authData = userRepository.addDiscordUsingIntent(
+                application,
+                data
+            );
             new UserDataObserver().attachTo(authData);
-        }else {
+        } else {
             setState(State.STANDBY);
         }
     }
 
     public void updateUser() {
         activityViewModel.setAction(new Action(Action.MainEvent.HIDE_KEYBOARD));
-        if(canRun() && activityViewModel.canRunAuthenticatedNetworkTask()) {
+        if (canRun() && activityViewModel.canRunAuthenticatedNetworkTask()) {
             setState(State.UPDATE_USER);
             User user = sessionManager.getUserDetails();
             String namev = name.getValue();
@@ -132,8 +138,9 @@ public class EditProfileViewModel extends BaseViewModel {
             LiveData<Resource<UserData>> updateUser;
             if (!TextUtils.isEmpty(dpv) && !dpv.equals(user.getDp())) {
                 updateUser = userRepository.updateUser(namev, dispv, dpv);
-            } else if (!namev.equals(user.getName()) ||
-                    !dispv.equals(user.getDisp())) {
+            } else if (
+                !namev.equals(user.getName()) || !dispv.equals(user.getDisp())
+            ) {
                 updateUser = userRepository.updateUser(namev, dispv);
             } else {
                 setState(State.STANDBY);
@@ -157,28 +164,38 @@ public class EditProfileViewModel extends BaseViewModel {
 
     public void setState(State state) {
         this.state.setValue(state);
-        activityViewModel.setIsLoading(!(state == State.ERROR || state == State.STANDBY));
+        activityViewModel.setIsLoading(
+            !(state == State.ERROR || state == State.STANDBY)
+        );
     }
 
     public boolean canRun() {
-        return (state.getValue() == State.STANDBY || state.getValue() == State.ERROR);
+        return (
+            state.getValue() == State.STANDBY || state.getValue() == State.ERROR
+        );
     }
 
-    private class UserDataObserver extends SingleTimeObserver<Resource<UserData>> {
+    private class UserDataObserver
+        extends SingleTimeObserver<Resource<UserData>> {
+
         @Override
         public void onReceived(Resource<UserData> userResource) {
             UserData userData = userResource.data;
             if (userResource.status == Status.SUCCESS && userData != null) {
                 initializeData(userData.getUser());
-                activityViewModel.setAction(new Action(Action.MainEvent.SNACKBAR,
-                        "Updated Successfully"));
+                activityViewModel.setAction(
+                    new Action(
+                        Action.MainEvent.SNACKBAR,
+                        "Updated Successfully"
+                    )
+                );
                 setState(State.STANDBY);
             } else {
                 setState(State.ERROR);
-                activityViewModel.setAction(new Action(Action.MainEvent.SNACKBAR,
-                        "Unable to update"));
+                activityViewModel.setAction(
+                    new Action(Action.MainEvent.SNACKBAR, "Unable to update")
+                );
             }
         }
     }
-
 }

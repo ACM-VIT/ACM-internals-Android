@@ -3,6 +3,7 @@ package com.acmvit.acm_app.model;
 import com.google.gson.annotations.SerializedName;
 
 public class Discord {
+
     @SerializedName("username")
     private String username;
 
@@ -32,9 +33,15 @@ public class Discord {
 
     @Override
     public String toString() {
-        return "Discord{" +
-                "username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                '}';
+        return (
+            "Discord{" +
+            "username='" +
+            username +
+            '\'' +
+            ", email='" +
+            email +
+            '\'' +
+            '}'
+        );
     }
 }

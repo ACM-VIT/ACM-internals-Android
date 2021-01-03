@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Idea implements Parcelable {
+
     private Integer imgResource;
     private String name;
     private String date;
@@ -12,7 +13,15 @@ public class Idea implements Parcelable {
     private String topicName;
     private String description;
 
-    public Idea(Integer imgResource, String name, String date, boolean liked, Integer likes_count, String topicName, String description) {
+    public Idea(
+        Integer imgResource,
+        String name,
+        String date,
+        boolean liked,
+        Integer likes_count,
+        String topicName,
+        String description
+    ) {
         this.imgResource = imgResource;
         this.name = name;
         this.date = date;

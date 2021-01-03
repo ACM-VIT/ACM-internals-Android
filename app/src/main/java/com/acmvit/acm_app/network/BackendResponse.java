@@ -45,10 +45,17 @@ public class BackendResponse<T> {
 
     @Override
     public String toString() {
-        return "AuthResponse{" +
-                "statusCode='" + statusCode + '\'' +
-                ", message='" + message + '\'' +
-                ", data=" + data +
-                '}';
+        return (
+            "AuthResponse{" +
+            "statusCode='" +
+            statusCode +
+            '\'' +
+            ", message='" +
+            message +
+            '\'' +
+            ", data=" +
+            data +
+            '}'
+        );
     }
 }

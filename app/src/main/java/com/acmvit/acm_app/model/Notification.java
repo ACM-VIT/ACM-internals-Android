@@ -1,6 +1,7 @@
 package com.acmvit.acm_app.model;
 
 public class Notification {
+
     private String icon;
     private String text;
 

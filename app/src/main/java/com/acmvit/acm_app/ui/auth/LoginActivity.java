@@ -1,8 +1,5 @@
 package com.acmvit.acm_app.ui.auth;
 
-import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,7 +9,8 @@ import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionManager;
 import android.view.ViewGroup;
-
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.BaseViewModelFactory;
 import com.acmvit.acm_app.MainActivity;
@@ -24,6 +22,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.tasks.Task;
 
 public class LoginActivity extends BaseActivity {
+
     private static final String TAG = "LoginActivity";
 
     private static final int RC_GOOGLE = 100;
@@ -40,7 +39,8 @@ public class LoginActivity extends BaseActivity {
 
         acmApp = ((AcmApp) getApplicationContext());
         googleSignInClient = acmApp.getmGoogleSignInClient();
-        loginViewModel = new ViewModelProvider(this, new BaseViewModelFactory(this))
+        loginViewModel =
+            new ViewModelProvider(this, new BaseViewModelFactory(this))
             .get(LoginViewModel.class);
 
         binding.setLifecycleOwner(this);
@@ -50,41 +50,50 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onLoginStateChanged(boolean isLoggedIn) {
-        if(isLoggedIn){
+        if (isLoggedIn) {
             //Send FCM token once logged in
             loginViewModel.sendFCMToken();
 
             TransitionManager.endTransitions((ViewGroup) binding.getRoot());
             //Navigate to MainActivity
-            Intent intent = new Intent(LoginActivity.this,
-                    MainActivity.class);
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
             finish();
         }
     }
 
     private void initObservers() {
-        loginViewModel.getState().observe(this, state -> {
-            switch (state){
-                case LOG_IN:
-                    Intent signInIntent = googleSignInClient.getSignInIntent();
-                    startActivityForResult(signInIntent, RC_GOOGLE);
-                    break;
-
-                case ERROR:
-                    googleSignInClient.signOut();
-                    break;
-            }
-        });
+        loginViewModel
+            .getState()
+            .observe(
+                this,
+                state -> {
+                    switch (state) {
+                        case LOG_IN:
+                            Intent signInIntent = googleSignInClient.getSignInIntent();
+                            startActivityForResult(signInIntent, RC_GOOGLE);
+                            break;
+                        case ERROR:
+                            googleSignInClient.signOut();
+                            break;
+                    }
+                }
+            );
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(
+        int requestCode,
+        int resultCode,
+        @Nullable Intent data
+    ) {
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
         if (requestCode == RC_GOOGLE) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(
+                data
+            );
             loginViewModel.handleSignInResult(task);
         }
     }

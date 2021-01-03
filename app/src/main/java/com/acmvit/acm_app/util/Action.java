@@ -1,15 +1,15 @@
 package com.acmvit.acm_app.util;
 
 import android.app.Activity;
-
 import java.util.Map;
 
 public class Action {
+
     public enum MainEvent {
         TOAST,
         SNACKBAR,
         HIDE_KEYBOARD,
-        CALLBACK
+        CALLBACK,
     }
 
     private final MainEvent type;
@@ -17,7 +17,12 @@ public class Action {
     private Map<String, String> data;
     private Callback callback;
 
-    public Action(MainEvent type, String message, Map<String, String> data, Callback callback) {
+    public Action(
+        MainEvent type,
+        String message,
+        Map<String, String> data,
+        Callback callback
+    ) {
         this.type = type;
         this.message = message;
         this.data = data;
@@ -47,7 +52,7 @@ public class Action {
         return data;
     }
 
-    public interface Callback{
+    public interface Callback {
         void run(Activity activity);
     }
 

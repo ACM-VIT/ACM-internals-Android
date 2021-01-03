@@ -1,9 +1,5 @@
 package com.acmvit.acm_app.onBoarding;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager.widget.ViewPager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
@@ -11,12 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager.widget.ViewPager;
 import com.acmvit.acm_app.MainActivity;
 import com.acmvit.acm_app.R;
 
 public class WelcomeActivity extends AppCompatActivity {
-
 
     private ViewPager viewPager;
     private WelcomeAdapter welcomeAdapter;
@@ -38,7 +35,6 @@ public class WelcomeActivity extends AppCompatActivity {
         addDotsIndicator(0);
         skipListener();
         nextListener();
-
     }
 
     private void addDotsIndicator(int position) {
@@ -62,31 +58,41 @@ public class WelcomeActivity extends AppCompatActivity {
         finish();
     }
 
-
     private void nextListener() {
-        next.setOnClickListener(v -> {
-            if (currentPage < 2)
-                viewPager.setCurrentItem(currentPage + 1);
-            else {
-                next.setEnabled(false);
-                launchAuthActivity();
+        next.setOnClickListener(
+            v -> {
+                if (currentPage < 2) viewPager.setCurrentItem(
+                    currentPage + 1
+                ); else {
+                    next.setEnabled(false);
+                    launchAuthActivity();
+                }
             }
-        });
+        );
     }
 
     private void skipListener() {
-        skip.setOnClickListener(v -> {
-            skip.setEnabled(false);
-            skip.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.white));
-            launchAuthActivity();
-        });
+        skip.setOnClickListener(
+            v -> {
+                skip.setEnabled(false);
+                skip.setTextColor(
+                    ContextCompat.getColor(
+                        getApplicationContext(),
+                        R.color.white
+                    )
+                );
+                launchAuthActivity();
+            }
+        );
     }
 
     ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
         @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
+        public void onPageScrolled(
+            int position,
+            float positionOffset,
+            int positionOffsetPixels
+        ) {}
 
         @Override
         public void onPageSelected(int position) {
@@ -95,9 +101,7 @@ public class WelcomeActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onPageScrollStateChanged(int state) {
-
-        }
+        public void onPageScrollStateChanged(int state) {}
     };
 
     private void initViews() {
@@ -106,5 +110,4 @@ public class WelcomeActivity extends AppCompatActivity {
         next = findViewById(R.id.next);
         skip = findViewById(R.id.skip);
     }
-
 }

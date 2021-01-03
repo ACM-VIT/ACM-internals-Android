@@ -7,20 +7,21 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 
 public abstract class SingleTimeObserver<T> implements Observer<T> {
+
     private LiveData<T> liveData;
 
-    public void attachTo(@NonNull LiveData<T> liveData){
+    public void attachTo(@NonNull LiveData<T> liveData) {
         detachLiveData();
         liveData.observeForever(this);
     }
 
-    public void attachTo(LifecycleOwner owner, @NonNull LiveData<T> liveData){
+    public void attachTo(LifecycleOwner owner, @NonNull LiveData<T> liveData) {
         detachLiveData();
         liveData.observe(owner, this);
     }
 
-    public void detachLiveData(){
-        if(this.liveData != null){
+    public void detachLiveData() {
+        if (this.liveData != null) {
             this.liveData.removeObserver(this);
         }
     }
@@ -32,5 +33,4 @@ public abstract class SingleTimeObserver<T> implements Observer<T> {
     }
 
     public abstract void onReceived(T t);
-
 }

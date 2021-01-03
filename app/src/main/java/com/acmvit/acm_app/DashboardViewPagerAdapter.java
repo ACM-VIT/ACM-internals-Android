@@ -3,24 +3,26 @@ package com.acmvit.acm_app;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
 
 public class DashboardViewPagerAdapter extends FragmentStateAdapter {
 
     private static final int N_PAGES = 3;
     ArrayList<Idea> ideas, currentProjects, allProjects;
 
-    public DashboardViewPagerAdapter(@NonNull Fragment fragment, ArrayList<Idea> ideas, ArrayList<Idea> currentProjects, ArrayList<Idea> allProjects) {
+    public DashboardViewPagerAdapter(
+        @NonNull Fragment fragment,
+        ArrayList<Idea> ideas,
+        ArrayList<Idea> currentProjects,
+        ArrayList<Idea> allProjects
+    ) {
         super(fragment);
         this.ideas = ideas;
         this.currentProjects = currentProjects;
         this.allProjects = allProjects;
         //Log.i("UpcomingAdapter", "The contestsAll size in UpcomingAdapter2 is " + this.contestsAll.size());
     }
-
 
     @NotNull
     @Override
@@ -30,7 +32,9 @@ public class DashboardViewPagerAdapter extends FragmentStateAdapter {
             case 0:
                 return DashboardIdeasFragment.newInstance(ideas);
             case 1:
-                return DashboardCurrentProjectsFragment.newInstance(currentProjects);
+                return DashboardCurrentProjectsFragment.newInstance(
+                    currentProjects
+                );
             case 2:
                 return DashboardAllProjectsFragment.newInstance(allProjects);
         }

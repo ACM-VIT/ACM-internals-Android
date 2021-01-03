@@ -3,6 +3,7 @@ package com.acmvit.acm_app.model;
 import com.google.gson.annotations.SerializedName;
 
 public class Accounts {
+
     @SerializedName("google")
     private Object google;
 
@@ -32,9 +33,15 @@ public class Accounts {
 
     @Override
     public String toString() {
-        return "Accounts{" +
-                "google='" + google + '\'' +
-                ", discord='" + discord + '\'' +
-                '}';
+        return (
+            "Accounts{" +
+            "google='" +
+            google +
+            '\'' +
+            ", discord='" +
+            discord +
+            '\'' +
+            '}'
+        );
     }
 }

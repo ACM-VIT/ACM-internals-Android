@@ -1,12 +1,12 @@
 package com.acmvit.acm_app.model;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 
 public class AuthToken {
+
     private static final String TAG = "AuthToken";
     private final double TOKEN_EXPIRY = 1.037e+7;
     public static final String TOKEN_TYPE = "Bearer";
@@ -39,24 +39,32 @@ public class AuthToken {
         this.refreshToken = refreshToken;
     }
 
-    private void calculateExpiry(){
+    private void calculateExpiry() {
         Calendar calendar = Calendar.getInstance();
         double expiry = calendar.getTimeInMillis() + TOKEN_EXPIRY * 1000D;
         expiryDate = new Date((long) expiry);
     }
 
-    public boolean isNull(){
+    public boolean isNull() {
         return accessToken == null || refreshToken == null;
     }
 
     @Override
     public String toString() {
-        return "AuthToken{" +
-                "TOKEN_EXPIRY=" + TOKEN_EXPIRY +
-                ", accessToken='" + accessToken + '\'' +
-                ", refreshToken='" + refreshToken + '\'' +
-                ", expiryDate=" + expiryDate +
-                '}';
+        return (
+            "AuthToken{" +
+            "TOKEN_EXPIRY=" +
+            TOKEN_EXPIRY +
+            ", accessToken='" +
+            accessToken +
+            '\'' +
+            ", refreshToken='" +
+            refreshToken +
+            '\'' +
+            ", expiryDate=" +
+            expiryDate +
+            '}'
+        );
     }
 
     @Override
@@ -64,8 +72,9 @@ public class AuthToken {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AuthToken authToken = (AuthToken) o;
-        return Objects.equals(accessToken, authToken.accessToken) &&
-                Objects.equals(refreshToken, authToken.refreshToken);
+        return (
+            Objects.equals(accessToken, authToken.accessToken) &&
+            Objects.equals(refreshToken, authToken.refreshToken)
+        );
     }
-
 }

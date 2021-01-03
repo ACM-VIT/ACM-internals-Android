@@ -1,8 +1,9 @@
-  package com.acmvit.acm_app.model;
+package com.acmvit.acm_app.model;
 
 import com.google.gson.annotations.SerializedName;
 
 public class UserData {
+
     @SerializedName("user")
     private User user;
 
@@ -32,9 +33,6 @@ public class UserData {
 
     @Override
     public String toString() {
-        return "AuthData{" +
-                "user=" + user +
-                ", token=" + token +
-                '}';
+        return "AuthData{" + "user=" + user + ", token=" + token + '}';
     }
 }

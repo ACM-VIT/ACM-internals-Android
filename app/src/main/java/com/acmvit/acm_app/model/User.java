@@ -25,7 +25,15 @@ public class User {
     @SerializedName("accounts_connected")
     private Accounts accounts;
 
-    public User(String id, String name, String verified, String email, Accounts accounts, String dp, String disp) {
+    public User(
+        String id,
+        String name,
+        String verified,
+        String email,
+        Accounts accounts,
+        String dp,
+        String disp
+    ) {
         this.id = id;
         this.name = name;
         this.verified = verified;
@@ -77,13 +85,24 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", verified='" + verified + '\'' +
-                ", email='" + email + '\'' +
-                ", accounts=" + accounts +
-                '}';
+        return (
+            "User{" +
+            "id='" +
+            id +
+            '\'' +
+            ", name='" +
+            name +
+            '\'' +
+            ", verified='" +
+            verified +
+            '\'' +
+            ", email='" +
+            email +
+            '\'' +
+            ", accounts=" +
+            accounts +
+            '}'
+        );
     }
 
     public String getDp() {
