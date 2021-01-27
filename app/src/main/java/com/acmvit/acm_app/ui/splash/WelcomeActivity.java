@@ -9,8 +9,8 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
-import com.acmvit.acm_app.MainActivity;
 import com.acmvit.acm_app.R;
+import com.acmvit.acm_app.ui.MainActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
 

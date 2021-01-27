@@ -8,9 +8,9 @@ import android.os.Looper;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import com.acmvit.acm_app.MainActivity;
 import com.acmvit.acm_app.R;
 import com.acmvit.acm_app.pref.BasePreferenceManager;
+import com.acmvit.acm_app.ui.MainActivity;
 
 public class SplashActivity extends AppCompatActivity {
 

@@ -89,6 +89,9 @@ public class LoginViewModel extends BaseViewModel {
 
     public void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
+            GoogleSignInAccount account = completedTask.getResult(
+                    ApiException.class
+            );
             if (account == null) {
                 setError();
                 return;
