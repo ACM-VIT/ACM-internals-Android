@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
     android:fitsSystemWindows="true"
-    tools:context=".onBoarding.WelcomeActivity">
+    tools:context=".ui.splash.WelcomeActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_welcome"

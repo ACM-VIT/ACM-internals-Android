@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
 import com.acmvit.acm_app.util.Action;
+import com.acmvit.acm_app.util.GeneralUtils;
 import com.google.android.material.snackbar.Snackbar;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -67,12 +68,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void closeKeyboard() {
         View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(
-                Context.INPUT_METHOD_SERVICE
-            );
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
+        GeneralUtils.hideKeyboard(this, view);
     }
 
     public void createToast(String msg) {

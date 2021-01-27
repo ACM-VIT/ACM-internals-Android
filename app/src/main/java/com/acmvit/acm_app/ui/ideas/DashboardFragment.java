@@ -1,4 +1,4 @@
-package com.acmvit.acm_app;
+package com.acmvit.acm_app.ui.ideas;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,9 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager2.widget.ViewPager2;
+import androidx.viewpager2.widget.ViewPager2;
+
+import com.acmvit.acm_app.R;
 import java.util.ArrayList;
 
 public class DashboardFragment extends Fragment {

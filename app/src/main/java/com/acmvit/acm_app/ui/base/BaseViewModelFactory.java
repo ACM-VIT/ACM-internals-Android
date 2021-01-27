@@ -1,4 +1,4 @@
-package com.acmvit.acm_app;
+package com.acmvit.acm_app.ui.base;
 
 import android.app.Activity;
 import android.app.Application;

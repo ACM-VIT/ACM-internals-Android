@@ -1,4 +1,4 @@
-package com.acmvit.acm_app;
+package com.acmvit.acm_app.ui.ideas;
 
 import android.os.Parcel;
 import android.os.Parcelable;

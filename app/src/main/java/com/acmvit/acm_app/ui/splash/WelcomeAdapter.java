@@ -1,4 +1,4 @@
-package com.acmvit.acm_app.onBoarding;
+package com.acmvit.acm_app.ui.splash;
 
 import android.content.Context;
 import android.view.LayoutInflater;
