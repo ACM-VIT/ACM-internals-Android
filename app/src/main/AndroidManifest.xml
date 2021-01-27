@@ -19,8 +19,7 @@
             android:name="asset_statements"
             android:resource="@string/asset_statements" />
 
-        <activity android:name=".ui.WelcomeActivity" />
-        <activity android:name=".onBoarding.WelcomeActivity" />
+        <activity android:name=".ui.splash.WelcomeActivity" />
         <activity android:name=".ui.splash.SplashActivity" >
 
             <intent-filter>
@@ -29,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.auth.LoginActivity" />
-        <activity android:name=".MainActivity"
+        <activity android:name=".ui.MainActivity"
             android:windowSoftInputMode="stateHidden|adjustResize"/>
 
         <activity

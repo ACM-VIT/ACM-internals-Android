@@ -1,4 +1,4 @@
-package com.acmvit.acm_app;
+package com.acmvit.acm_app.ui.ideas;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;

@@ -10,7 +10,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 import com.acmvit.acm_app.AcmApp;
-import com.acmvit.acm_app.MainActivity;
+import com.acmvit.acm_app.ui.MainActivity;
 import com.acmvit.acm_app.R;
 import com.acmvit.acm_app.repository.UserRepository;
 import com.acmvit.acm_app.util.Constants;

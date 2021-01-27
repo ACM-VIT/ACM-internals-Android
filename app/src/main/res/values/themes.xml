@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.ACM_app" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.ACM_app" parent="Theme.MaterialComponents.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorBlue</item>
         <item name="colorPrimaryVariant">@color/colorBlueDark</item>
@@ -8,12 +8,15 @@
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/colorItemBackground</item>
         <item name="colorOnSecondary">@color/white</item>
+        <item name="colorOnSurface">#FFFFFF</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="colorOnBackground">@color/white</item>
         <item name="android:colorBackground">@color/colorBackground</item>
         <item name="popupMenuStyle">@style/ThemeOverlay.popupTheme</item>
         <item name="popupTheme">@style/ThemeOverlay.popupTheme</item>
+        <item name="android:overScrollMode">never</item>
+        <item name="android:scrollbarSize">0dp</item>
     </style>
 
     //Added

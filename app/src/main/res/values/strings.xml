@@ -28,6 +28,8 @@
     <string name="name">Name</string>
     <string name="status">Status</string>
     <string name="required_field_error">This field is required</string>
+    <string name="password_mismatch_error">Passwords do not match</string>
+    <string name="password_weak_error">Minimum password length is 6</string>
     <string name="notifications">notifications</string>
     <string name="events">Events</string>
     <string name="check_project">Check Project</string>
@@ -36,5 +38,13 @@
     <string name="swipe_left_to_reject">Swipe left to reject</string>
     <string name="swipe_right_to_accept">Swipe right to accept</string>
     <string name="sign_out">Sign Out</string>
+    <string name="cli_for_geeks">CLI for Geeks</string>
+    <string name="set_the_password_to_use_with_the_cli">Set the password to use with the CLI</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="cancel">Cancel</string>
+    <string name="set">Set</string>
+    <string name="user_settings">User Settings</string>
+    <string name="cli_password">CLI Password</string>
 
 </resources>

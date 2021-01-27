@@ -7,8 +7,7 @@ import com.acmvit.acm_app.repository.AuthRepository;
 import com.acmvit.acm_app.ui.base.ActivityViewModel;
 import com.acmvit.acm_app.ui.base.BaseViewModel;
 import com.acmvit.acm_app.util.Resource;
-import com.acmvit.acm_app.util.SingleTimeObserver;
-import com.acmvit.acm_app.util.Status;
+import com.acmvit.acm_app.util.reactive.SingleTimeObserver;
 
 public class MainViewModel extends BaseViewModel {
 

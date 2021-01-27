@@ -9,13 +9,9 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import com.acmvit.acm_app.BaseViewModelFactory;
-import com.acmvit.acm_app.R;
+import com.acmvit.acm_app.ui.base.BaseViewModelFactory;
 import com.acmvit.acm_app.databinding.FragmentEditProfileBinding;
-import com.acmvit.acm_app.service.AuthService;
 import com.acmvit.acm_app.ui.base.BaseActivity;
-import com.google.android.material.snackbar.Snackbar;
-import net.openid.appauth.AuthorizationServiceConfiguration;
 import org.jetbrains.annotations.NotNull;
 
 public class EditProfileFragment extends Fragment {
@@ -36,13 +32,10 @@ public class EditProfileFragment extends Fragment {
         ViewGroup container,
         Bundle savedInstanceState
     ) {
-        Log.d(TAG, "onCreateView: ");
-
         binding =
             FragmentEditProfileBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.inputName.getEditText().clearFocus();
-
         return binding.getRoot();
     }
 
@@ -71,6 +64,15 @@ public class EditProfileFragment extends Fragment {
                     startActivityForResult(intent, RC_REQUEST);
                 }
             );
+
+        viewModel.getState().observe(getViewLifecycleOwner(), state -> {
+            switch (state){
+                case CHANGE_CLI_PWD:
+                    CLIPasswordDialog dialog = new CLIPasswordDialog();
+                    dialog.setOnDismissListener(() -> viewModel.notifyDialogDismissed());
+                    dialog.show(getChildFragmentManager(), CLIPasswordDialog.TAG);
+            }
+        });
     }
 
     @Override

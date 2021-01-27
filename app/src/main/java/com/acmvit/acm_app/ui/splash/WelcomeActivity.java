@@ -1,17 +1,16 @@
-package com.acmvit.acm_app.onBoarding;
+package com.acmvit.acm_app.ui.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
-import com.acmvit.acm_app.MainActivity;
 import com.acmvit.acm_app.R;
+import com.acmvit.acm_app.ui.MainActivity;
 
 public class WelcomeActivity extends AppCompatActivity {
 

@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/idea"
-        android:name="com.acmvit.acm_app.DashboardFragment"
+        android:name="com.acmvit.acm_app.ui.ideas.DashboardFragment"
         android:label="idea_fragment"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/members"
-        android:name="com.acmvit.acm_app.MembersFragment"
+        android:name="com.acmvit.acm_app.ui.members.MembersFragment"
         android:label="fragment_members"
         tools:layout="@layout/fragment_members" />
     <fragment
@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_events" />
     <fragment
         android:id="@+id/profile"
-        android:name="com.acmvit.acm_app.ProfileFragment"
+        android:name="com.acmvit.acm_app.ui.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment

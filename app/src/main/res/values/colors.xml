@@ -8,9 +8,11 @@
     <color name="colorItemBackground">#242D3B</color>
     <color name="colorBottomNav">#252E3B</color>
     <color name="colorError">#EF5350</color>
+    <color name="colorBackgroundElevated">#3E4A53</color>
 
     <color name="colorRipple">#D210141C</color>
     <color name="darkGrey">#AAAAAA</color>
     <color name="colorDisp">#7C7C7C</color>
+    <color name="normalTextWithPrimaryTinge">#C8D6D8</color>
 
 </resources>

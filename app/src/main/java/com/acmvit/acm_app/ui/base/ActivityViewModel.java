@@ -2,15 +2,11 @@ package com.acmvit.acm_app.ui.base;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import com.acmvit.acm_app.AcmApp;
-import com.acmvit.acm_app.model.UserData;
 import com.acmvit.acm_app.pref.SessionManager;
-import com.acmvit.acm_app.repository.UserRepository;
 import com.acmvit.acm_app.util.Action;
-import com.acmvit.acm_app.util.Resource;
-import com.acmvit.acm_app.util.SingleLiveEvent;
+import com.acmvit.acm_app.util.reactive.SingleLiveEvent;
 
 public class ActivityViewModel extends ViewModel {
 
@@ -50,7 +46,7 @@ public class ActivityViewModel extends ViewModel {
         return action;
     }
 
-    public void setAction(Action action) {
+    public void fireAction(Action action) {
         this.action.setValue(action);
     }
 }

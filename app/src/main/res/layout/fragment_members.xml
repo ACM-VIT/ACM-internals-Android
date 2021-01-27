@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    tools:context=".MembersFragment">
+    tools:context=".ui.members.MembersFragment">
 
     <TextView
         android:layout_width="wrap_content"
