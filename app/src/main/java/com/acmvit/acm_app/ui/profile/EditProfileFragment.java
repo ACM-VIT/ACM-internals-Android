@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
+
+import com.acmvit.acm_app.R;
 import com.acmvit.acm_app.databinding.FragmentEditProfileBinding;
 import com.acmvit.acm_app.ui.base.BaseActivity;
 import com.acmvit.acm_app.ui.base.BaseViewModelFactory;
@@ -36,6 +39,8 @@ public class EditProfileFragment extends Fragment {
             FragmentEditProfileBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.inputName.getEditText().clearFocus();
+        binding.backButton.setOnClickListener((View v)->
+                Navigation.findNavController(v).navigate(R.id.action_editProfileFragment_to_profile));
         return binding.getRoot();
     }
 
@@ -60,9 +65,7 @@ public class EditProfileFragment extends Fragment {
             .getStartResultActivity()
             .observe(
                 getViewLifecycleOwner(),
-                intent -> {
-                    startActivityForResult(intent, RC_REQUEST);
-                }
+                intent -> startActivityForResult(intent, RC_REQUEST)
             );
 
         viewModel

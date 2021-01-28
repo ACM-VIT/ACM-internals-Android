@@ -24,9 +24,17 @@
         android:id="@+id/profile"
         android:name="com.acmvit.acm_app.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.acmvit.acm_app.ui.profile.EditProfileFragment"
-        android:label="EditProfileFragment" />
+        android:label="EditProfileFragment" >
+        <action
+            android:id="@+id/action_editProfileFragment_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
 </navigation>

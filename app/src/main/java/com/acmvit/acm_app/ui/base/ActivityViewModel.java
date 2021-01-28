@@ -49,4 +49,15 @@ public class ActivityViewModel extends ViewModel {
     public void fireAction(Action action) {
         this.action.setValue(action);
     }
+
+    public SessionManager getSessionManager() {
+        return sessionManager;
+    }
+
+    public boolean checkLocking(){
+        if(getSessionManager().getUserDetails()!=null) {
+            return getSessionManager().getUserDetails().getAccounts().getDiscord() == null;
+        }
+        return true;
+    }
 }
