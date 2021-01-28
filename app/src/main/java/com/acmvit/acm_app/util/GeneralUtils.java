@@ -3,7 +3,6 @@ package com.acmvit.acm_app.util;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-
 import java.util.Calendar;
 
 public class GeneralUtils {
@@ -13,10 +12,10 @@ public class GeneralUtils {
         return (int) (calendar.getTimeInMillis() / 1000);
     }
 
-    public static void hideKeyboard(Context context, View currentFocus){
+    public static void hideKeyboard(Context context, View currentFocus) {
         if (currentFocus != null) {
             InputMethodManager imm = (InputMethodManager) context.getSystemService(
-                    Context.INPUT_METHOD_SERVICE
+                Context.INPUT_METHOD_SERVICE
             );
             imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
         }

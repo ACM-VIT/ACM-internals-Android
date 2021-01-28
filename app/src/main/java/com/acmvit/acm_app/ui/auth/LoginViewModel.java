@@ -50,8 +50,11 @@ public class LoginViewModel extends BaseViewModel {
     }
 
     public void signInWithGoogle() {
-        if (activityViewModel.canRunNetworkTask()
-                && state.getValue() != State.LOG_IN && !sessionManager.getAuthState()) {
+        if (
+            activityViewModel.canRunNetworkTask() &&
+            state.getValue() != State.LOG_IN &&
+            !sessionManager.getAuthState()
+        ) {
             state.setValue(State.LOG_IN);
             activityViewModel.setIsLoading(true);
         }
@@ -62,35 +65,35 @@ public class LoginViewModel extends BaseViewModel {
             state.setValue(State.GET_ACCESS_CODE);
             activityViewModel.setIsLoading(true);
             LiveData<Resource<UserData>> authData = authRepository.loginByGoogle(
-
-                    idToken
+                idToken
             );
             authData.observeForever(
-                    authDataResource -> {
-                        UserData data = authDataResource.data;
-                        activityViewModel.setIsLoading(false);
-                        if (
-                                authDataResource.status == Status.SUCCESS &&
-                                        data != null
-                        ) {
-                            state.setValue(State.STANDBY);
-                        } else {
-                            activityViewModel.fireAction(
-                                    new Action(
-                                            Action.MainEvent.SNACKBAR,
-                                            "Unable to Signin"
-                                    )
-                            );
-                            state.setValue(State.ERROR);
-                        }
-                    });
+                authDataResource -> {
+                    UserData data = authDataResource.data;
+                    activityViewModel.setIsLoading(false);
+                    if (
+                        authDataResource.status == Status.SUCCESS &&
+                        data != null
+                    ) {
+                        state.setValue(State.STANDBY);
+                    } else {
+                        activityViewModel.fireAction(
+                            new Action(
+                                Action.MainEvent.SNACKBAR,
+                                "Unable to Signin"
+                            )
+                        );
+                        state.setValue(State.ERROR);
+                    }
+                }
+            );
         }
     }
 
     public void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(
-                    ApiException.class
+                ApiException.class
             );
             if (account == null) {
                 setError();
@@ -102,7 +105,7 @@ public class LoginViewModel extends BaseViewModel {
             Log.e(TAG, "handleSignInResult: " + e.getStatusCode(), e);
 
             activityViewModel.fireAction(
-                    new Action(Action.MainEvent.SNACKBAR, "Unable to Signin")
+                new Action(Action.MainEvent.SNACKBAR, "Unable to Signin")
             );
         }
     }

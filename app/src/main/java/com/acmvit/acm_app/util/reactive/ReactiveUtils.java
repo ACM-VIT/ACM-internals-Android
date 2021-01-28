@@ -8,17 +8,23 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.Observer;
 
 public class ReactiveUtils {
+
     @MainThread
     @NonNull
     public static <X, Y> LiveData<Y> joinLD(
-            @NonNull LiveData<X> source1,
-            @NonNull LiveData<X> source2,
-            @NonNull final Function<X, Y> mapFunction) {
-
+        @NonNull LiveData<X> source1,
+        @NonNull LiveData<X> source2,
+        @NonNull final Function<X, Y> mapFunction
+    ) {
         final MediatorLiveData<Y> result = new MediatorLiveData<>();
-        result.addSource(source1, (Observer<X>) x -> result.setValue(mapFunction.apply(x)));
-        result.addSource(source2, (Observer<X>) x -> result.setValue(mapFunction.apply(x)));
+        result.addSource(
+            source1,
+            (Observer<X>) x -> result.setValue(mapFunction.apply(x))
+        );
+        result.addSource(
+            source2,
+            (Observer<X>) x -> result.setValue(mapFunction.apply(x))
+        );
         return result;
     }
-    
 }

@@ -7,27 +7,28 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
-
-import com.acmvit.acm_app.ui.base.BaseViewModelFactory;
 import com.acmvit.acm_app.databinding.DialogCliPasswordBinding;
 import com.acmvit.acm_app.ui.base.BaseActivity;
+import com.acmvit.acm_app.ui.base.BaseViewModelFactory;
 
 public class CLIPasswordDialog extends DialogFragment {
+
     public static final String TAG = "CLIPasswordDialog";
     private DialogCliPasswordBinding binding;
     private CLIPasswordViewModel viewModel;
-    private OnDismissListener onDismissListener = () -> {
-    };
+    private OnDismissListener onDismissListener = () -> {};
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+    public View onCreateView(
+        @NonNull LayoutInflater inflater,
+        @Nullable ViewGroup container,
+        @Nullable Bundle savedInstanceState
+    ) {
         binding = DialogCliPasswordBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.inputPwd.getEditText().clearFocus();
@@ -40,9 +41,11 @@ public class CLIPasswordDialog extends DialogFragment {
 
         //Init ViewModel
         BaseViewModelFactory factory = new BaseViewModelFactory(
-                (BaseActivity) getActivity()
+            (BaseActivity) getActivity()
         );
-        viewModel = new ViewModelProvider(this, factory).get(CLIPasswordViewModel.class);
+        viewModel =
+            new ViewModelProvider(this, factory)
+            .get(CLIPasswordViewModel.class);
 
         binding.setViewmodel(viewModel);
         initObservers();
@@ -57,8 +60,9 @@ public class CLIPasswordDialog extends DialogFragment {
         layoutParams.width = WindowManager.LayoutParams.MATCH_PARENT;
         layoutParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
         dialogWindow.setAttributes(layoutParams);
-        dialogWindow.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
+        dialogWindow.setSoftInputMode(
+            WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE
+        );
     }
 
     @Override
@@ -68,7 +72,9 @@ public class CLIPasswordDialog extends DialogFragment {
     }
 
     private void initObservers() {
-        viewModel.getDismissDialogLiveData().observe(getViewLifecycleOwner(), trigger -> dismiss());
+        viewModel
+            .getDismissDialogLiveData()
+            .observe(getViewLifecycleOwner(), trigger -> dismiss());
     }
 
     public void setOnDismissListener(OnDismissListener onDismissListener) {

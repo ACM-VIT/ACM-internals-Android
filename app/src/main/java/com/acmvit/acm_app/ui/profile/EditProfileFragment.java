@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import com.acmvit.acm_app.ui.base.BaseViewModelFactory;
 import com.acmvit.acm_app.databinding.FragmentEditProfileBinding;
 import com.acmvit.acm_app.ui.base.BaseActivity;
+import com.acmvit.acm_app.ui.base.BaseViewModelFactory;
 import org.jetbrains.annotations.NotNull;
 
 public class EditProfileFragment extends Fragment {
@@ -65,14 +65,24 @@ public class EditProfileFragment extends Fragment {
                 }
             );
 
-        viewModel.getState().observe(getViewLifecycleOwner(), state -> {
-            switch (state){
-                case CHANGE_CLI_PWD:
-                    CLIPasswordDialog dialog = new CLIPasswordDialog();
-                    dialog.setOnDismissListener(() -> viewModel.notifyDialogDismissed());
-                    dialog.show(getChildFragmentManager(), CLIPasswordDialog.TAG);
-            }
-        });
+        viewModel
+            .getState()
+            .observe(
+                getViewLifecycleOwner(),
+                state -> {
+                    switch (state) {
+                        case CHANGE_CLI_PWD:
+                            CLIPasswordDialog dialog = new CLIPasswordDialog();
+                            dialog.setOnDismissListener(
+                                () -> viewModel.notifyDialogDismissed()
+                            );
+                            dialog.show(
+                                getChildFragmentManager(),
+                                CLIPasswordDialog.TAG
+                            );
+                    }
+                }
+            );
     }
 
     @Override

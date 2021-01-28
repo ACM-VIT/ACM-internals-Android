@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Constants {
+
     public static final int MIN_PASSWORD_LENGTH = 6;
 
     public static class ProjectNotification {
+
         public static final String TOPIC = "projects";
         public static final String MSG_TITLE = "title";
         public static final String MSG_BODY = "desc";

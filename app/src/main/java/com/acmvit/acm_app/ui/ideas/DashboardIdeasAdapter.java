@@ -7,15 +7,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.acmvit.acm_app.R;
-
 import java.util.ArrayList;
 
 public class DashboardIdeasAdapter
     extends RecyclerView.Adapter<DashboardIdeasAdapter.ViewHolder> {
 
     private ArrayList<Idea> items;
+
     public DashboardIdeasAdapter(ArrayList<Idea> items) {
         this.items = items;
     }
