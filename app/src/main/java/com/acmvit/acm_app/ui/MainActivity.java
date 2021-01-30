@@ -44,6 +44,7 @@ public class MainActivity extends BaseActivity {
             navHostFragment.getNavController()
         );
 
+
         viewModel =
             new ViewModelProvider(this, new BaseViewModelFactory(this))
             .get(MainViewModel.class);
@@ -69,9 +70,7 @@ public class MainActivity extends BaseActivity {
         );
 
         binding.overflowMenu.setOnClickListener(
-            view -> {
-                popup.show();
-            }
+            view -> popup.show()
         );
     }
 
@@ -95,5 +94,21 @@ public class MainActivity extends BaseActivity {
         );
         snackbar.setAnchorView(binding.bottomNavigationView);
         snackbar.show();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(activityViewModel.checkLocking()){
+            for(int i=0;i<bottomNavigationView.getMenu().size()-1;i++) {
+                bottomNavigationView.getMenu().getItem(i).setEnabled(false);
+            }
+
+        }
+        else{
+            for(int i=0;i<bottomNavigationView.getMenu().size()-1;i++) {
+                bottomNavigationView.getMenu().getItem(i).setEnabled(true);
+            }
+        }
     }
 }

@@ -69,4 +69,11 @@
         <item name="lineHeight">30dp</item>
     </style>
 
+    <style name="SearchView" parent="Widget.AppCompat.SearchView">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:editTextColor">@android:color/white</item>
+        <item name="android:textColorHint">@android:color/white</item>
+        <item name="android:colorAccent">@color/white</item>
+    </style>
+
 </resources>

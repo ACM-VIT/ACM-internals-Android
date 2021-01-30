@@ -4,7 +4,7 @@
     <string name="dashboard">Dashboard</string>
     <string name="requests">Requests</string>
     <string name="ideas">Ideas</string>
-    <string name="core_members">Core<br />Committee<br />Members</string>
+    <string name="core_members">Core\nCommittee\nMembers</string>
 
     <string name="welcome_slider_1_text">Pitch your idea and add interested people to your project</string>
     <string name="welcome_slider_1_header">Idea</string>

@@ -1,6 +1,8 @@
 package com.acmvit.acm_app.network;
 
 import com.acmvit.acm_app.model.UserData;
+import com.acmvit.acm_app.model.UserList;
+
 import java.util.HashMap;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -38,4 +40,8 @@ public interface BackendService {
 
     @DELETE("/App/v1/access/logout")
     Call<BackendResponse<Void>> logout();
+
+    @GET("/App/v1/user/fetch/all")
+    Call<BackendResponse<UserList>> getAllUsers();
+
 }
