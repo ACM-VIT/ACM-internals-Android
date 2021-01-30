@@ -4,12 +4,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.acmvit.acm_app.model.User;
+import com.acmvit.acm_app.ui.members.MembersFragmentDirections;
+import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -35,6 +39,11 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.ViewHold
                 .load(users.get(position).getDp())
                 .placeholder(R.drawable.ic_worker)
                 .into(holder.dp);
+        holder.item.setOnClickListener(v->{
+            MembersFragmentDirections.ActionMembersToProfile action = MembersFragmentDirections.actionMembersToProfile();
+            action.setUid(users.get(position).getId());
+            Navigation.findNavController(v).navigate(action);
+        });
 
     }
 
@@ -49,12 +58,14 @@ public class MembersAdapter extends RecyclerView.Adapter<MembersAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView name;
         ImageView dp;
+        LinearLayout item;
 
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             name=itemView.findViewById(R.id.member_name);
             dp=itemView.findViewById(R.id.member_dp);
+            item=itemView.findViewById(R.id.member_item);
 
         }
     }

@@ -14,7 +14,12 @@
         android:id="@+id/members"
         android:name="com.acmvit.acm_app.ui.members.MembersFragment"
         android:label="fragment_members"
-        tools:layout="@layout/fragment_members" />
+        tools:layout="@layout/fragment_members">
+        <action
+            android:id="@+id/action_members_to_profile"
+            app:destination="@id/profile"
+            app:popUpTo="@id/members"/>
+    </fragment>
     <fragment
         android:id="@+id/notifications"
         android:name="com.acmvit.acm_app.ui.invites.EventsFragment"
@@ -24,15 +29,19 @@
         android:id="@+id/profile"
         android:name="com.acmvit.acm_app.ui.profile.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profile_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <argument
+            android:name="uid"
+            app:argType="string"
+            android:defaultValue="default" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.acmvit.acm_app.ui.profile.EditProfileFragment"
-        android:label="EditProfileFragment" >
+        android:label="EditProfileFragment">
         <action
             android:id="@+id/action_editProfileFragment_to_profile"
             app:destination="@id/profile" />

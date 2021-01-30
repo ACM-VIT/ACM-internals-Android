@@ -39,7 +39,6 @@ public class ProfileFragment extends Fragment {
     @Override
     public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         binding=FragmentProfileBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
         ProfileViewPagerAdapter adapter=new ProfileViewPagerAdapter(this);
@@ -52,8 +51,16 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         BaseViewModelFactory factory=new BaseViewModelFactory((BaseActivity) getActivity());
         viewModel=new ViewModelProvider(this,factory).get(ProfileViewModel.class);
-
         binding.setViewModel(viewModel);
+        ProfileFragmentArgs args = ProfileFragmentArgs.fromBundle(requireArguments());
+        if(args.getUid().equals("default")){
+            viewModel.initializeData();
+            binding.fab.setVisibility(View.VISIBLE);
+        }
+        else{
+            viewModel.fetchData(args.getUid());
+            binding.fab.setVisibility(View.INVISIBLE);
+        }
 
         new TabLayoutMediator(binding.tabLayout,binding.viewPager, (tab, position) -> {
             if(position==0){
