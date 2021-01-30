@@ -11,7 +11,7 @@ public class Constants {
 
         public static final String TOPIC = "projects";
         public static final String MSG_TITLE = "title";
-        public static final String MSG_BODY = "desc";
+        public static final String MSG_BODY = "message";
         public static final String CHANNEL_ID = "PROJECTS_CHANNEL";
         public static final String CHANNEL_NAME = "projects";
         public static final String CHANNEL_DISP =
