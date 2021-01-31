@@ -14,11 +14,10 @@ public class ProfileViewPagerAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         Fragment fragment;
-        if(position==0){
-            fragment=new ProjectsFragment();
-        }
-        else{
-            fragment=new SocialsFragment();
+        if (position == 0) {
+            fragment = new ProjectsFragment();
+        } else {
+            fragment = new SocialsFragment();
         }
         return fragment;
     }

@@ -54,9 +54,15 @@ public class ActivityViewModel extends ViewModel {
         return sessionManager;
     }
 
-    public boolean checkLocking(){
-        if(getSessionManager().getUserDetails()!=null) {
-            return getSessionManager().getUserDetails().getAccounts().getDiscord() == null;
+    public boolean checkLocking() {
+        if (getSessionManager().getUserDetails() != null) {
+            return (
+                getSessionManager()
+                    .getUserDetails()
+                    .getAccounts()
+                    .getDiscord() ==
+                null
+            );
         }
         return true;
     }
