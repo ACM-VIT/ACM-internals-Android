@@ -1,8 +1,11 @@
-package com.acmvit.acm_app.ui.profile;
+package com.acmvit.acm_app.ui.profile.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.acmvit.acm_app.ui.profile.ProjectsFragment;
+import com.acmvit.acm_app.ui.profile.SocialsFragment;
 
 public class ProfileViewPagerAdapter extends FragmentStateAdapter {
 

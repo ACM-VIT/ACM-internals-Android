@@ -1,8 +1,14 @@
-package com.acmvit.acm_app.ui.ideas;
+package com.acmvit.acm_app.ui.ideas.adapters;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
+
+import com.acmvit.acm_app.ui.ideas.DashboardAllProjectsFragment;
+import com.acmvit.acm_app.ui.ideas.DashboardCurrentProjectsFragment;
+import com.acmvit.acm_app.ui.ideas.DashboardIdeasFragment;
+import com.acmvit.acm_app.model.Idea;
+
 import java.util.ArrayList;
 import org.jetbrains.annotations.NotNull;
 

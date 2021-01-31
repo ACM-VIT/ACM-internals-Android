@@ -4,17 +4,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+
 import com.acmvit.acm_app.R;
 import com.acmvit.acm_app.databinding.FragmentProfileBinding;
 import com.acmvit.acm_app.ui.base.BaseActivity;
 import com.acmvit.acm_app.ui.base.BaseViewModelFactory;
-import com.acmvit.acm_app.ui.profile.ProfileViewPagerAdapter;
+import com.acmvit.acm_app.ui.profile.adapters.ProfileViewPagerAdapter;
 import com.google.android.material.tabs.TabLayoutMediator;
+
 import org.jetbrains.annotations.NotNull;
 
 public class ProfileFragment extends Fragment {
