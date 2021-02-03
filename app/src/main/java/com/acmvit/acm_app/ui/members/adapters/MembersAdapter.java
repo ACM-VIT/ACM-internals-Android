@@ -49,8 +49,7 @@ public class MembersAdapter
             .into(holder.dp);
         holder.item.setOnClickListener(
             v -> {
-                MembersFragmentDirections.ActionMembersToProfile action = MembersFragmentDirections.actionMembersToProfile();
-                action.setUid(users.get(position).getId());
+                MembersFragmentDirections.ActionMembersToMemberProfileFragment action = MembersFragmentDirections.actionMembersToMemberProfileFragment(users.get(position).getId());
                 Navigation.findNavController(v).navigate(action);
             }
         );

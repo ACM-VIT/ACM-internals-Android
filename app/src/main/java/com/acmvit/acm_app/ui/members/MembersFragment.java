@@ -24,47 +24,47 @@ public class MembersFragment extends Fragment {
 
     @Override
     public View onCreateView(
-        @NotNull LayoutInflater inflater,
-        ViewGroup container,
-        Bundle savedInstanceState
+            @NotNull LayoutInflater inflater,
+            ViewGroup container,
+            Bundle savedInstanceState
     ) {
         binding = FragmentMembersBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.searchBar.setOnQueryTextListener(
-            new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    return false;
-                }
+                new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String query) {
+                        return false;
+                    }
 
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    viewModel.filterUsers(newText.toLowerCase());
-                    return false;
+                    @Override
+                    public boolean onQueryTextChange(String newText) {
+                        viewModel.filterUsers(newText.toLowerCase());
+                        return false;
+                    }
                 }
-            }
         );
         return binding.getRoot();
     }
 
     @Override
     public void onViewCreated(
-        @NonNull View view,
-        @Nullable Bundle savedInstanceState
+            @NonNull View view,
+            @Nullable Bundle savedInstanceState
     ) {
         viewModel = new ViewModelProvider(this).get(MembersViewModel.class);
         adapter = new MembersAdapter(viewModel.list.getValue());
         binding.recyclerView.setAdapter(adapter);
         viewModel.list.observe(
-            getViewLifecycleOwner(),
-            userArrayList -> {
-                adapter.replace(userArrayList);
-                adapter.notifyDataSetChanged();
-            }
+                getViewLifecycleOwner(),
+                userArrayList -> {
+                    adapter.replace(userArrayList);
+                    adapter.notifyDataSetChanged();
+                }
         );
         viewModel.allUsers.observe(
-            getViewLifecycleOwner(),
-            allUserList -> viewModel.list.postValue(allUserList)
+                getViewLifecycleOwner(),
+                allUserList -> viewModel.list.postValue(allUserList)
         );
         super.onViewCreated(view, savedInstanceState);
     }
