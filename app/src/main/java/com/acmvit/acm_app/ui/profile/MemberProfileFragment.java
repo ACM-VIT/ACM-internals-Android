@@ -9,9 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
-import com.acmvit.acm_app.R;
 import com.acmvit.acm_app.databinding.FragmentProfileBinding;
 import com.acmvit.acm_app.ui.base.BaseActivity;
 import com.acmvit.acm_app.ui.base.BaseViewModelFactory;
@@ -20,26 +18,17 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import org.jetbrains.annotations.NotNull;
 
-public class ProfileFragment extends Fragment {
-
+public class MemberProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
 
     @Override
-    public View onCreateView(
-            @NotNull LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState
-    ) {
+    public View onCreateView(@NotNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
+        binding.fab.setVisibility(View.INVISIBLE);
         ProfileViewPagerAdapter adapter = new ProfileViewPagerAdapter(this);
         binding.viewPager.setAdapter(adapter);
-        binding.fab.setOnClickListener(
-                v ->
-                        Navigation
-                                .findNavController(v)
-                                .navigate(R.id.action_profile_to_editProfileFragment)
-        );
         return binding.getRoot();
     }
 
@@ -51,9 +40,12 @@ public class ProfileFragment extends Fragment {
         BaseViewModelFactory factory = new BaseViewModelFactory(
                 (BaseActivity) getActivity()
         );
-        ProfileViewModel viewModel = new ViewModelProvider(this, factory).get("profile", ProfileViewModel.class);
+        ProfileViewModel viewModel = (ProfileViewModel) new ViewModelProvider(this, factory).get("member profile",ProfileViewModel.class);
         binding.setViewModel(viewModel);
-        viewModel.initializeData();
+        MemberProfileFragmentArgs args = MemberProfileFragmentArgs.fromBundle(
+                requireArguments()
+        );
+        viewModel.fetchData(args.getUid());
         new TabLayoutMediator(
                 binding.tabLayout,
                 binding.viewPager,

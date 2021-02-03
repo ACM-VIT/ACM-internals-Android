@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.acmvit.acm_app.R;
+import com.acmvit.acm_app.model.Idea;
+import com.acmvit.acm_app.ui.ideas.adapters.DashboardIdeasAdapter;
+
 import java.util.ArrayList;
 
 public class DashboardIdeasFragment extends Fragment {

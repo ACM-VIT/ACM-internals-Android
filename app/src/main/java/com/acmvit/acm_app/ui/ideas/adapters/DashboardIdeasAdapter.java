@@ -1,4 +1,4 @@
-package com.acmvit.acm_app.ui.ideas;
+package com.acmvit.acm_app.ui.ideas.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,14 +8,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.acmvit.acm_app.R;
+import com.acmvit.acm_app.model.Idea;
+
 import java.util.ArrayList;
 
-public class DashboardAllProjectsAdapter
-    extends RecyclerView.Adapter<DashboardAllProjectsAdapter.ViewHolder> {
+public class DashboardIdeasAdapter
+    extends RecyclerView.Adapter<DashboardIdeasAdapter.ViewHolder> {
 
     private ArrayList<Idea> items;
 
-    public DashboardAllProjectsAdapter(ArrayList<Idea> items) {
+    public DashboardIdeasAdapter(ArrayList<Idea> items) {
         this.items = items;
     }
 

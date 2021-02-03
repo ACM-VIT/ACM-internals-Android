@@ -1,4 +1,4 @@
-package com.acmvit.acm_app.ui.splash;
+package com.acmvit.acm_app.ui.splash.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;

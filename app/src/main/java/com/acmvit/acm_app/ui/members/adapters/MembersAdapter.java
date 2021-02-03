@@ -1,4 +1,4 @@
-package com.acmvit.acm_app;
+package com.acmvit.acm_app.ui.members.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,13 +6,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.acmvit.acm_app.R;
 import com.acmvit.acm_app.model.User;
 import com.acmvit.acm_app.ui.members.MembersFragmentDirections;
-import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class MembersAdapter
@@ -46,8 +49,7 @@ public class MembersAdapter
             .into(holder.dp);
         holder.item.setOnClickListener(
             v -> {
-                MembersFragmentDirections.ActionMembersToProfile action = MembersFragmentDirections.actionMembersToProfile();
-                action.setUid(users.get(position).getId());
+                MembersFragmentDirections.ActionMembersToMemberProfileFragment action = MembersFragmentDirections.actionMembersToMemberProfileFragment(users.get(position).getId());
                 Navigation.findNavController(v).navigate(action);
             }
         );
