@@ -1,5 +1,7 @@
 # ACM Internals Android Client
 
+&nbsp;&nbsp;&nbsp; ![build status](https://github.com/ACM-VIT/ACM-internals-Android/tree/main/.github/workflows/build.yml?branch=main) &nbsp;&nbsp;&nbsp;
+
 ## Structure
 
 * `build.gradle` - root gradle config file
