@@ -3,13 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/editProfileFragment">
+    app:startDestination="@id/projectsFragment">
 
-    <fragment
-        android:id="@+id/idea"
-        android:name="com.acmvit.acm_app.ui.ideas.DashboardFragment"
-        android:label="idea_fragment"
-        tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/members"
         android:name="com.acmvit.acm_app.ui.members.MembersFragment"
@@ -20,11 +15,7 @@
             app:destination="@id/profile"
             app:popUpTo="@id/members"/>
     </fragment>
-    <fragment
-        android:id="@+id/notifications"
-        android:name="com.acmvit.acm_app.ui.invites.EventsFragment"
-        android:label="fragment_notification"
-        tools:layout="@layout/fragment_events" />
+
     <fragment
         android:id="@+id/profile"
         android:name="com.acmvit.acm_app.ui.profile.ProfileFragment"
@@ -38,12 +29,26 @@
             app:argType="string"
             android:defaultValue="default" />
     </fragment>
+
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.acmvit.acm_app.ui.profile.EditProfileFragment"
-        android:label="EditProfileFragment">
+        android:label="EditProfileFragment"/>
+
+    <fragment
+        android:id="@+id/projectsFragment"
+        android:name="com.acmvit.acm_app.ui.projects.ProjectsFragment"
+        android:label="fragment_projects2"
+        tools:layout="@layout/fragment_projects" >
         <action
-            android:id="@+id/action_editProfileFragment_to_profile"
-            app:destination="@id/profile" />
+            android:id="@+id/action_projectsFragment_to_membersBottomDialogFragment"
+            app:destination="@id/membersBottomDialogFragment" />
     </fragment>
+
+    <dialog
+        android:id="@+id/membersBottomDialogFragment"
+        android:name="com.acmvit.acm_app.ui.members.MembersBottomDialogFragment"
+        android:label="MembersBottomDialogFragment" >
+    </dialog>
+
 </navigation>
