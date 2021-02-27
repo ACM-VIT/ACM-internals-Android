@@ -1,8 +1,9 @@
-package com.acmvit.acm_app.ui.base;
+package com.acmvit.acm_app.ui;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+
 import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.pref.SessionManager;
 import com.acmvit.acm_app.util.Action;
@@ -14,7 +15,7 @@ public class ActivityViewModel extends ViewModel {
     private final LiveData<Boolean> loginState = sessionManager.getAuthStateNotifier();
     private final LiveData<Boolean> networkState = AcmApp.getIsConnected();
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(
-        false
+            false
     );
     private final SingleLiveEvent<Action> action = new SingleLiveEvent<>();
 
@@ -56,13 +57,7 @@ public class ActivityViewModel extends ViewModel {
 
     public boolean checkLocking() {
         if (getSessionManager().getUserDetails() != null) {
-            return (
-                getSessionManager()
-                    .getUserDetails()
-                    .getAccounts()
-                    .getDiscord() ==
-                null
-            );
+            return getSessionManager().getUserDetails().getAccounts().getDiscord() == null;
         }
         return true;
     }
