@@ -1,6 +1,6 @@
 # ACM Internals Android Client
 
-&nbsp;&nbsp;&nbsp; ![build status](https://github.com/ACM-VIT/ACM-internals-Android/tree/main/.github/workflows/build.yml?branch=main) &nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp; [![Android-master Actions Status](https://github.com/ACM-VIT/ACM-internals-Android/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ACM-VIT/ACM-internals-Android/actions) &nbsp;&nbsp;&nbsp;
 
 ## Structure
 
