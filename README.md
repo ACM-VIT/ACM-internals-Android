@@ -1,6 +1,13 @@
-# ACM Internals Android Client
+![ACM-HEADER](https://user-images.githubusercontent.com/14032427/92643737-e6252e00-f2ff-11ea-8a51-1f1b69caba9f.png)
+
+<h1 align="center"> ACM-VIT Internal App (Android) </h1>
+
+<p align="center"> 
+	Android client for <a href="https://github.com/ACM-VIT/acmInternalBackend">ACM Internal Backend</a>
+</p>
 
 &nbsp;&nbsp;&nbsp; [![Android-master Actions Status](https://github.com/ACM-VIT/ACM-internals-Android/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/ACM-VIT/ACM-internals-Android/actions) &nbsp;&nbsp;&nbsp;
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/ACM-VIT/ACM-internals-Android/blob/main/LICENSE)
 
 ## Structure
 
