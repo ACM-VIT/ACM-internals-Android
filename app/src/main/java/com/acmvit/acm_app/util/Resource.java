@@ -2,10 +2,13 @@ package com.acmvit.acm_app.util;
 
 import static com.acmvit.acm_app.util.Status.ERROR;
 import static com.acmvit.acm_app.util.Status.LOADING;
+import static com.acmvit.acm_app.util.Status.NO_DATA;
 import static com.acmvit.acm_app.util.Status.SUCCESS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.util.Objects;
 
 public class Resource<T> {
 
@@ -40,8 +43,23 @@ public class Resource<T> {
         return new Resource<>(LOADING, data, null);
     }
 
+    public static <T> Resource<T> noData() {
+        return new Resource<>(NO_DATA, null, null);
+    }
+
     @Nullable
     public String getMessage() {
         return message;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Resource<?> resource = (Resource<?>) o;
+        return status == resource.status &&
+                Objects.equals(data, resource.data) &&
+                Objects.equals(message, resource.message);
+    }
+
 }

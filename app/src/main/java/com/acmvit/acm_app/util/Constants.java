@@ -25,6 +25,7 @@ public class Constants {
         public static final String SUCCESS_STATUS = "10000";
         public static final int TOKEN_RETRY_COUNT = 2;
         public static final String DP_STORAGE_LOC = "profileDP";
+        public static final int PROJECTS_PAGE_SIZE = 15;
     }
 
     public static class Discord {
