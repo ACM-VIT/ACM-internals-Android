@@ -11,7 +11,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import com.acmvit.acm_app.model.User;
 import com.acmvit.acm_app.ui.members.MembersFragmentDirections;
-import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
@@ -51,6 +50,7 @@ public class MembersAdapter
                 Navigation.findNavController(v).navigate(action);
             }
         );
+
     }
 
     public void replace(ArrayList<User> newList) {

@@ -13,7 +13,7 @@ import com.acmvit.acm_app.repository.UserRepository;
 public class SplashViewModel extends AndroidViewModel {
 
     private static final String TAG = "SplashViewModel";
-    private static final int SPLASH_TIMEOUT = 2500;
+    private static final int SPLASH_TIMEOUT = 1000;
     private final SessionManager sessionManager;
     private final UserRepository userRepository;
     private final Application application;

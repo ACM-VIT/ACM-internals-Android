@@ -1,20 +1,14 @@
 package com.acmvit.acm_app.ui.base;
 
-import android.content.Context;
-import android.content.res.Resources;
 import android.os.Bundle;
-import android.util.TypedValue;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProvider;
-import com.acmvit.acm_app.util.Action;
+
+import com.acmvit.acm_app.ui.ActivityViewModel;
 import com.acmvit.acm_app.util.GeneralUtils;
-import com.google.android.material.snackbar.Snackbar;
 
 public abstract class BaseActivity extends AppCompatActivity {
 

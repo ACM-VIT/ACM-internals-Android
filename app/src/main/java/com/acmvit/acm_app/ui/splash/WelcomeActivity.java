@@ -43,7 +43,7 @@ public class WelcomeActivity extends AppCompatActivity {
             dots[i] = new TextView(this);
             dots[i].setText(Html.fromHtml("&#8226"));
             dots[i].setTextSize(28);
-            dots[i].setTextColor(getResources().getColor(R.color.colorBlue));
+            dots[i].setTextColor(getResources().getColor(R.color.colorPrimary));
             dots[i].setAlpha(0.5f);
             dotsLayout.addView(dots[i]);
         }

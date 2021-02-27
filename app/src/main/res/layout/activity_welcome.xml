@@ -64,7 +64,7 @@
             android:background="@color/colorBackground"
             android:fontFamily="@font/inter_font"
             android:text="@string/Skip"
-            android:textColor="@color/colorBlue" />
+            android:textColor="@color/colorPrimary" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

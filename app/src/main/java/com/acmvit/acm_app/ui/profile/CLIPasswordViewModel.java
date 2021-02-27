@@ -2,15 +2,13 @@ package com.acmvit.acm_app.ui.profile;
 
 import android.app.Application;
 import android.util.Log;
-import androidx.arch.core.util.Function;
+
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.Transformations;
 import com.acmvit.acm_app.model.UserData;
 import com.acmvit.acm_app.repository.UserRepository;
-import com.acmvit.acm_app.ui.base.ActivityViewModel;
+import com.acmvit.acm_app.ui.ActivityViewModel;
 import com.acmvit.acm_app.ui.base.BaseViewModel;
 import com.acmvit.acm_app.util.Action;
 import com.acmvit.acm_app.util.Constants;
