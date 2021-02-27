@@ -34,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="54dp"
-            android:backgroundTint="@color/colorBlueDark"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:fontFamily="@font/roboto_medium"
             android:onClick="@{() -> viewmodel.signInWithGoogle()}"
             android:padding="12dp"
@@ -77,11 +77,11 @@
             android:id="@+id/textView3"
             style="@style/no_internet_bar"
             android:layout_width="0dp"
-            android:layout_height="45dp"
             android:text="@string/no_internet_connection"
             android:visibility="@{viewmodel.activityViewModel.networkState ? View.GONE : View.VISIBLE}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

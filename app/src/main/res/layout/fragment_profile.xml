@@ -14,6 +14,18 @@
         android:layout_height="match_parent">
 
 
+        <ImageView
+            android:id="@+id/overflow_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:layout_marginEnd="16dp"
+            android:elevation="3dp"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_more" />
+
         <ScrollView
             android:id="@+id/scrollView2"
             android:layout_width="match_parent"
@@ -47,8 +59,9 @@
                     android:translationY="60dp"
                     app:civ_border_color="#4F4F4F"
                     app:civ_border_width="2dp"
-                    app:civ_circle_background_color="@color/colorBlue"
+                    app:civ_circle_background_color="@color/colorPrimary"
                     app:imageUrl="@{viewModel.dp}"
+                    app:circleCrop="@{true}"
                     app:layout_constraintBottom_toTopOf="@+id/material_card"
                     app:layout_constraintCircleRadius="60dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +74,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="32dp"
                     android:layout_marginEnd="32dp"
-                    app:cardBackgroundColor="@color/colorItemBackground"
+                    app:cardBackgroundColor="@color/colorSurface"
                     app:cardCornerRadius="20dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -146,8 +159,8 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/material_card"
-                    app:tabIndicatorColor="@color/colorBlueDark"
-                    app:tabSelectedTextColor="@color/colorBlueDark"
+                    app:tabIndicatorColor="@color/colorPrimaryDark"
+                    app:tabSelectedTextColor="@color/colorPrimaryDark"
                     app:tabTextColor="@color/white" />
 
                 <androidx.viewpager2.widget.ViewPager2
@@ -170,8 +183,8 @@
             android:layout_marginBottom="32dp"
             android:contentDescription="@string/edit_profile"
             android:src="@drawable/ic_baseline_edit"
-            app:rippleColor="@color/colorBlueDark"
-            app:backgroundTint="@color/colorItemBackground"
+            app:rippleColor="@color/colorPrimaryDark"
+            app:backgroundTint="@color/colorSurface"
             android:foregroundGravity="center_horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
