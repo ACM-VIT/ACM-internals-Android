@@ -7,6 +7,8 @@ import android.net.NetworkInfo;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+
+import com.acmvit.acm_app.db.AcmDb;
 import com.acmvit.acm_app.pref.SessionManager;
 import com.acmvit.acm_app.service.NetworkChangeReceiver;
 import com.acmvit.acm_app.util.Constants;
@@ -20,6 +22,7 @@ public class AcmApp extends Application {
 
     private GoogleSignInClient mGoogleSignInClient;
     private static SessionManager sessionManager;
+    private static AcmDb acmDb;
     private static final MutableLiveData<Boolean> isConnected = new MutableLiveData<>(
         false
     );
@@ -59,6 +62,9 @@ public class AcmApp extends Application {
             new NetworkChangeReceiver(),
             new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION)
         );
+
+        acmDb = AcmDb.getInstance(this);
+
     }
 
     public GoogleSignInClient getmGoogleSignInClient() {
@@ -79,5 +85,9 @@ public class AcmApp extends Application {
 
     public static boolean getIsConnectedOneTime() {
         return isConnected.getValue();
+    }
+
+    public static AcmDb getAcmDb() {
+        return acmDb;
     }
 }
