@@ -1,28 +1,59 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Theme.ACM_app" parent="Theme.MaterialComponents.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorBlue</item>
-        <item name="colorPrimaryVariant">@color/colorBlueDark</item>
+
+        <!-- Primary brand color -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryLight</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
+        <item name="colorSurface">@color/colorSurfaceLight</item>
+        <item name="background">@color/colorBackground</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/colorItemBackground</item>
-        <item name="colorOnSecondary">@color/white</item>
-        <item name="colorOnSurface">#FFFFFF</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="colorOnBackground">@color/white</item>
-        <item name="android:colorBackground">@color/colorBackground</item>
+        <item name="colorOnSurface">@color/white</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@color/black</item>
+
+        <!-- Default Configurations -->
         <item name="popupMenuStyle">@style/ThemeOverlay.popupTheme</item>
         <item name="popupTheme">@style/ThemeOverlay.popupTheme</item>
         <item name="android:overScrollMode">never</item>
         <item name="android:scrollbarSize">0dp</item>
+        <item name="android:textColorHighlight">@color/colorPrimaryLight</item>
+        <item name="android:textColorLink">@color/colorPrimary</item>
+        <item name="android:textCursorDrawable">@null</item>
+        <item name="fontFamily">@font/roboto_medium</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
-    //Added
+    <style name="Widget.App.Chip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="ensureMinTouchTargetSize">false</item>
+        <item name="chipIconTint">@color/chip_stroke_color_selector</item>
+        <item name="chipBackgroundColor">@color/chip_fill_color_selector</item>
+        <item name="chipStrokeWidth">1.5dp</item>
+        <item name="chipStrokeColor">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/chip_stroke_color_selector</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="chipIconEnabled">true</item>
+        <item name="chipIconVisible">true</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="rippleColor">#802684FC</item>
+    </style>
+    
+    <style name="Widget.App.Chip.DotIcon" parent="Widget.App.Chip">
+        <item name="chipIconSize">6dp</item>
+        <item name="chipIcon">@drawable/filled_circle</item>
+        <item name="iconStartPadding">6dp</item>
+        <item name="textStartPadding">4dp</item>
+        <item name="shapeAppearanceOverlay">@null</item>
+        <item name="shapeAppearance">@style/ShapeAppearance.MaterialComponents.SmallComponent</item>
+    </style>
 
     <style name="ThemeOverlay.popupTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="android:colorBackground">@color/colorItemBackground</item>
+        <item name="android:colorBackground">@color/colorSurface</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
@@ -38,28 +69,33 @@
         <item name="fontFamily">@font/cerebri_sans_regular</item>
     </style>
 
-    <style name="text_input_layout_style"
-        parent = "@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="text_input_layout_style" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
         <item name="android:textColorHint">#EFFDFF</item>
-        <item name="counterTextColor">@color/colorDisp</item>
-        <item name="hintTextColor">@color/colorBlueDark</item>
+        <item name="counterTextColor">@color/grey</item>
+        <item name="hintTextColor">@color/colorPrimaryDark</item>
         <item name="boxStrokeColor">@color/text_input_color_selector</item>
     </style>
-    
+
+    <style name="edit_profile_section_header_style">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
     <style name="no_internet_bar" parent="Widget.MaterialComponents.TextView">
-        <item name="android:layout_height">50dp</item>
+        <item name="android:layout_height">30dp</item>
         <item name="android:background">@color/colorError</item>
         <item name="fontFamily">@font/inter_font</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:paddingStart">@dimen/no_internet_text_padding</item>
         <item name="android:paddingEnd">@dimen/no_internet_text_padding</item>
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/lightGrey</item>
+        <item name="android:textSize">12sp</item>
         <item name="android:letterSpacing">0.05</item>
     </style>
 
     <style name="TitleText" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textColor">@color/colorBlue</item>
+        <item name="android:textColor">@color/colorPrimary</item>
         <item name="elevation">1dp</item>
         <item name="lineHeight">30dp</item>
     </style>
