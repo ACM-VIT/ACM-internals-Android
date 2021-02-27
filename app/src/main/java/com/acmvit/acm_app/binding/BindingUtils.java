@@ -16,12 +16,6 @@ import java.util.Map;
 
 public class BindingUtils {
 
-    private static final Map<Integer, ProjectStatus> idProjectStatusMap = Map.of(
-            R.id.ideation_chip, ProjectStatus.IDEATION,
-            R.id.implementation_chip, ProjectStatus.IN_PROGRESS,
-            R.id.done_chip, ProjectStatus.COMPLETED
-    );
-
     @ColorInt
     public static int getColorFromStatus(Context context, ProjectStatus status){
         if (status == null) return 0;
@@ -48,8 +42,11 @@ public class BindingUtils {
     }
 
     public static ProjectStatus idToStatus(int status) {
-        Log.d("fg", "statusToId: ");
-        return idProjectStatusMap.get(status);
+        if (status == R.id.ideation_chip) return ProjectStatus.IDEATION;
+        if (status == R.id.implementation_chip) return ProjectStatus.IN_PROGRESS;
+        if (status == R.id.done_chip) return ProjectStatus.COMPLETED;
+
+        return ProjectStatus.IDEATION;
     }
 
 }
