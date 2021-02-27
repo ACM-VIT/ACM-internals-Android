@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        android:id="@+id/search_extend_ts"
+        motion:constraintSetEnd="@+id/end_search_extend"
+        motion:constraintSetStart="@id/start"
+        motion:duration="500"
+        motion:motionInterpolator="cubic(0.4,0,0,1)"
+        motion:layoutDuringTransition="ignoreRequest">
+
+    </Transition>
+
+    <Transition
+        android:id="@+id/scroll_collapse_ts"
+        motion:constraintSetEnd="@+id/end_scroll_collapse"
+        motion:constraintSetStart="@id/start"
+        motion:duration="10000"
+        motion:motionInterpolator="easeInOut">
+
+        <OnSwipe
+            motion:dragDirection="dragUp"
+            motion:touchAnchorSide="top"
+            motion:touchAnchorId="@id/swipe_refresh_container"/>
+        <KeyFrameSet >
+            <KeyPosition
+                motion:motionTarget="@id/search_textfield"
+                motion:framePosition="40"
+                motion:keyPositionType="deltaRelative"
+                motion:percentY="0.2" />
+
+            <KeyAttribute
+                motion:motionTarget="@+id/scroll_collapse_ts"
+                motion:framePosition="50"
+                android:alpha="0.5" />
+
+            <KeyPosition
+                motion:motionTarget="@+id/search_field_icon"
+                motion:framePosition="40"
+                motion:keyPositionType="deltaRelative"
+                motion:percentY="0.2" />
+
+            <KeyPosition
+                motion:motionTarget="@+id/search_extend"
+                motion:framePosition="40"
+                motion:keyPositionType="deltaRelative"
+                motion:percentY="0.2" />
+
+            <KeyAttribute
+                motion:motionTarget="@+id/filter_chip_scroll"
+                motion:framePosition="50"
+                android:alpha="0" />
+
+        </KeyFrameSet>
+
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="@+id/overlay_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/filter_chip_scroll"
+            motion:layout_constraintStart_toStartOf="@+id/overlay_view"
+            android:id="@+id/swipe_refresh_container"
+            android:layout_marginTop="20dp" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end_search_extend">
+        <Constraint android:id="@+id/search_extend">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="5dp"
+                motion:layout_constraintBottom_toTopOf="@id/guideline8"
+                motion:layout_constraintEnd_toEndOf="@+id/search_textfield"
+                motion:layout_constraintHorizontal_bias="0.0"
+                motion:layout_constrainedHeight="true"
+                motion:layout_constraintStart_toStartOf="@+id/search_textfield"
+                motion:layout_constraintTop_toBottomOf="@+id/search_textfield"
+                motion:layout_constraintVertical_bias="0.0" />
+
+            <Transform android:translationZ="3dp" />
+        </Constraint>
+
+        <Constraint android:id="@+id/search_textfield">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:elevation="5dp"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintHorizontal_bias="1.0"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintTop_toTopOf="parent" />
+
+            <Transform android:translationZ="3dp" />
+        </Constraint>
+
+        <Constraint android:id="@id/search_done_icon">
+            <PropertySet android:visibility="visible" />
+            <Transform android:translationZ="3dp" />
+        </Constraint>
+
+        <Constraint android:id="@+id/search_field_icon">
+            <Transform android:translationZ="3dp" />
+        </Constraint>
+
+        <Constraint android:id="@+id/overlay_view">
+            <PropertySet android:alpha="0.75" />
+        </Constraint>
+
+    </ConstraintSet>
+
+
+    <ConstraintSet android:id="@+id/end_scroll_collapse">
+
+        <Constraint android:id="@id/filter_chip_scroll">
+            <Layout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintBottom_toBottomOf="@+id/search_textfield"/>
+            <PropertySet android:alpha="0"/>
+            <Transform android:scaleX="0.8"/>
+        </Constraint>
+
+        <Constraint android:id="@id/search_textfield">
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginBottom="10dp"
+                android:elevation="3dp"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintHorizontal_bias="1.0"
+                motion:layout_constraintStart_toStartOf="parent"
+                motion:layout_constraintBottom_toTopOf="parent" />
+        </Constraint>
+
+    </ConstraintSet>
+
+</MotionScene>

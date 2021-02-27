@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.acmvit.acm_app.binding.BindingUtils"/>
+
+        <variable
+            name="project"
+            type="com.acmvit.acm_app.model.Project" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:focusable="false"
+        android:stateListAnimator="@animator/card_state_list_animator"
+        tools:ignore="RtlSymmetry">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.35" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:cardBackgroundColor="@color/colorSurface"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="24dp"
+                android:paddingTop="4dp"
+                android:paddingEnd="12dp"
+                android:paddingBottom="12dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/project_tags_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12dp"
+                    android:clipToPadding="true"
+                    android:minHeight="4dp"
+                    android:orientation="horizontal"
+                    android:paddingStart="0dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toStartOf="@+id/project_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:itemCount="4"
+                    tools:listitem="@layout/item_chip" />
+
+                <ImageView
+                    android:id="@+id/project_icon"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
+                    android:adjustViewBounds="false"
+                    app:corners="@{16}"
+                    app:imageUrl="@{project.icon}"
+                    app:layout_constraintBottom_toBottomOf="@+id/project_tags_rv"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/project_tags_rv"
+                    tools:scaleX="1.5"
+                    tools:scaleY="1.5"
+                    tools:src="@drawable/project_logo_ph" />
+
+                <TextView
+                    android:id="@+id/project_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="@{project.name}"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/project_tags_rv"
+                    app:layout_constraintTop_toBottomOf="@+id/project_tags_rv"
+                    tools:text="Mentor - Mentee App" />
+
+                <TextView
+                    android:id="@+id/project_desp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:text="@{project.description}"
+                    android:textColor="@color/lightGrey"
+                    app:layout_constraintEnd_toEndOf="@+id/project_name"
+                    app:layout_constraintStart_toStartOf="@+id/project_name"
+                    app:layout_constraintTop_toBottomOf="@+id/project_name"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. " />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/project_members_rv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="@+id/project_desp"
+                    app:layout_constraintStart_toStartOf="@+id/project_desp"
+                    app:layout_constraintTop_toBottomOf="@+id/project_desp"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_people_in" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/project_status_colored_bar"
+            android:layout_width="4dp"
+            android:layout_height="0dp"
+            android:background="@drawable/projects_type_side_rounded_rect"
+            android:backgroundTint="@{BindingUtils.getColorFromStatus(context, project.status)}"
+            android:elevation="3dp"
+            android:outlineProvider="none"
+            app:layout_constraintBottom_toTopOf="@id/guideline7"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:backgroundTint="@color/colorIdeation" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
