@@ -93,7 +93,7 @@ public class UserRepository {
     ) {
         MutableLiveData<Resource<UserData>> resource = new MutableLiveData<>();
         HashMap<String, String> uploadBody = new HashMap<>();
-        String fileName = sessionManager.getUserDetails().getId() + ".jpg";
+        String fileName = sessionManager.getUserDetails().getUser_id() + ".jpg";
         StorageReference uploadRef = dpReference.child(fileName);
 
         UploadTask uploadTask = uploadRef.putFile(Uri.parse(dpUri));
@@ -185,7 +185,7 @@ public class UserRepository {
     }
 
     public LiveData<Resource<UserData>> fetchUserDetails() {
-        String id = sessionManager.getUserDetails().getId();
+        String id = sessionManager.getUserDetails().getUser_id();
         MutableLiveData<Resource<UserData>> userData = new MutableLiveData<>();
         tokenizedService
             .fetchUserById(id)
@@ -219,7 +219,7 @@ public class UserRepository {
 
     @WorkerThread
     public boolean fetchUser() throws IOException {
-        String id = sessionManager.getUserDetails().getId();
+        String id = sessionManager.getUserDetails().getUser_id();
         Response<BackendResponse<UserData>> response = tokenizedService
             .fetchUserById(id)
             .execute();
