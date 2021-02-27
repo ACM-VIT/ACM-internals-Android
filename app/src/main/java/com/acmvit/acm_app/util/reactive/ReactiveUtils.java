@@ -19,11 +19,11 @@ public class ReactiveUtils {
         final MediatorLiveData<Y> result = new MediatorLiveData<>();
         result.addSource(
             source1,
-            (Observer<X>) x -> result.setValue(mapFunction.apply(x))
+                x -> result.setValue(mapFunction.apply(x))
         );
         result.addSource(
             source2,
-            (Observer<X>) x -> result.setValue(mapFunction.apply(x))
+                x -> result.setValue(mapFunction.apply(x))
         );
         return result;
     }

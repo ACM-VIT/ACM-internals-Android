@@ -1,18 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<!--    Theme Colors    -->
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="colorBackground">#1C272F</color>
-    <color name="colorBlue">#1ABCFE</color>
-    <color name="colorBlueDark">#2D9CDB</color>
-    <color name="colorItemBackground">#242D3B</color>
-    <color name="colorBottomNav">#252E3B</color>
-    <color name="colorError">#EF5350</color>
-    <color name="colorBackgroundElevated">#3E4A53</color>
-
+    <color name="colorPrimary">#1ABCFE</color>
+    <color name="colorPrimaryLight">#6FC8EE</color>
+    <color name="colorPrimaryDark">#2684FC</color>
+    <color name="colorSurface">#242D3B</color>
+    <color name="colorError">#700401</color>
+    <color name="colorSurfaceLight">#3E4A53</color>
     <color name="colorRipple">#D210141C</color>
-    <color name="darkGrey">#AAAAAA</color>
-    <color name="colorDisp">#7C7C7C</color>
+    <color name="darkGrey">#808080</color>
+    <color name="grey">#BDBDBD</color>
+    <color name="lightGrey">#C4C4C4</color>
     <color name="normalTextWithPrimaryTinge">#C8D6D8</color>
+
+<!--    Other Colors     -->
+    <color name="colorIdeation">#FFC857</color>
+    <color name="colorImplementation">#FF6B57</color>
+    <color name="colorCompleted">#0ACF83</color>
 
 </resources>

@@ -9,12 +9,15 @@ import androidx.lifecycle.ViewModel;
 import com.acmvit.acm_app.model.Accounts;
 import com.acmvit.acm_app.model.User;
 import com.acmvit.acm_app.repository.MembersRepository;
-import com.acmvit.acm_app.ui.base.ActivityViewModel;
 import com.acmvit.acm_app.ui.base.BaseViewModel;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
+
+import com.acmvit.acm_app.model.User;
+import com.acmvit.acm_app.repository.MembersRepository;
+
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Observable;
-import java.util.Observer;
 
 public class MembersViewModel extends ViewModel {
 

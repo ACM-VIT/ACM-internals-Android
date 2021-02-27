@@ -1,14 +1,22 @@
 package com.acmvit.acm_app.ui.profile;
 
 import android.app.Application;
+
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.acmvit.acm_app.model.User;
 import com.acmvit.acm_app.model.UserData;
 import com.acmvit.acm_app.network.BackendResponse;
 import com.acmvit.acm_app.network.BackendService;
 import com.acmvit.acm_app.network.ServiceGenerator;
-import com.acmvit.acm_app.ui.base.ActivityViewModel;
+import com.acmvit.acm_app.repository.AuthRepository;
+import com.acmvit.acm_app.ui.ActivityViewModel;
 import com.acmvit.acm_app.ui.base.BaseViewModel;
+import com.acmvit.acm_app.util.Resource;
+import com.acmvit.acm_app.util.reactive.SingleTimeObserver;
+
+import org.jetbrains.annotations.NotNull;
+
 import java.util.Objects;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
@@ -17,6 +25,13 @@ import retrofit2.Response;
 
 public class ProfileViewModel extends BaseViewModel {
 
+    private enum State {
+        STANDBY,
+        LOGOUT,
+    }
+
+    private State state = State.STANDBY;
+    private final AuthRepository authRepository;
     public final MutableLiveData<String> name = new MutableLiveData<>("");
     public final MutableLiveData<String> disp = new MutableLiveData<>("");
     public final MutableLiveData<String> dp = new MutableLiveData<>("");
@@ -27,6 +42,7 @@ public class ProfileViewModel extends BaseViewModel {
         Application application
     ) {
         super(activityViewModel, application);
+        authRepository = AuthRepository.getInstance();
     }
 
     public void initializeData() {
@@ -69,4 +85,22 @@ public class ProfileViewModel extends BaseViewModel {
                 }
             );
     }
+
+
+    public void logout() {
+        if (activityViewModel.canRunAuthenticatedNetworkTask() &&
+                        state == State.STANDBY) {
+            state = State.LOGOUT;
+            activityViewModel.setIsLoading(true);
+            LiveData<Resource<Void>> status = authRepository.logout();
+            new SingleTimeObserver<Resource<Void>>() {
+                @Override
+                public void onReceived(Resource<Void> resource) {
+                    activityViewModel.setIsLoading(false);
+                    state = State.STANDBY;
+                }
+            }.attachTo(status);
+        }
+    }
+
 }

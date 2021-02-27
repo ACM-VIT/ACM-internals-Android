@@ -1,5 +1,6 @@
 package com.acmvit.acm_app.ui.profile;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.PopupMenu;
+
+import com.acmvit.acm_app.ui.base.BaseViewModelFactory;
 import com.acmvit.acm_app.R;
 import com.acmvit.acm_app.databinding.FragmentProfileBinding;
 import com.acmvit.acm_app.ui.base.BaseActivity;
@@ -34,14 +43,7 @@ public class ProfileFragment extends Fragment {
     ) {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
-        ProfileViewPagerAdapter adapter = new ProfileViewPagerAdapter(this);
-        binding.viewPager.setAdapter(adapter);
-        binding.fab.setOnClickListener(
-            v ->
-                Navigation
-                    .findNavController(v)
-                    .navigate(R.id.action_profile_to_editProfileFragment)
-        );
+        binding.fab.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_profile_to_editProfileFragment));
         return binding.getRoot();
     }
 
@@ -67,19 +69,31 @@ public class ProfileFragment extends Fragment {
             binding.fab.setVisibility(View.INVISIBLE);
         }
 
-        new TabLayoutMediator(
-            binding.tabLayout,
-            binding.viewPager,
-            (tab, position) -> {
-                if (position == 0) {
-                    tab.setText("Projects");
-                }
-                if (position == 1) {
-                    tab.setText("Socials");
-                }
-            }
-        )
-            .attach();
         super.onViewCreated(view, savedInstanceState);
+
+        setupOverflowMenu();
+    }
+
+    public void setupOverflowMenu() {
+        Context wrapper = new ContextThemeWrapper(
+                getContext(),
+                R.style.ThemeOverlay_popupTheme
+        );
+        PopupMenu popup = new PopupMenu(wrapper, binding.overflowMenu);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.overflow_menu, popup.getMenu());
+        popup.setOnMenuItemClickListener(
+                menuItem -> {
+                    if (menuItem.getItemId() == R.id.menu_signout) {
+                        viewModel.logout();
+                        return true;
+                    }
+                    return false;
+                }
+        );
+
+        binding.overflowMenu.setOnClickListener(
+                view -> popup.show()
+        );
     }
 }

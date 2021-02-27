@@ -38,12 +38,8 @@ public class EditProfileFragment extends Fragment {
             FragmentEditProfileBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.inputName.getEditText().clearFocus();
-        binding.backButton.setOnClickListener(
-            (View v) ->
-                Navigation
-                    .findNavController(v)
-                    .navigate(R.id.action_editProfileFragment_to_profile)
-        );
+        binding.backButton.setOnClickListener((View v)->
+                Navigation.findNavController(v).popBackStack());
         return binding.getRoot();
     }
 

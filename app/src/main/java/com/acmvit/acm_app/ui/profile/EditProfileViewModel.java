@@ -12,7 +12,7 @@ import com.acmvit.acm_app.model.UserData;
 import com.acmvit.acm_app.pref.SessionManager;
 import com.acmvit.acm_app.repository.UserRepository;
 import com.acmvit.acm_app.service.AuthService;
-import com.acmvit.acm_app.ui.base.ActivityViewModel;
+import com.acmvit.acm_app.ui.ActivityViewModel;
 import com.acmvit.acm_app.ui.base.BaseViewModel;
 import com.acmvit.acm_app.util.Action;
 import com.acmvit.acm_app.util.Resource;
@@ -152,8 +152,8 @@ public class EditProfileViewModel extends BaseViewModel {
         if (canRun() && activityViewModel.canRunAuthenticatedNetworkTask()) {
             setState(State.UPDATE_USER);
             User user = sessionManager.getUserDetails();
-            String namev = name.getValue().trim();
-            String dispv = disp.getValue().trim();
+            String namev = name.getValue();
+            String dispv = disp.getValue();
             String dpv = dp.getValue();
 
             if (namev == null) {
@@ -162,6 +162,9 @@ public class EditProfileViewModel extends BaseViewModel {
             if (dispv == null) {
                 dispv = "";
             }
+
+            namev = namev.trim();
+            dispv = dispv.trim();
 
             LiveData<Resource<UserData>> updateUser;
             if (!TextUtils.isEmpty(dpv) && !dpv.equals(user.getDp())) {

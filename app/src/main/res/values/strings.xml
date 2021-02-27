@@ -26,7 +26,7 @@
     <string name="basic">Basic</string>
     <string name="accounts">Accounts</string>
     <string name="name">Name</string>
-    <string name="status">Status</string>
+    <string name="projectStatus">Status</string>
     <string name="required_field_error">This field is required</string>
     <string name="password_mismatch_error">Passwords do not match</string>
     <string name="password_weak_error">Minimum password length is 6</string>
@@ -46,5 +46,16 @@
     <string name="set">Set</string>
     <string name="user_settings">User Settings</string>
     <string name="cli_password">CLI Password</string>
+    <string name="search_for">Search for \"%s\"</string>
+    <string name="ideation">Idea</string>
+    <string name="implementation">Project</string>
+    <string name="completed">Product</string>
+    <string name="my_projects">My</string>
+    <string name="projects">Projects</string>
+    <string name="members">Members</string>
+    <string name="invites">Invites</string>
+    <string name="profile">Profile</string>
+    <string name="search">Search</string>
+    <string name="unable_to_fetch">Unable to Fetch</string>
 
 </resources>

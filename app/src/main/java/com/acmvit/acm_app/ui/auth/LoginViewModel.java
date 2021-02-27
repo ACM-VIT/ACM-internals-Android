@@ -9,7 +9,7 @@ import com.acmvit.acm_app.model.UserData;
 import com.acmvit.acm_app.pref.SessionManager;
 import com.acmvit.acm_app.repository.AuthRepository;
 import com.acmvit.acm_app.repository.UserRepository;
-import com.acmvit.acm_app.ui.base.ActivityViewModel;
+import com.acmvit.acm_app.ui.ActivityViewModel;
 import com.acmvit.acm_app.ui.base.BaseViewModel;
 import com.acmvit.acm_app.util.Action;
 import com.acmvit.acm_app.util.Resource;

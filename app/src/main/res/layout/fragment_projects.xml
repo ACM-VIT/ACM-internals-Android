@@ -1,9 +1,237 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:nestedScrollingEnabled="true"
-    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-    tools:context="ui.profile.ProjectsFragment" />
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.acmvit.acm_app.ui.projects.ProjectsViewModel" />
+        <import type="com.acmvit.acm_app.R"/>
+        <import type="com.acmvit.acm_app.binding.BindingUtils"/>
+        <import type="com.acmvit.acm_app.util.GeneralUtils"/>
+    </data>
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/root_ml"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
+        android:background="@color/colorBackground"
+        app:layoutDescription="@xml/fragment_projects_scene"
+        tools:context=".ui.projects.ProjectsFragment"
+        tools:ignore="RtlSymmetry">
+
+        <View
+            android:id="@+id/overlay_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="@color/black"
+            android:elevation="0dp"
+            android:focusable="true"
+            android:onClick="@{() -> viewmodel.setSearchViewExpand(false)}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/search_extend"
+            android:layout_width="0dp"
+            android:layout_height="8dp"
+            android:background="@drawable/search_field_extend_bg"
+            android:elevation="4dp"
+            android:orientation="vertical"
+            android:outlineProvider="background"
+            android:paddingStart="12dp"
+            android:paddingTop="8dp"
+            android:animateLayoutChanges="true"
+            android:paddingBottom="12dp"
+            app:layout_constraintBottom_toTopOf="@id/guideline8"
+            app:layout_constraintEnd_toEndOf="@+id/search_textfield"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/search_textfield"
+            app:layout_constraintTop_toBottomOf="@+id/search_textfield"
+            app:layout_constraintVertical_bias="0.0">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/tags_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="2dp"
+                android:paddingBottom="4dp"
+                tools:itemCount="3"
+                tools:listitem="@layout/item_chip"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/search_textfield"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/search_field_bg"
+            android:drawablePadding="12dp"
+            android:elevation="4dp"
+            android:gravity="center_vertical"
+            android:hint="@android:string/search_go"
+            android:inputType="textPersonName"
+            android:maxLength="@{viewmodel.filters.isTag ? viewmodel.searchData.length() : 20}"
+            android:outlineProvider="none"
+            android:paddingStart="48dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="12dp"
+            android:singleLine="true"
+            android:text="@={viewmodel.searchData}"
+            android:textColor="@color/lightGrey"
+            android:textColorHint="@color/grey"
+            android:textSize="@{viewmodel.filters.tagSearchFilter.isTag ? @dimen/search_chip_text_size : @dimen/search_normal_text_size}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/search_field_icon"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:elevation="5dp"
+            android:src="@drawable/ic_search"
+            android:tag="motion1"
+            app:layout_constraintBottom_toBottomOf="@+id/search_textfield"
+            app:layout_constraintStart_toStartOf="@+id/search_textfield"
+            app:layout_constraintTop_toTopOf="@+id/search_textfield"
+            app:tint="@color/grey" />
+
+        <ImageView
+            android:id="@+id/search_done_icon"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/rounded_ripple"
+            android:elevation="5dp"
+            android:padding="8dp"
+            android:onClick="@{() -> viewmodel.submitTextFilter()}"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/search_field_icon"
+            app:layout_constraintEnd_toEndOf="@+id/search_textfield"
+            app:layout_constraintTop_toTopOf="@+id/search_field_icon"
+            app:srcCompat="@drawable/ic_tick"
+            app:tint="@color/white_icon_selector"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.75" />
+
+        <HorizontalScrollView
+            android:id="@+id/filter_chip_scroll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:elevation="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_textfield">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_Group_Parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:chipSpacingHorizontal="12dp"
+                app:singleLine="true">
+
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/project_status_chip_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:check="@={BindingUtils.statusToId(viewmodel.filters.projectStatus)}"
+                    app:chipSpacingHorizontal="12dp"
+                    app:singleLine="true"
+                    app:singleSelection="true">
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/ideation_chip"
+                        style="@style/Widget.App.Chip.DotIcon"
+                        android:text="@string/ideation"
+                        app:chipIconTint="@color/colorIdeation" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/implementation_chip"
+                        style="@style/Widget.App.Chip.DotIcon"
+                        android:text="@string/implementation"
+                        app:chipIconTint="@color/colorImplementation" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/done_chip"
+                        style="@style/Widget.App.Chip.DotIcon"
+                        android:text="@string/completed"
+                        app:chipIconTint="@color/colorCompleted" />
+
+                </com.google.android.material.chip.ChipGroup>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/my_chip"
+                    style="@style/Widget.App.Chip.DotIcon"
+                    app:onCloseIconClickListener="@{() -> viewmodel.removeUserFilter()}"
+                    android:text="@{GeneralUtils.getFirstNChars(viewmodel.filters.user.name, 5)}"
+                    app:imgIcon="@{viewmodel.filters.user.dp}"
+                    app:placeholder="@{@drawable/ic_user_icon}"
+                    app:textEndPadding="0dp"
+                    app:chipIconSize="@dimen/my_chip_unselected_icon_size"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+
+        </HorizontalScrollView>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_container"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/overlay_view"
+            app:layout_constraintStart_toStartOf="@+id/overlay_view"
+            app:layout_constraintTop_toBottomOf="@+id/filter_chip_scroll"
+            app:progressBackgroundColorSchemeResource="@{R.color.colorSurfaceLight}"
+            app:refreshing="@={viewmodel.isRefreshing}"
+            app:spinnerColor="@{R.color.lightGrey}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/projects_rv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipToPadding="false"
+                android:orientation="vertical"
+                android:paddingBottom="30dp"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_project" />
+
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_add"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+</layout>

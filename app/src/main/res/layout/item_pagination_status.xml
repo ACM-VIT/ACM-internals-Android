@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <import type="com.acmvit.acm_app.util.Status"/>
+        <variable
+            name="status"
+            type="com.acmvit.acm_app.util.Status" />
+        <variable
+            name="retryCallback"
+            type="Runnable" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:focusable="false"
+        android:paddingBottom="16dp">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loading_lottie"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:tint="@color/grey"
+            android:focusable="false"
+            app:isVisible="@{status == Status.LOADING}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loading_lottie1" />
+
+        <ImageView
+            android:id="@+id/retry_btn"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:background="@drawable/rounded_ripple"
+            android:onClick="@{() -> retryCallback.run()}"
+            android:padding="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_retry" />
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:letterSpacing="0.05"
+            android:text="@string/unable_to_fetch"
+            android:textColor="@color/darkGrey"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/retry_btn"
+            app:layout_constraintStart_toStartOf="@+id/retry_btn"
+            app:layout_constraintTop_toBottomOf="@+id/retry_btn" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:constraint_referenced_ids="retry_btn,textView17"
+            app:isVisible="@{status == Status.ERROR}"
+            tools:layout_editor_absoluteY="20dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

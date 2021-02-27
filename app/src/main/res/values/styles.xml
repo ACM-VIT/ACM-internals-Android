@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="edit_profile_section_header_style">
-        <item name="android:textAlignment">center</item>
-        <item name="android:textColor">@color/colorDisp</item>
-        <item name="android:textSize">16sp</item>
-    </style>
-</resources>

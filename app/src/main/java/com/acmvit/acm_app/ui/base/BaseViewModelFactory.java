@@ -1,15 +1,13 @@
 package com.acmvit.acm_app.ui.base;
 
-import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
-import com.acmvit.acm_app.ui.base.ActivityViewModel;
-import com.acmvit.acm_app.ui.base.BaseActivity;
-import com.acmvit.acm_app.ui.base.BaseViewModel;
+
+import com.acmvit.acm_app.ui.ActivityViewModel;
+
 import java.lang.reflect.InvocationTargetException;
 
 public class BaseViewModelFactory implements ViewModelProvider.Factory {
