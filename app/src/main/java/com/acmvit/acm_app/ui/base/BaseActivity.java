@@ -6,7 +6,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.acmvit.acm_app.ui.ActivityViewModel;
 import com.acmvit.acm_app.util.GeneralUtils;
 

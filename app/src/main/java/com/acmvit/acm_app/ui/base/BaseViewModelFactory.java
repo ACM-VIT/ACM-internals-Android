@@ -1,13 +1,10 @@
 package com.acmvit.acm_app.ui.base;
 
 import android.app.Application;
-
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.acmvit.acm_app.ui.ActivityViewModel;
-
 import java.lang.reflect.InvocationTargetException;
 
 public class BaseViewModelFactory implements ViewModelProvider.Factory {

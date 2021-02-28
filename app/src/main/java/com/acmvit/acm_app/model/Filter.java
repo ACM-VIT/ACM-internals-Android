@@ -3,11 +3,16 @@ package com.acmvit.acm_app.model;
 import java.util.Objects;
 
 public class Filter {
+
     public final String userId;
     public final ProjectStatus status;
     public final TagSearchFilter tagSearchFilter;
 
-    public Filter(String userId, ProjectStatus status, TagSearchFilter tagSearchFilter) {
+    public Filter(
+        String userId,
+        ProjectStatus status,
+        TagSearchFilter tagSearchFilter
+    ) {
         this.userId = userId;
         this.status = status;
         this.tagSearchFilter = tagSearchFilter;
@@ -30,9 +35,10 @@ public class Filter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Filter filter = (Filter) o;
-        return Objects.equals(userId, filter.userId) &&
-                status == filter.status &&
-                Objects.equals(tagSearchFilter, filter.tagSearchFilter);
+        return (
+            Objects.equals(userId, filter.userId) &&
+            status == filter.status &&
+            Objects.equals(tagSearchFilter, filter.tagSearchFilter)
+        );
     }
-
 }

@@ -6,13 +6,10 @@ import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-
 import com.google.gson.annotations.SerializedName;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.io.Serializable;
 import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 @Entity(tableName = "user")
 public class User implements Serializable {
@@ -44,12 +41,12 @@ public class User implements Serializable {
     private Accounts accounts;
 
     public User(
-            @NotNull String user_id,
-            String name,
-            String email,
-            Accounts accounts,
-            String dp,
-            String disp
+        @NotNull String user_id,
+        String name,
+        String email,
+        Accounts accounts,
+        String dp,
+        String disp
     ) {
         this.user_id = user_id;
         this.name = name;
@@ -119,19 +116,19 @@ public class User implements Serializable {
     @Override
     public String toString() {
         return (
-                "User{" +
-                        "id='" +
-                        user_id +
-                        '\'' +
-                        ", name='" +
-                        name +
-                        '\'' +
-                        ", email='" +
-                        email +
-                        '\'' +
-                        ", accounts=" +
-                        accounts +
-                        '}'
+            "User{" +
+            "id='" +
+            user_id +
+            '\'' +
+            ", name='" +
+            name +
+            '\'' +
+            ", email='" +
+            email +
+            '\'' +
+            ", accounts=" +
+            accounts +
+            '}'
         );
     }
 
@@ -140,12 +137,14 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return user_id.equals(user.user_id) &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(dp, user.dp) &&
-                Objects.equals(disp, user.disp) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(accounts, user.accounts);
+        return (
+            user_id.equals(user.user_id) &&
+            Objects.equals(name, user.name) &&
+            Objects.equals(dp, user.dp) &&
+            Objects.equals(disp, user.disp) &&
+            Objects.equals(email, user.email) &&
+            Objects.equals(accounts, user.accounts)
+        );
     }
 
     @Override

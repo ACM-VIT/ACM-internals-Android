@@ -2,12 +2,10 @@ package com.acmvit.acm_app.ui.projects;
 
 import android.app.Application;
 import android.util.Log;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
-
 import com.acmvit.acm_app.db.AcmDb;
 import com.acmvit.acm_app.model.Filter;
 import com.acmvit.acm_app.model.Project;
@@ -23,15 +21,15 @@ import com.acmvit.acm_app.util.Status;
 import com.acmvit.acm_app.util.reactive.SingleLiveEvent;
 import com.acmvit.acm_app.util.reactive.SingleSourceMediatorLD;
 import com.google.android.gms.common.util.Strings;
-
 import java.util.List;
 import java.util.Objects;
 
 public class ProjectsViewModel extends BaseViewModel {
+
     private static final String TAG = "'ProjectsViewModel'";
 
     public enum State {
-        STANDBY
+        STANDBY,
     }
 
     private final Filters filters = new Filters();
@@ -39,69 +37,119 @@ public class ProjectsViewModel extends BaseViewModel {
     private final SingleSourceMediatorLD<List<String>> tags = new SingleSourceMediatorLD<>();
     private final PaginatedResource<Project> projectPaginatedResource = new PaginatedResource<>();
     private final MediatorLiveData<Boolean> isRefreshing = new MediatorLiveData<>();
-    private final MutableLiveData<Boolean> isSearchExpanded = new MutableLiveData<>(false);
-    private final MutableLiveData<String> searchData = new MutableLiveData<>("");
+    private final MutableLiveData<Boolean> isSearchExpanded = new MutableLiveData<>(
+        false
+    );
+    private final MutableLiveData<String> searchData = new MutableLiveData<>(
+        ""
+    );
     private final ProjectsRepository projectsRepository;
     private final SingleLiveEvent<Void> scrollToTop = new SingleLiveEvent<>();
 
-    public ProjectsViewModel(ActivityViewModel activityViewModel, Application application) {
+    public ProjectsViewModel(
+        ActivityViewModel activityViewModel,
+        Application application
+    ) {
         super(activityViewModel, application);
         isRefreshing.setValue(false);
-        projectsRepository = ProjectsRepository.getInstance(AcmDb.getInstance(application));
-        tags.addSource(projectsRepository.getAllTags(), listResource -> {
-            if (listResource.data != null) {
-                Log.d(TAG, "ProjectsViewModel: ");
-                tags.setValue(listResource.data);
+        projectsRepository =
+            ProjectsRepository.getInstance(AcmDb.getInstance(application));
+        tags.addSource(
+            projectsRepository.getAllTags(),
+            listResource -> {
+                if (listResource.data != null) {
+                    Log.d(TAG, "ProjectsViewModel: ");
+                    tags.setValue(listResource.data);
+                }
             }
-        });
+        );
 
-        filters.getTagSearchFilter().observeForever(s -> {
-            String searchKeyVal = filters.getSearchText();
+        filters
+            .getTagSearchFilter()
+            .observeForever(
+                s -> {
+                    String searchKeyVal = filters.getSearchText();
 
-            if (!searchKeyVal.equals(searchData.getValue())) {
-                searchData.setValue(searchKeyVal);
+                    if (!searchKeyVal.equals(searchData.getValue())) {
+                        searchData.setValue(searchKeyVal);
+                    }
+                }
+            );
+
+        isSearchExpanded.observeForever(
+            val -> {
+                if (
+                    !val &&
+                    !filters.getSearchText().equals(searchData.getValue())
+                ) {
+                    searchData.setValue(filters.getSearchText());
+                }
             }
-        });
+        );
 
-        isSearchExpanded.observeForever(val -> {
-            if (!val && !filters.getSearchText().equals(searchData.getValue())) {
-                searchData.setValue(filters.getSearchText());
-            }
-        });
+        Transformations
+            .distinctUntilChanged(filters.getFilter())
+            .observeForever(
+                filter -> {
+                    scrollToTop.setValue(null);
+                    projectPaginatedResource.data.setValue(null);
+                    TagSearchFilter tagSearchFilter = filter.tagSearchFilter;
+                    if (
+                        tagSearchFilter == null ||
+                        Strings.emptyToNull(tagSearchFilter.searchKey) == null
+                    ) {
+                        projectPaginatedResource.updatePaginatedResource(
+                            projectsRepository.getProjectsWithUidAndStatus(
+                                filter.userId,
+                                filter.status
+                            )
+                        );
+                    } else if (filter.tagSearchFilter.isTag) {
+                        projectPaginatedResource.updatePaginatedResource(
+                            projectsRepository.getProjectsWithTag(
+                                tagSearchFilter.searchKey
+                            )
+                        );
+                    } else {
+                        projectPaginatedResource.updatePaginatedResource(
+                            projectsRepository.getProjectsWithName(
+                                tagSearchFilter.searchKey
+                            )
+                        );
+                    }
+                }
+            );
 
-        Transformations.distinctUntilChanged(filters.getFilter()).observeForever(filter -> {
-            scrollToTop.setValue(null);
-            projectPaginatedResource.data.setValue(null);
-            TagSearchFilter tagSearchFilter = filter.tagSearchFilter;
-            if (tagSearchFilter == null || Strings.emptyToNull(tagSearchFilter.searchKey) == null) {
-                projectPaginatedResource.updatePaginatedResource(projectsRepository.getProjectsWithUidAndStatus(filter.userId, filter.status));
+        searchData.observeForever(
+            s -> {
+                boolean isTag = filters.getIsTag();
+                if (s.isEmpty() && isTag) {
+                    filters.clear(filters.tagSearchFilter);
+                }
             }
-            else if (filter.tagSearchFilter.isTag) {
-                projectPaginatedResource.updatePaginatedResource(projectsRepository.getProjectsWithTag(tagSearchFilter.searchKey));
-            } else {
-                projectPaginatedResource.updatePaginatedResource(projectsRepository.getProjectsWithName(tagSearchFilter.searchKey));
-            }
-        });
+        );
 
-        searchData.observeForever(s -> {
-            boolean isTag = filters.getIsTag();
-            if (s.isEmpty() && isTag) {
-                filters.clear(filters.tagSearchFilter);
+        isRefreshing.addSource(
+            Objects.requireNonNull(projectPaginatedResource.status),
+            status -> {
+                if (
+                    GeneralUtils.unBoxNullableBoolean(
+                        isRefreshing.getValue()
+                    ) &&
+                    status != Status.LOADING
+                ) {
+                    isRefreshing.setValue(false);
+                }
             }
-        });
+        );
 
-        isRefreshing.addSource(Objects.requireNonNull(projectPaginatedResource.status), status -> {
-            if (GeneralUtils.unBoxNullableBoolean(isRefreshing.getValue()) && status != Status.LOADING) {
-                isRefreshing.setValue(false);
+        isRefreshing.observeForever(
+            isRefreshing -> {
+                if (isRefreshing) {
+                    projectPaginatedResource.invalidate.run();
+                }
             }
-        });
-
-        isRefreshing.observeForever(isRefreshing -> {
-            if (isRefreshing) {
-                projectPaginatedResource.invalidate.run();
-            }
-        });
-
+        );
     }
 
     public Filters getFilters() {
@@ -131,7 +179,9 @@ public class ProjectsViewModel extends BaseViewModel {
     public void submitTextFilter() {
         if (!filters.getIsTag()) {
             String searchStr = String.valueOf(searchData.getValue());
-            TagSearchFilter filter = searchStr.isEmpty() ? null : new TagSearchFilter(false, searchStr);
+            TagSearchFilter filter = searchStr.isEmpty()
+                ? null
+                : new TagSearchFilter(false, searchStr);
             filters.setTagSearchFilter(filter);
         }
         isSearchExpanded.setValue(false);
@@ -156,6 +206,7 @@ public class ProjectsViewModel extends BaseViewModel {
     }
 
     public static class Filters {
+
         private final MutableLiveData<TagSearchFilter> tagSearchFilter = new MutableLiveData<>();
         private final MutableLiveData<ProjectStatus> projectStatus = new MutableLiveData<>();
         private final MutableLiveData<User> user = new MutableLiveData<>();
@@ -163,27 +214,46 @@ public class ProjectsViewModel extends BaseViewModel {
 
         public Filters() {
             filter.setValue(new Filter(null, null, null));
-            filter.addSource(projectStatus, status -> {
-                if (status != null) {
-                    clear(tagSearchFilter);
+            filter.addSource(
+                projectStatus,
+                status -> {
+                    if (status != null) {
+                        clear(tagSearchFilter);
+                    }
+                    filter.setValue(
+                        Objects
+                            .requireNonNull(filter.getValue())
+                            .setStatus(status)
+                    );
                 }
-                filter.setValue(Objects.requireNonNull(filter.getValue()).setStatus(status));
-            });
+            );
 
-            filter.addSource(user, userVal -> {
-                if (userVal != null) {
-                    clear(tagSearchFilter);
+            filter.addSource(
+                user,
+                userVal -> {
+                    if (userVal != null) {
+                        clear(tagSearchFilter);
+                    }
+                    String id = userVal == null ? null : userVal.getUser_id();
+                    filter.setValue(
+                        Objects.requireNonNull(filter.getValue()).setUserId(id)
+                    );
                 }
-                String id = userVal == null ? null : userVal.getUser_id();
-                filter.setValue(Objects.requireNonNull(filter.getValue()).setUserId(id));
-            });
+            );
 
-            filter.addSource(tagSearchFilter, tagSearch -> {
-                if (tagSearch != null) {
-                    clear(projectStatus, user);
+            filter.addSource(
+                tagSearchFilter,
+                tagSearch -> {
+                    if (tagSearch != null) {
+                        clear(projectStatus, user);
+                    }
+                    filter.setValue(
+                        Objects
+                            .requireNonNull(filter.getValue())
+                            .setTagSearchFilter(tagSearch)
+                    );
                 }
-                filter.setValue(Objects.requireNonNull(filter.getValue()).setTagSearchFilter(tagSearch));
-            });
+            );
         }
 
         private void clear(MutableLiveData<?>... liveDatas) {
@@ -232,7 +302,5 @@ public class ProjectsViewModel extends BaseViewModel {
             if (tagSearchFilter.getValue() == null) return "";
             return tagSearchFilter.getValue().searchKey;
         }
-
     }
-
 }

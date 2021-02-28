@@ -1,7 +1,6 @@
 package com.acmvit.acm_app.ui.profile;
 
 import android.app.Application;
-
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.acmvit.acm_app.model.User;
@@ -14,10 +13,8 @@ import com.acmvit.acm_app.ui.ActivityViewModel;
 import com.acmvit.acm_app.ui.base.BaseViewModel;
 import com.acmvit.acm_app.util.Resource;
 import com.acmvit.acm_app.util.reactive.SingleTimeObserver;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -86,10 +83,11 @@ public class ProfileViewModel extends BaseViewModel {
             );
     }
 
-
     public void logout() {
-        if (activityViewModel.canRunAuthenticatedNetworkTask() &&
-                        state == State.STANDBY) {
+        if (
+            activityViewModel.canRunAuthenticatedNetworkTask() &&
+            state == State.STANDBY
+        ) {
             state = State.LOGOUT;
             activityViewModel.setIsLoading(true);
             LiveData<Resource<Void>> status = authRepository.logout();
@@ -99,8 +97,8 @@ public class ProfileViewModel extends BaseViewModel {
                     activityViewModel.setIsLoading(false);
                     state = State.STANDBY;
                 }
-            }.attachTo(status);
+            }
+            .attachTo(status);
         }
     }
-
 }

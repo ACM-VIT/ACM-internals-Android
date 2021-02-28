@@ -2,7 +2,6 @@ package com.acmvit.acm_app.repository;
 
 import android.annotation.SuppressLint;
 import android.util.Log;
-
 import androidx.annotation.NonNull;
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
@@ -14,15 +13,11 @@ import androidx.lifecycle.Transformations;
 import androidx.paging.DataSource;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
-
 import com.acmvit.acm_app.db.AcmDb;
 import com.acmvit.acm_app.util.PaginatedResource;
 import com.acmvit.acm_app.util.Resource;
 import com.acmvit.acm_app.util.Status;
 import com.acmvit.acm_app.util.reactive.SingleTimeObserver;
-
-import java.util.concurrent.TimeUnit;
-
 import io.reactivex.BackpressureStrategy;
 import io.reactivex.Completable;
 import io.reactivex.Flowable;
@@ -31,39 +26,58 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Action;
 import io.reactivex.schedulers.Schedulers;
 import io.reactivex.subjects.BehaviorSubject;
+import java.util.concurrent.TimeUnit;
 
 public abstract class PaginatedNetworkBoundResource<RequestType, ResultModel> {
+
     private static final String TAG = "PaginatedNetworkBoundRe";
     private final PaginatedResource<ResultModel> paginatedResource;
     private AcmDb localDb;
-    private final MutableLiveData<Boolean> shouldPushUpdates = new MutableLiveData<>(true);
+    private final MutableLiveData<Boolean> shouldPushUpdates = new MutableLiveData<>(
+        true
+    );
 
     public PaginatedNetworkBoundResource(int databasePageSize) {
         DataSource.Factory<Integer, ResultModel> dataSourceFactory = loadFromDb();
         BoundaryCallback boundaryCallback = new BoundaryCallback();
 
         PagedList.Config config = new PagedList.Config.Builder()
-                .setEnablePlaceholders(false)
-                .setPageSize(databasePageSize + 1)
-                .build();
+            .setEnablePlaceholders(false)
+            .setPageSize(databasePageSize + 1)
+            .build();
 
-        LiveData<Status> status = LiveDataReactiveStreams.fromPublisher(boundaryCallback.getStatus()
+        LiveData<Status> status = LiveDataReactiveStreams.fromPublisher(
+            boundaryCallback
+                .getStatus()
                 .debounce(500, TimeUnit.MILLISECONDS)
-                .distinctUntilChanged().toFlowable(BackpressureStrategy.LATEST));
+                .distinctUntilChanged()
+                .toFlowable(BackpressureStrategy.LATEST)
+        );
 
-        final LiveData<PagedList<ResultModel>> dbSource = new LivePagedListBuilder<>(dataSourceFactory, config)
-                .setBoundaryCallback(boundaryCallback)
-                .build();
+        final LiveData<PagedList<ResultModel>> dbSource = new LivePagedListBuilder<>(
+            dataSourceFactory,
+            config
+        )
+            .setBoundaryCallback(boundaryCallback)
+            .build();
 
-        LiveData<PagedList<ResultModel>> result = Transformations.switchMap(Transformations.distinctUntilChanged(shouldPushUpdates), input -> {
-            if (input) {
-                return dbSource;
+        LiveData<PagedList<ResultModel>> result = Transformations.switchMap(
+            Transformations.distinctUntilChanged(shouldPushUpdates),
+            input -> {
+                if (input) {
+                    return dbSource;
+                }
+                return new MutableLiveData<>(dbSource.getValue());
             }
-            return new MutableLiveData<>(dbSource.getValue());
-        });
+        );
 
-
-        paginatedResource = new PaginatedResource<>(Transformations.distinctUntilChanged(result), status, boundaryCallback::invalidate, boundaryCallback::requestAgain);
+        paginatedResource =
+            new PaginatedResource<>(
+                Transformations.distinctUntilChanged(result),
+                status,
+                boundaryCallback::invalidate,
+                boundaryCallback::requestAgain
+            );
         boundaryCallback.invalidate();
     }
 
@@ -80,18 +94,27 @@ public abstract class PaginatedNetworkBoundResource<RequestType, ResultModel> {
 
     protected abstract DataSource.Factory<Integer, ResultModel> loadFromDb();
 
-    protected abstract void createCall(MutableLiveData<Resource<RequestType>> reqItem, int lastRequestedPage);
+    protected abstract void createCall(
+        MutableLiveData<Resource<RequestType>> reqItem,
+        int lastRequestedPage
+    );
 
-    protected Completable deleteItems() {return Completable.complete();};
+    protected Completable deleteItems() {
+        return Completable.complete();
+    }
 
     protected RequestType processResponse(Resource<RequestType> response) {
         return response.data;
     }
 
-    public class BoundaryCallback extends PagedList.BoundaryCallback<ResultModel> {
+    public class BoundaryCallback
+        extends PagedList.BoundaryCallback<ResultModel> {
+
         private int lastRequestedPage = 1;
         private boolean hasMoreResults = true;
-        private final BehaviorSubject<Status> status = BehaviorSubject.createDefault(Status.SUCCESS);
+        private final BehaviorSubject<Status> status = BehaviorSubject.createDefault(
+            Status.SUCCESS
+        );
 
         @Override
         public void onZeroItemsLoaded() {
@@ -99,8 +122,7 @@ public abstract class PaginatedNetworkBoundResource<RequestType, ResultModel> {
         }
 
         @Override
-        public void onItemAtFrontLoaded(@NonNull ResultModel itemAtFront) {
-        }
+        public void onItemAtFrontLoaded(@NonNull ResultModel itemAtFront) {}
 
         @Override
         public void onItemAtEndLoaded(@NonNull ResultModel itemAtEnd) {
@@ -140,42 +162,67 @@ public abstract class PaginatedNetworkBoundResource<RequestType, ResultModel> {
                             shouldPushUpdates.setValue(false);
                             if (lastRequestedPage == 1) {
                                 subscribeToCompletable(
-                                        Completable.fromAction(
-                                                () -> localDb.runInTransaction(() -> deleteItems()
-                                                        .andThen(saveCallResult(processResponse(newData))).blockingAwait())));
+                                    Completable.fromAction(
+                                        () ->
+                                            localDb.runInTransaction(
+                                                () ->
+                                                    deleteItems()
+                                                        .andThen(
+                                                            saveCallResult(
+                                                                processResponse(
+                                                                    newData
+                                                                )
+                                                            )
+                                                        )
+                                                        .blockingAwait()
+                                            )
+                                    )
+                                );
                             } else {
                                 subscribeToCompletable(
-                                        Completable.fromAction(
-                                                () -> localDb.runInTransaction(
-                                                        () -> saveCallResult(processResponse(newData))).blockingAwait()));
+                                    Completable.fromAction(
+                                        () ->
+                                            localDb
+                                                .runInTransaction(
+                                                    () ->
+                                                        saveCallResult(
+                                                            processResponse(
+                                                                newData
+                                                            )
+                                                        )
+                                                )
+                                                .blockingAwait()
+                                    )
+                                );
                             }
                             break;
-
                         case ERROR:
                             Log.d(TAG, "onReceived: " + newData.getMessage());
                             status.onNext(Status.ERROR);
                             break;
-
                         case NO_DATA:
                             hasMoreResults = false;
                             status.onNext(Status.SUCCESS);
                             break;
                     }
                 }
-            }.attachTo(response);
+            }
+            .attachTo(response);
         }
 
         @SuppressLint("CheckResult")
         private void subscribeToCompletable(Completable completable) {
-            completable.subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doFinally(() -> shouldPushUpdates.setValue(true))
-                    .subscribe(() -> {
+            completable
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally(() -> shouldPushUpdates.setValue(true))
+                .subscribe(
+                    () -> {
                         Log.d(TAG, "onReceived: ");
                         lastRequestedPage++;
                         status.onNext(Status.SUCCESS);
-                    });
+                    }
+                );
         }
-
     }
 }

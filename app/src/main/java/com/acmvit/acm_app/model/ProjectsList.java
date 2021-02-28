@@ -1,7 +1,6 @@
 package com.acmvit.acm_app.model;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
 
 public class ProjectsList {

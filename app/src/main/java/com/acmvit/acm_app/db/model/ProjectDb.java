@@ -5,14 +5,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-
 import com.acmvit.acm_app.model.ProjectStatus;
 import com.acmvit.acm_app.model.User;
 import com.google.gson.annotations.SerializedName;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 @Entity(tableName = "project")
 public class ProjectDb {
@@ -39,7 +36,15 @@ public class ProjectDb {
 
     private String founder_id;
 
-    public ProjectDb(@NonNull String project_id, ProjectStatus projectStatus, String name, String description, String icon, String founder_id, long timestamp) {
+    public ProjectDb(
+        @NonNull String project_id,
+        ProjectStatus projectStatus,
+        String name,
+        String description,
+        String icon,
+        String founder_id,
+        long timestamp
+    ) {
         this.project_id = project_id;
         this.projectStatus = projectStatus;
         this.name = name;
@@ -111,28 +116,50 @@ public class ProjectDb {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProjectDb project = (ProjectDb) o;
-        return founder_id.equals(project.founder_id) &&
-                Objects.equals(project_id, project.project_id) &&
-                projectStatus == project.projectStatus &&
-                Objects.equals(name, project.name) &&
-                Objects.equals(description, project.description) &&
-                Objects.equals(icon, project.icon);
+        return (
+            founder_id.equals(project.founder_id) &&
+            Objects.equals(project_id, project.project_id) &&
+            projectStatus == project.projectStatus &&
+            Objects.equals(name, project.name) &&
+            Objects.equals(description, project.description) &&
+            Objects.equals(icon, project.icon)
+        );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(project_id, projectStatus, name, description, icon, founder_id);
+        return Objects.hash(
+            project_id,
+            projectStatus,
+            name,
+            description,
+            icon,
+            founder_id
+        );
     }
 
     @Override
     public String toString() {
-        return "Project{" +
-                "user_id='" + project_id + '\'' +
-                ", status=" + projectStatus +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", icon='" + icon + '\'' +
-                ", founder_id='" + founder_id + '\'' +
-                '}';
+        return (
+            "Project{" +
+            "user_id='" +
+            project_id +
+            '\'' +
+            ", status=" +
+            projectStatus +
+            ", name='" +
+            name +
+            '\'' +
+            ", description='" +
+            description +
+            '\'' +
+            ", icon='" +
+            icon +
+            '\'' +
+            ", founder_id='" +
+            founder_id +
+            '\'' +
+            '}'
+        );
     }
 }

@@ -38,8 +38,9 @@ public class EditProfileFragment extends Fragment {
             FragmentEditProfileBinding.inflate(inflater, container, false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
         binding.inputName.getEditText().clearFocus();
-        binding.backButton.setOnClickListener((View v)->
-                Navigation.findNavController(v).popBackStack());
+        binding.backButton.setOnClickListener(
+            (View v) -> Navigation.findNavController(v).popBackStack()
+        );
         return binding.getRoot();
     }
 

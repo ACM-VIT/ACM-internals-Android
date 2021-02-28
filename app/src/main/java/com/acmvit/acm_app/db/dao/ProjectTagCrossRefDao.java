@@ -4,13 +4,10 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Transaction;
-
 import com.acmvit.acm_app.db.model.ProjectTagCrossRef;
 import com.acmvit.acm_app.model.Project;
-
-import java.util.List;
-
 import io.reactivex.Completable;
+import java.util.List;
 
 @Dao
 public abstract class ProjectTagCrossRefDao {
@@ -27,12 +24,14 @@ public abstract class ProjectTagCrossRefDao {
 
         if (tags != null) {
             for (String tag : tags) {
-                ProjectTagCrossRef crossRef = new ProjectTagCrossRef(projectId, tag);
+                ProjectTagCrossRef crossRef = new ProjectTagCrossRef(
+                    projectId,
+                    tag
+                );
                 completable = completable.andThen(insert(crossRef));
             }
         }
 
         return completable;
     }
-
 }

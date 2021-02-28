@@ -3,6 +3,7 @@ package com.acmvit.acm_app.model;
 import java.util.Objects;
 
 public class TagSearchFilter {
+
     public final boolean isTag;
     public final String searchKey;
 
@@ -16,8 +17,6 @@ public class TagSearchFilter {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TagSearchFilter that = (TagSearchFilter) o;
-        return isTag == that.isTag &&
-                Objects.equals(searchKey, that.searchKey);
+        return isTag == that.isTag && Objects.equals(searchKey, that.searchKey);
     }
-
 }

@@ -7,7 +7,6 @@ import android.net.NetworkInfo;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import com.acmvit.acm_app.db.AcmDb;
 import com.acmvit.acm_app.pref.SessionManager;
 import com.acmvit.acm_app.service.NetworkChangeReceiver;
@@ -64,7 +63,6 @@ public class AcmApp extends Application {
         );
 
         acmDb = AcmDb.getInstance(this);
-
     }
 
     public GoogleSignInClient getmGoogleSignInClient() {

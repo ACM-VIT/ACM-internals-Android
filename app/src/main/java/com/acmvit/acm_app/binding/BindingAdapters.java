@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.SearchView;
-
 import androidx.annotation.ColorInt;
 import androidx.annotation.ColorRes;
 import androidx.annotation.IdRes;
@@ -24,7 +23,6 @@ import androidx.databinding.InverseBindingListener;
 import androidx.databinding.InverseBindingMethod;
 import androidx.databinding.InverseBindingMethods;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import com.acmvit.acm_app.R;
 import com.acmvit.acm_app.ui.custom.MLTransitionListener;
 import com.bumptech.glide.Glide;
@@ -44,32 +42,55 @@ import com.bumptech.glide.request.transition.Transition;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputLayout;
-
 import java.util.List;
 
 @BindingMethods(
-        {
-                @BindingMethod(type = ImageView.class, attribute = "android:src", method = "setImageResource"),
-                @BindingMethod(type = ChipGroup.class, attribute = "check", method = "check")
-        }
+    {
+        @BindingMethod(
+            type = ImageView.class,
+            attribute = "android:src",
+            method = "setImageResource"
+        ),
+        @BindingMethod(
+            type = ChipGroup.class,
+            attribute = "check",
+            method = "check"
+        ),
+    }
 )
-
 @InverseBindingMethods(
-        {
-                @InverseBindingMethod(type = ChipGroup.class, attribute = "check", method = "getCheckedChipId"),
-                @InverseBindingMethod(type = Chip.class, attribute = "selected", method = "isChecked")
-        }
+    {
+        @InverseBindingMethod(
+            type = ChipGroup.class,
+            attribute = "check",
+            method = "getCheckedChipId"
+        ),
+        @InverseBindingMethod(
+            type = Chip.class,
+            attribute = "selected",
+            method = "isChecked"
+        ),
+    }
 )
-
 public class BindingAdapters {
+
     private static final String TAG = "BindingAdapters";
 
-    @BindingAdapter(value = {"imageUrl", "placeholder", "circleCrop", "corners"}, requireAll = false)
-    public static void loadImage(ImageView view, String url, Drawable placeholder, boolean circleCrop, Integer corners) {
+    @BindingAdapter(
+        value = { "imageUrl", "placeholder", "circleCrop", "corners" },
+        requireAll = false
+    )
+    public static void loadImage(
+        ImageView view,
+        String url,
+        Drawable placeholder,
+        boolean circleCrop,
+        Integer corners
+    ) {
         RequestBuilder<Bitmap> requestBuilder = Glide
-                .with(view.getContext())
-                .asBitmap()
-                .load(url);
+            .with(view.getContext())
+            .asBitmap()
+            .load(url);
 
         if (placeholder != null) {
             requestBuilder = requestBuilder.placeholder(placeholder);
@@ -78,7 +99,13 @@ public class BindingAdapters {
         if (circleCrop) {
             requestBuilder = requestBuilder.circleCrop();
         } else if (corners != null) {
-            requestBuilder = requestBuilder.transform(new MultiTransformation<>(new CenterCrop(), new RoundedCorners(corners)));
+            requestBuilder =
+                requestBuilder.transform(
+                    new MultiTransformation<>(
+                        new CenterCrop(),
+                        new RoundedCorners(corners)
+                    )
+                );
         }
         requestBuilder.into(view);
     }
@@ -103,12 +130,14 @@ public class BindingAdapters {
     }
 
     @BindingAdapter("refreshing")
-    public static void setIsRefreshing(SwipeRefreshLayout srl, boolean isRefreshing) {
+    public static void setIsRefreshing(
+        SwipeRefreshLayout srl,
+        boolean isRefreshing
+    ) {
         if (isRefreshing != srl.isRefreshing()) {
             srl.setRefreshing(isRefreshing);
             Log.d(TAG, "setIsRefreshing: " + isRefreshing);
         }
-
     }
 
     @InverseBindingAdapter(attribute = "refreshing")
@@ -118,20 +147,35 @@ public class BindingAdapters {
     }
 
     @BindingAdapter("refreshingAttrChanged")
-    public static void setRefreshingListener(SwipeRefreshLayout srl, final InverseBindingListener attrChange) {
-        srl.setOnRefreshListener(() -> {
-            attrChange.onChange();
-
-        });
+    public static void setRefreshingListener(
+        SwipeRefreshLayout srl,
+        final InverseBindingListener attrChange
+    ) {
+        srl.setOnRefreshListener(
+            () -> {
+                attrChange.onChange();
+            }
+        );
     }
 
     @BindingAdapter("spinnerColor")
-    public static void setColorScheme(SwipeRefreshLayout srl, @ColorRes int spinnerColor) {
+    public static void setColorScheme(
+        SwipeRefreshLayout srl,
+        @ColorRes int spinnerColor
+    ) {
         srl.setColorSchemeResources(spinnerColor);
     }
 
-    @BindingAdapter(value = {"transition", "toEnd", "defaultTransition"}, requireAll = false)
-    public static void setTransition(MotionLayout ml, @IdRes int transition, boolean toEnd, @IdRes int defaultTransition) {
+    @BindingAdapter(
+        value = { "transition", "toEnd", "defaultTransition" },
+        requireAll = false
+    )
+    public static void setTransition(
+        MotionLayout ml,
+        @IdRes int transition,
+        boolean toEnd,
+        @IdRes int defaultTransition
+    ) {
         if (defaultTransition == 0) {
             defaultTransition = transition;
         }
@@ -143,19 +187,29 @@ public class BindingAdapters {
         }
 
         int finalDefaultTransition = defaultTransition;
-        ml.setTransitionListener(new MLTransitionListener() {
-            @Override
-            public void onTransitionCompleted(MotionLayout motionLayout, int current) {
-                if (current == ml.getEndState()) {
-                    //ml.setTransition(finalDefaultTransition);
+        ml.setTransitionListener(
+            new MLTransitionListener() {
+                @Override
+                public void onTransitionCompleted(
+                    MotionLayout motionLayout,
+                    int current
+                ) {
+                    if (current == ml.getEndState()) {
+                        //ml.setTransition(finalDefaultTransition);
+                    }
                 }
             }
-        });
+        );
     }
 
     @BindingAdapter("checkAttrChanged")
-    public static void setCheckedChangeListener(ChipGroup chipGroup, final InverseBindingListener listener) {
-        chipGroup.setOnCheckedChangeListener((group, checkedId) -> listener.onChange());
+    public static void setCheckedChangeListener(
+        ChipGroup chipGroup,
+        final InverseBindingListener listener
+    ) {
+        chipGroup.setOnCheckedChangeListener(
+            (group, checkedId) -> listener.onChange()
+        );
     }
 
     @BindingAdapter("query")
@@ -164,19 +218,24 @@ public class BindingAdapters {
     }
 
     @BindingAdapter("queryAttrChanged")
-    public static void setQueryChangedListener(SearchView view, final InverseBindingListener listener) {
-        view.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+    public static void setQueryChangedListener(
+        SearchView view,
+        final InverseBindingListener listener
+    ) {
+        view.setOnQueryTextListener(
+            new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
+                }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                listener.onChange();
-                return false;
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    listener.onChange();
+                    return false;
+                }
             }
-        });
+        );
     }
 
     @InverseBindingAdapter(attribute = "query")
@@ -184,26 +243,46 @@ public class BindingAdapters {
         return view.getQuery().toString();
     }
 
-    @BindingAdapter(value = {"imgIcon", "placeholder"})
-    public static void setChipIconUrl(Chip chip, String imgIcon, Drawable placeholder) {
+    @BindingAdapter(value = { "imgIcon", "placeholder" })
+    public static void setChipIconUrl(
+        Chip chip,
+        String imgIcon,
+        Drawable placeholder
+    ) {
         Context context = chip.getContext();
         chip.setChipIcon(placeholder);
-        Glide.with(context)
-                .asBitmap()
-                .load(imgIcon)
-                .circleCrop()
-                .listener(new RequestListener<Bitmap>() {
+        Glide
+            .with(context)
+            .asBitmap()
+            .load(imgIcon)
+            .circleCrop()
+            .listener(
+                new RequestListener<Bitmap>() {
                     @Override
-                    public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
+                    public boolean onLoadFailed(
+                        @Nullable GlideException e,
+                        Object model,
+                        Target<Bitmap> target,
+                        boolean isFirstResource
+                    ) {
                         return false;
                     }
 
                     @Override
-                    public boolean onResourceReady(Bitmap bitmap, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
-                        chip.setChipIcon(new BitmapDrawable(context.getResources(), bitmap));
+                    public boolean onResourceReady(
+                        Bitmap bitmap,
+                        Object model,
+                        Target<Bitmap> target,
+                        DataSource dataSource,
+                        boolean isFirstResource
+                    ) {
+                        chip.setChipIcon(
+                            new BitmapDrawable(context.getResources(), bitmap)
+                        );
                         return false;
                     }
-                }).preload();
+                }
+            )
+            .preload();
     }
-
 }

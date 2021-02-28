@@ -17,14 +17,8 @@ public class ReactiveUtils {
         @NonNull final Function<X, Y> mapFunction
     ) {
         final MediatorLiveData<Y> result = new MediatorLiveData<>();
-        result.addSource(
-            source1,
-                x -> result.setValue(mapFunction.apply(x))
-        );
-        result.addSource(
-            source2,
-                x -> result.setValue(mapFunction.apply(x))
-        );
+        result.addSource(source1, x -> result.setValue(mapFunction.apply(x)));
+        result.addSource(source2, x -> result.setValue(mapFunction.apply(x)));
         return result;
     }
 }

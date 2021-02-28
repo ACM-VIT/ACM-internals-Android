@@ -5,12 +5,13 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
-
 import com.acmvit.acm_app.model.User;
-
 import org.jetbrains.annotations.NotNull;
 
-@Entity(primaryKeys = {"user_id", "project_id"}, indices = {@Index("project_id")})
+@Entity(
+    primaryKeys = { "user_id", "project_id" },
+    indices = { @Index("project_id") }
+)
 public class ProjectMemberCrossRef {
 
     @NonNull
@@ -21,7 +22,10 @@ public class ProjectMemberCrossRef {
     @ColumnInfo(name = "project_id")
     private String projectId;
 
-    public ProjectMemberCrossRef(@NotNull String userId, @NotNull String projectId) {
+    public ProjectMemberCrossRef(
+        @NotNull String userId,
+        @NotNull String projectId
+    ) {
         this.userId = userId;
         this.projectId = projectId;
     }

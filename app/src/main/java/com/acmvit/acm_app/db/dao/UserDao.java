@@ -6,13 +6,11 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-
 import com.acmvit.acm_app.model.Project;
 import com.acmvit.acm_app.model.User;
-
+import io.reactivex.Completable;
 import java.util.List;
 
-import io.reactivex.Completable;
 @Dao
 public interface UserDao {
     @Query("SELECT * FROM user ORDER BY name")
@@ -26,5 +24,4 @@ public interface UserDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     Completable insertUsersAndIgnoreIfExists(List<User> users);
-
 }

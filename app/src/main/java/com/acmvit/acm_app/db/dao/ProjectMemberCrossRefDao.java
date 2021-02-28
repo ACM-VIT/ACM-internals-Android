@@ -1,24 +1,21 @@
 package com.acmvit.acm_app.db.dao;
 
 import android.util.Log;
-
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Transaction;
-
 import com.acmvit.acm_app.db.model.ProjectMemberCrossRef;
 import com.acmvit.acm_app.db.model.ProjectTagCrossRef;
 import com.acmvit.acm_app.model.Project;
 import com.acmvit.acm_app.model.User;
-
+import io.reactivex.Completable;
 import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Completable;
-
 @Dao
 public abstract class ProjectMemberCrossRefDao {
+
     private static final String TAG = "ProjectMemberCrossRefDa";
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
@@ -41,11 +38,13 @@ public abstract class ProjectMemberCrossRefDao {
         Completable completable = Completable.complete();
 
         for (String userId : userIds) {
-            ProjectMemberCrossRef crossRef = new ProjectMemberCrossRef(userId, projectId);
+            ProjectMemberCrossRef crossRef = new ProjectMemberCrossRef(
+                userId,
+                projectId
+            );
             completable = completable.andThen(insert(crossRef));
         }
 
         return completable;
     }
-
 }

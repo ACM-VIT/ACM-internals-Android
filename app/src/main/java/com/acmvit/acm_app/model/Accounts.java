@@ -3,12 +3,11 @@ package com.acmvit.acm_app.model;
 import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Ignore;
-
 import com.google.gson.annotations.SerializedName;
-
 import java.util.Objects;
 
 public class Accounts {
+
     @SerializedName("discord")
     @Embedded(prefix = "discord_")
     private Discord discord;
@@ -28,12 +27,7 @@ public class Accounts {
     @Override
     public String toString() {
         return (
-            "Accounts{" +
-            "google='" +
-            ", discord='" +
-            discord +
-            '\'' +
-            '}'
+            "Accounts{" + "google='" + ", discord='" + discord + '\'' + '}'
         );
     }
 

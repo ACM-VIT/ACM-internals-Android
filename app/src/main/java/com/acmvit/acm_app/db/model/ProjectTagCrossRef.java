@@ -6,8 +6,12 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.Index;
 
-@Entity(primaryKeys = {"project_id", "tag"}, indices = {@Index("project_id"), @Index("tag")})
+@Entity(
+    primaryKeys = { "project_id", "tag" },
+    indices = { @Index("project_id"), @Index("tag") }
+)
 public class ProjectTagCrossRef {
+
     @NonNull
     @ColumnInfo(name = "project_id")
     private String projectId;

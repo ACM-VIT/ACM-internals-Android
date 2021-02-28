@@ -2,9 +2,7 @@ package com.acmvit.acm_app.model;
 
 import androidx.paging.DataSource;
 import androidx.room.ColumnInfo;
-
 import com.google.gson.annotations.SerializedName;
-
 import java.util.Objects;
 
 public class Discord {
@@ -57,8 +55,10 @@ public class Discord {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Discord discord = (Discord) o;
-        return Objects.equals(username, discord.username) &&
-                Objects.equals(email, discord.email);
+        return (
+            Objects.equals(username, discord.username) &&
+            Objects.equals(email, discord.email)
+        );
     }
 
     @Override

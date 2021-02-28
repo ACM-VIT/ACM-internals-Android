@@ -4,19 +4,16 @@ import androidx.room.ColumnInfo;
 import androidx.room.Ignore;
 import androidx.room.Junction;
 import androidx.room.Relation;
-
 import com.acmvit.acm_app.db.model.ProjectMemberCrossRef;
 import com.acmvit.acm_app.db.model.ProjectTagCrossRef;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import org.jetbrains.annotations.NotNull;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import org.jetbrains.annotations.NotNull;
 
 public class Project {
 
@@ -40,10 +37,10 @@ public class Project {
     private String founderId;
 
     @Relation(
-            entity = Tag.class,
-            parentColumn = "project_id",
-            entityColumn = "tag",
-            associateBy = @Junction(ProjectTagCrossRef.class)
+        entity = Tag.class,
+        parentColumn = "project_id",
+        entityColumn = "tag",
+        associateBy = @Junction(ProjectTagCrossRef.class)
     )
     @SerializedName("tags")
     private List<String> tags;
@@ -56,9 +53,9 @@ public class Project {
     private User founder;
 
     @Relation(
-            parentColumn = "project_id",
-            entityColumn = "user_id",
-            associateBy = @Junction(ProjectMemberCrossRef.class)
+        parentColumn = "project_id",
+        entityColumn = "user_id",
+        associateBy = @Junction(ProjectMemberCrossRef.class)
     )
     @Expose(serialize = false, deserialize = false)
     private List<User> members;
@@ -79,10 +76,22 @@ public class Project {
     @SerializedName("updatedAt")
     private Timestamp timestamp;
 
-    public Project() {
-    }
+    public Project() {}
 
-    public Project(@NotNull String project_id, ProjectStatus status, String name, String description, List<String> tags, User founder, List<User> members, String icon, List<String> memberIds, List<String> teamMemberProfilePics, List<String> teamMemberNames, Timestamp timestamp) {
+    public Project(
+        @NotNull String project_id,
+        ProjectStatus status,
+        String name,
+        String description,
+        List<String> tags,
+        User founder,
+        List<User> members,
+        String icon,
+        List<String> memberIds,
+        List<String> teamMemberProfilePics,
+        List<String> teamMemberNames,
+        Timestamp timestamp
+    ) {
         this.project_id = project_id;
         this.status = status;
         this.name = name;
@@ -200,11 +209,15 @@ public class Project {
     public List<User> getMembersWithFounder() {
         List<User> membersWithFounder = new ArrayList<>();
 
-        if(getMembers() != null && !getMembers().isEmpty()) {
+        if (getMembers() != null && !getMembers().isEmpty()) {
             membersWithFounder.addAll(getMembers());
-        } else if (memberIds != null){
+        } else if (memberIds != null) {
             for (int i = 0; i < memberIds.size(); i++) {
-                User user = new User(memberIds.get(i), teamMemberNames.get(i), teamMemberProfilePics.get(i));
+                User user = new User(
+                    memberIds.get(i),
+                    teamMemberNames.get(i),
+                    teamMemberProfilePics.get(i)
+                );
                 membersWithFounder.add(user);
             }
         }
@@ -219,7 +232,10 @@ public class Project {
         }
 
         membersWithFounder.remove(getFounder());
-        Collections.sort(membersWithFounder, (o1, o2) -> o1.getName().compareTo(o2.getName()));
+        Collections.sort(
+            membersWithFounder,
+            (o1, o2) -> o1.getName().compareTo(o2.getName())
+        );
         membersWithFounder.add(0, getFounder());
         return membersWithFounder;
     }
@@ -229,32 +245,58 @@ public class Project {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Project project = (Project) o;
-        return Objects.equals(project_id, project.project_id) &&
-                status == project.status &&
-                Objects.equals(name, project.name) &&
-                Objects.equals(description, project.description) &&
-                Objects.equals(tags, project.tags) &&
-                Objects.equals(icon, project.icon) &&
-                Objects.equals(getMembersWithFounder(), project.getMembersWithFounder());
+        return (
+            Objects.equals(project_id, project.project_id) &&
+            status == project.status &&
+            Objects.equals(name, project.name) &&
+            Objects.equals(description, project.description) &&
+            Objects.equals(tags, project.tags) &&
+            Objects.equals(icon, project.icon) &&
+            Objects.equals(
+                getMembersWithFounder(),
+                project.getMembersWithFounder()
+            )
+        );
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(project_id, status, name, description, tags, icon, founder, members);
+        return Objects.hash(
+            project_id,
+            status,
+            name,
+            description,
+            tags,
+            icon,
+            founder,
+            members
+        );
     }
 
     @NotNull
     @Override
     public String toString() {
-        return "Project{" +
-                "user_id='" + project_id + '\'' +
-                ", status=" + status +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", tags=" + tags +
-                ", icon='" + icon + '\'' +
-                getMembersWithFounder() +
-                '}';
+        return (
+            "Project{" +
+            "user_id='" +
+            project_id +
+            '\'' +
+            ", status=" +
+            status +
+            ", name='" +
+            name +
+            '\'' +
+            ", description='" +
+            description +
+            '\'' +
+            ", tags=" +
+            tags +
+            ", icon='" +
+            icon +
+            '\'' +
+            getMembersWithFounder() +
+            '}'
+        );
     }
 
     public String getFounderId() {

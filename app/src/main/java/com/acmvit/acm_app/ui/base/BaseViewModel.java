@@ -1,9 +1,7 @@
 package com.acmvit.acm_app.ui.base;
 
 import android.app.Application;
-
 import androidx.lifecycle.ViewModel;
-
 import com.acmvit.acm_app.ui.ActivityViewModel;
 
 public class BaseViewModel extends ViewModel {

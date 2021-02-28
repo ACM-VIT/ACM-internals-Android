@@ -50,7 +50,6 @@ public class MembersAdapter
                 Navigation.findNavController(v).navigate(action);
             }
         );
-
     }
 
     public void replace(ArrayList<User> newList) {

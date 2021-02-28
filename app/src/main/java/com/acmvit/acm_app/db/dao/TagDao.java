@@ -5,12 +5,9 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-
 import com.acmvit.acm_app.model.Tag;
-
-import java.util.List;
-
 import io.reactivex.Completable;
+import java.util.List;
 
 @Dao
 public interface TagDao {

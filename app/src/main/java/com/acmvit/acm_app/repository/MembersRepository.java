@@ -1,12 +1,10 @@
 package com.acmvit.acm_app.repository;
 
 import android.util.Log;
-
 import androidx.arch.core.util.Function;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
-
 import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.db.AcmDb;
 import com.acmvit.acm_app.model.User;
@@ -16,18 +14,16 @@ import com.acmvit.acm_app.network.BackendResponse;
 import com.acmvit.acm_app.network.BackendService;
 import com.acmvit.acm_app.network.ServiceGenerator;
 import com.acmvit.acm_app.util.Resource;
-
-import org.jetbrains.annotations.NotNull;
-
+import io.reactivex.Completable;
 import java.util.ArrayList;
 import java.util.List;
-
-import io.reactivex.Completable;
+import org.jetbrains.annotations.NotNull;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MembersRepository {
+
     public static MembersRepository instance;
     public static ServiceGenerator serviceGenerator;
     public static BackendService service;
@@ -38,7 +34,8 @@ public class MembersRepository {
         if (instance == null) {
             instance = new MembersRepository();
             serviceGenerator = ServiceGenerator.getInstance();
-            service = serviceGenerator.createTokenizedService(BackendService.class);
+            service =
+                serviceGenerator.createTokenizedService(BackendService.class);
             localDb = AcmApp.getAcmDb();
             instance.fetchAllUsers();
         }
@@ -48,26 +45,33 @@ public class MembersRepository {
     public void fetchAllUsers() {
         if (users.getValue() == null) {
             try {
-                service.getAllUsers().enqueue(new Callback<BackendResponse<UserList>>() {
-                    @Override
-                    public void onResponse(@NotNull Call<BackendResponse<UserList>> call, @NotNull Response<BackendResponse<UserList>> response) {
-                        assert response.body() != null;
-                        users.setValue(response.body().getData().getUsers());
-                    }
+                service
+                    .getAllUsers()
+                    .enqueue(
+                        new Callback<BackendResponse<UserList>>() {
+                            @Override
+                            public void onResponse(
+                                @NotNull Call<BackendResponse<UserList>> call,
+                                @NotNull Response<BackendResponse<UserList>> response
+                            ) {
+                                assert response.body() != null;
+                                users.setValue(
+                                    response.body().getData().getUsers()
+                                );
+                            }
 
-                    @Override
-                    public void onFailure(@NotNull Call<BackendResponse<UserList>> call, @NotNull Throwable t) {
-
-                    }
-                });
-
+                            @Override
+                            public void onFailure(
+                                @NotNull Call<BackendResponse<UserList>> call,
+                                @NotNull Throwable t
+                            ) {}
+                        }
+                    );
             } catch (Exception e) {
                 Log.e("Fetch data", e.toString());
             }
         }
-
     }
-
 
     public LiveData<Resource<List<User>>> getAllUsers() {
         return new NetworkBoundResource<UserList, List<User>>() {
@@ -82,10 +86,14 @@ public class MembersRepository {
             }
 
             @Override
-            protected void createCall(MutableLiveData<Resource<UserList>> reqItem) {
-                service.getAllUsers().enqueue(new BackendNetworkCall<>(reqItem));
+            protected void createCall(
+                MutableLiveData<Resource<UserList>> reqItem
+            ) {
+                service
+                    .getAllUsers()
+                    .enqueue(new BackendNetworkCall<>(reqItem));
             }
-        }.getAsLiveData();
+        }
+            .getAsLiveData();
     }
-
 }

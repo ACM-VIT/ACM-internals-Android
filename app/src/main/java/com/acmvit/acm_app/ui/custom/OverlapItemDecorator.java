@@ -27,13 +27,13 @@ import android.os.Looper;
 import android.os.UserHandle;
 import android.view.Display;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class OverlapItemDecorator extends RecyclerView.ItemDecoration {
+
     private final int overlap;
     private final int orientation;
 
@@ -43,25 +43,35 @@ public class OverlapItemDecorator extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
-
+    public void getItemOffsets(
+        @NonNull Rect outRect,
+        @NonNull View view,
+        @NonNull RecyclerView parent,
+        @NonNull RecyclerView.State state
+    ) {
         int pos = parent.getChildAdapterPosition(view);
 
         if (pos == RecyclerView.NO_POSITION || pos == 0) {
             return;
         }
 
-        if (orientation == LinearLayoutManager.HORIZONTAL){
+        if (orientation == LinearLayoutManager.HORIZONTAL) {
             outRect.left = -overlap;
         } else if (orientation == LinearLayoutManager.VERTICAL) {
             outRect.top = -overlap;
         } else {
-            throw new IllegalArgumentException("Orientation should either be LinearLayoutManager.VERTICAL or LinearLayoutManager.Horizontal");
+            throw new IllegalArgumentException(
+                "Orientation should either be LinearLayoutManager.VERTICAL or LinearLayoutManager.Horizontal"
+            );
         }
     }
 
     @Override
-    public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
+    public void onDraw(
+        @NonNull Canvas c,
+        @NonNull RecyclerView parent,
+        @NonNull RecyclerView.State state
+    ) {
         super.onDraw(c, parent, state);
     }
 }

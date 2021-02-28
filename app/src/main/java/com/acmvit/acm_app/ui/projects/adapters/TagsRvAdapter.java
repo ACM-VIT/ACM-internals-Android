@@ -3,21 +3,19 @@ package com.acmvit.acm_app.ui.projects.adapters;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SortedList;
 import androidx.recyclerview.widget.SortedListAdapterCallback;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
 import com.acmvit.acm_app.R;
 import com.acmvit.acm_app.databinding.ItemChipBinding;
 import com.acmvit.acm_app.ui.custom.OnItemClickListener;
 import com.google.android.gms.common.util.Strings;
-
 import java.util.List;
 
 public class TagsRvAdapter extends RecyclerView.Adapter<TagsRvAdapter.TagsVH> {
+
     private static final String TAG = "TagsRvAdapter";
     private final SortedList<String> tags;
     private OnItemClickListener onItemClickListener = pos -> {};
@@ -29,26 +27,35 @@ public class TagsRvAdapter extends RecyclerView.Adapter<TagsRvAdapter.TagsVH> {
     }
 
     public TagsRvAdapter(Integer bgColorResId) {
-        this.tags = new SortedList<>(String.class, new SortedListAdapterCallback<String>(this) {
-            @Override
-            public int compare(String o1, String o2) {
-                return o1.compareTo(o2);
-            }
+        this.tags =
+            new SortedList<>(
+                String.class,
+                new SortedListAdapterCallback<String>(this) {
+                    @Override
+                    public int compare(String o1, String o2) {
+                        return o1.compareTo(o2);
+                    }
 
-            @Override
-            public boolean areContentsTheSame(String oldItem, String newItem) {
-                return true;
-            }
+                    @Override
+                    public boolean areContentsTheSame(
+                        String oldItem,
+                        String newItem
+                    ) {
+                        return true;
+                    }
 
-            @Override
-            public boolean areItemsTheSame(String item1, String item2) {
-                return item1.equals(item2);
-            }
-        });
+                    @Override
+                    public boolean areItemsTheSame(String item1, String item2) {
+                        return item1.equals(item2);
+                    }
+                }
+            );
         this.bgColor = bgColorResId;
     }
 
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+    public void setOnItemClickListener(
+        OnItemClickListener onItemClickListener
+    ) {
         this.onItemClickListener = onItemClickListener;
     }
 
@@ -83,19 +90,21 @@ public class TagsRvAdapter extends RecyclerView.Adapter<TagsRvAdapter.TagsVH> {
     }
 
     public class TagsVH extends RecyclerView.ViewHolder {
+
         ItemChipBinding binding;
 
         public TagsVH(ItemChipBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
             binding.setBackgroundResId(bgColor);
-            binding.tagChip.setOnClickListener(v -> onItemClickListener.onItemClick(getAdapterPosition()));
+            binding.tagChip.setOnClickListener(
+                v -> onItemClickListener.onItemClick(getAdapterPosition())
+            );
             binding.executePendingBindings();
         }
 
-        public void bind(String tag){
+        public void bind(String tag) {
             binding.setText(tag);
         }
     }
-
 }

@@ -1,18 +1,15 @@
 package com.acmvit.acm_app.network;
 
 import android.util.Pair;
-
 import com.acmvit.acm_app.model.Project;
 import com.acmvit.acm_app.model.ProjectStatus;
 import com.acmvit.acm_app.model.ProjectsList;
 import com.acmvit.acm_app.model.Tag;
 import com.acmvit.acm_app.model.UserData;
 import com.acmvit.acm_app.model.UserList;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -60,18 +57,33 @@ public interface BackendService {
     Call<BackendResponse<Map<String, List<Tag>>>> getAllTags();
 
     @GET("/App/v1/project/fetch/byUserAndStatus/{userId}/{status}/{page}")
-    Call<BackendResponse<ProjectsList>> getProjectsWithUserAndStatus(@Path("userId") String uid, @Path("status") String status, @Path("page") int page);
+    Call<BackendResponse<ProjectsList>> getProjectsWithUserAndStatus(
+        @Path("userId") String uid,
+        @Path("status") String status,
+        @Path("page") int page
+    );
 
     @GET("/App/v1/project/fetch/byUser/{userId}/{page}")
-    Call<BackendResponse<ProjectsList>> getProjectsWithUser(@Path("userId") String uid, @Path("page") int page);
+    Call<BackendResponse<ProjectsList>> getProjectsWithUser(
+        @Path("userId") String uid,
+        @Path("page") int page
+    );
 
     @GET("/App/v1/project/fetch/byStatus/{status}/{page}")
-    Call<BackendResponse<ProjectsList>> getProjectsWithStatus(@Path("status") String status, @Path("page") int page);
+    Call<BackendResponse<ProjectsList>> getProjectsWithStatus(
+        @Path("status") String status,
+        @Path("page") int page
+    );
 
     @GET("/App/v1/project/fetch/byTag/{tag}/{page}")
-    Call<BackendResponse<ProjectsList>> getProjectsWithTag(@Path("tag") String tag, @Path("page") int page);
+    Call<BackendResponse<ProjectsList>> getProjectsWithTag(
+        @Path("tag") String tag,
+        @Path("page") int page
+    );
 
     @GET("/App/v1/project/fetch/byPartialName/{name}/{page}")
-    Call<BackendResponse<HashMap<String, List<Project>>>> getProjectsWithName(@Path("name") String name, @Path("page") int page);
-
+    Call<BackendResponse<HashMap<String, List<Project>>>> getProjectsWithName(
+        @Path("name") String name,
+        @Path("page") int page
+    );
 }

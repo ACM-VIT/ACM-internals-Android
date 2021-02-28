@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.view.ContextThemeWrapper;
 import android.view.MenuInflater;
 import android.widget.PopupMenu;
-
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
-
 import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.R;
 import com.acmvit.acm_app.databinding.ActivityMainBinding;
@@ -37,12 +35,12 @@ public class MainActivity extends BaseActivity {
         binding.setLifecycleOwner(this);
 
         navHostFragment =
-                (NavHostFragment) getSupportFragmentManager()
-                        .findFragmentById(R.id.nav_host_fragment_container);
+            (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.nav_host_fragment_container);
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         NavigationUI.setupWithNavController(
-                bottomNavigationView,
-                navHostFragment.getNavController()
+            bottomNavigationView,
+            navHostFragment.getNavController()
         );
     }
 
@@ -50,7 +48,7 @@ public class MainActivity extends BaseActivity {
     public void onLoginStateChanged(boolean isLoggedIn) {
         if (!isLoggedIn) {
             ((AcmApp) getApplicationContext()).getmGoogleSignInClient()
-                    .signOut();
+                .signOut();
             Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
@@ -60,9 +58,9 @@ public class MainActivity extends BaseActivity {
     @Override
     public void showSnackBar(String msg) {
         Snackbar snackbar = Snackbar.make(
-                binding.bottomNavigationView,
-                msg,
-                Snackbar.LENGTH_SHORT
+            binding.bottomNavigationView,
+            msg,
+            Snackbar.LENGTH_SHORT
         );
         snackbar.setAnchorView(binding.bottomNavigationView);
         snackbar.show();
@@ -72,12 +70,19 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         if (activityViewModel.checkLocking()) {
-            for (int i = 0; i < bottomNavigationView.getMenu().size() - 1; i++) {
+            for (
+                int i = 0;
+                i < bottomNavigationView.getMenu().size() - 1;
+                i++
+            ) {
                 bottomNavigationView.getMenu().getItem(i).setEnabled(false);
             }
-
         } else {
-            for (int i = 0; i < bottomNavigationView.getMenu().size() - 1; i++) {
+            for (
+                int i = 0;
+                i < bottomNavigationView.getMenu().size() - 1;
+                i++
+            ) {
                 bottomNavigationView.getMenu().getItem(i).setEnabled(true);
             }
         }
