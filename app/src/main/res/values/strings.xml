@@ -57,5 +57,11 @@
     <string name="profile">Profile</string>
     <string name="search">Search</string>
     <string name="unable_to_fetch">Unable to Fetch</string>
+    <string name="description">Description</string>
+    <string name="title">Title</string>
+    <string name="tags">Tags</string>
+    <string name="founder">Founder</string>
+    <string name="member">Member</string>
+    <string name="save">Save</string>
 
 </resources>

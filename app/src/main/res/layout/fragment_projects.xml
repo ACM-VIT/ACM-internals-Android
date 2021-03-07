@@ -138,7 +138,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:elevation="1dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_textfield">
@@ -183,12 +182,12 @@
                 <com.google.android.material.chip.Chip
                     android:id="@+id/my_chip"
                     style="@style/Widget.App.Chip.DotIcon"
-                    app:onCloseIconClickListener="@{() -> viewmodel.removeUserFilter()}"
                     android:text="@{GeneralUtils.getFirstNChars(viewmodel.filters.user.name, 5)}"
+                    app:chipIconSize="@dimen/my_chip_unselected_icon_size"
                     app:imgIcon="@{viewmodel.filters.user.dp}"
+                    app:onCloseIconClickListener="@{() -> viewmodel.removeUserFilter()}"
                     app:placeholder="@{@drawable/ic_user_icon}"
-                    app:textEndPadding="0dp"
-                    app:chipIconSize="@dimen/my_chip_unselected_icon_size"/>
+                    app:textEndPadding="0dp" />
 
             </com.google.android.material.chip.ChipGroup>
 
@@ -213,7 +212,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
-                android:orientation="vertical"
                 android:paddingBottom="30dp"
                 tools:itemCount="5"
                 tools:listitem="@layout/item_project" />

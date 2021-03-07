@@ -31,7 +31,7 @@ public class Resource<T> {
         this.message = message;
     }
 
-    public static <T> Resource<T> success(@NonNull T data) {
+    public static <T> Resource<T> success(T data) {
         return new Resource<>(SUCCESS, data, null);
     }
 

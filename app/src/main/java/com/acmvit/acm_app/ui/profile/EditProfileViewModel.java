@@ -3,13 +3,17 @@ package com.acmvit.acm_app.ui.profile;
 import android.app.Application;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.util.Log;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
 import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.model.Accounts;
 import com.acmvit.acm_app.model.User;
 import com.acmvit.acm_app.model.UserData;
-import com.acmvit.acm_app.pref.SessionManager;
+import com.acmvit.acm_app.db.pref.SessionManager;
 import com.acmvit.acm_app.repository.UserRepository;
 import com.acmvit.acm_app.service.AuthService;
 import com.acmvit.acm_app.ui.ActivityViewModel;

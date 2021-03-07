@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.acmvit.acm_app.AcmApp;
-import com.acmvit.acm_app.pref.SessionManager;
+import com.acmvit.acm_app.db.pref.SessionManager;
 import com.acmvit.acm_app.util.Action;
 import com.acmvit.acm_app.util.reactive.SingleLiveEvent;
 

@@ -15,15 +15,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="0dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="8dp">
+        android:padding="8dp">
 
         <com.google.android.material.chip.Chip
             android:id="@+id/tag_chip"
             style="@style/Widget.App.Chip.Simple"
             android:layout_width="wrap_content"
-            android:layout_height="20dp"
+            android:layout_height="25dp"
             android:text="@{text}"
             app:chipBackgroundColor="@{backgroundResId != null ? context.getColor(backgroundResId) : @color/colorSurface}"
             app:layout_constraintStart_toStartOf="parent"

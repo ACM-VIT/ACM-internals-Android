@@ -6,7 +6,11 @@ import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.Nullable;
 
+import com.acmvit.acm_app.model.ListChange;
+
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class GeneralUtils {
 
@@ -38,10 +42,14 @@ public class GeneralUtils {
         return s.substring(0, n-1);
     }
 
-    public static boolean nullableEquals(Object o1, Object o2) {
-        if (o1 == o2) return true;
-        if (o1 == null) return false;
-        return o1.equals(o2);
+    public static <T> ListChange<T> getListDiff(List<T> newList, List<T> oldList) {
+        List<T> newListCopy = new ArrayList<>(newList);
+        List<T> oldListCopy = new ArrayList<>(oldList);
+
+        newListCopy.removeAll(oldList); //Added
+        oldListCopy.removeAll(newList); //Removed
+
+        return new ListChange<>(newListCopy, oldListCopy);
     }
 
 }

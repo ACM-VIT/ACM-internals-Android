@@ -7,7 +7,7 @@ import androidx.lifecycle.MediatorLiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.acmvit.acm_app.model.User;
-import com.acmvit.acm_app.pref.SessionManager;
+import com.acmvit.acm_app.db.pref.SessionManager;
 import com.acmvit.acm_app.repository.MembersRepository;
 import com.acmvit.acm_app.ui.ActivityViewModel;
 import com.acmvit.acm_app.ui.base.BaseViewModel;

@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.model.UserData;
-import com.acmvit.acm_app.pref.SessionManager;
+import com.acmvit.acm_app.db.pref.SessionManager;
 import com.acmvit.acm_app.repository.AuthRepository;
 import com.acmvit.acm_app.repository.UserRepository;
 import com.acmvit.acm_app.ui.ActivityViewModel;

@@ -20,16 +20,10 @@
 
         <ImageView
             android:id="@+id/backButton"
-            android:layout_width="48dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/rounded_ripple"
-            android:padding="8dp"
             android:src="@drawable/ic_left_arrow"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            style="@style/img_btn_style" />
 
         <TextView
             android:id="@+id/textView4"

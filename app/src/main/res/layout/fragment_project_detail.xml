@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.acmvit.acm_app.ui.projects.ProjectDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/btn_save"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackground">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_back">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="24dp">
+
+                <ImageView
+                    android:id="@+id/btn_edit_tags"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView20"
+                    app:layout_constraintStart_toEndOf="@+id/textView20"
+                    app:layout_constraintTop_toTopOf="@+id/textView20"
+                    app:srcCompat="@drawable/ic_baseline_edit"
+                    app:tint="@color/grey_primary_selected_color_selector" />
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guideline9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_begin="12dp" />
+
+                <ImageView
+                    android:id="@+id/img_project"
+                    android:layout_width="75dp"
+                    android:layout_height="75dp"
+                    app:imageUrl="@{viewmodel.dp}"
+                    app:corners="@{20}"
+                    app:layout_constraintStart_toStartOf="@+id/guideline9"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/tv_project_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:textColor="@color/white"
+                    android:textSize="22sp"
+                    android:text="@{viewmodel.basicProject.name}"
+                    android:textStyle="bold"
+                    app:layout_constrainedWidth="true"
+                    app:layout_constraintEnd_toEndOf="@+id/tv_project_disp"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/guideline9"
+                    app:layout_constraintTop_toBottomOf="@+id/img_project"
+                    tools:text="Mentor Mentee App" />
+
+                <TextView
+                    android:id="@+id/tv_project_disp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewmodel.basicProject.disp}"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginEnd="72dp"
+                    android:textColor="@color/grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/guideline9"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_project_name"
+                    tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  " />
+
+                <ImageView
+                    android:id="@+id/ideation_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    app:layout_constraintEnd_toStartOf="@+id/impl_badge"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_project_disp"
+                    app:srcCompat="@drawable/ic_status"
+                    app:tint="@color/colorIdeation" />
+
+                <ImageView
+                    android:id="@+id/impl_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha="@{viewmodel.basicProject.status.ordinal() > 0 ? @integer/alpha_100 : @integer/alpha_10}"
+                    app:layout_constraintBottom_toBottomOf="@+id/ideation_badge"
+                    app:layout_constraintEnd_toStartOf="@+id/completed_badge"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/ideation_badge"
+                    app:layout_constraintTop_toTopOf="@+id/ideation_badge"
+                    app:srcCompat="@drawable/ic_status"
+                    app:tint="@color/colorImplementation" />
+
+                <ImageView
+                    android:id="@+id/completed_badge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha="@{viewmodel.basicProject.status.ordinal() > 1 ? @integer/alpha_100 : @integer/alpha_10}"
+                    app:layout_constraintBottom_toBottomOf="@+id/impl_badge"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/impl_badge"
+                    app:layout_constraintTop_toTopOf="@+id/impl_badge"
+                    app:srcCompat="@drawable/ic_status"
+                    app:tint="@color/colorCompleted" />
+
+                <TextView
+                    android:id="@+id/textView20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:fontFamily="@font/inter_font"
+                    android:text="@string/tags"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline9"
+                    app:layout_constraintTop_toBottomOf="@+id/ideation_badge" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_tags"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView20"
+                    tools:listitem="@layout/item_chip_large" />
+
+                <TextView
+                    android:id="@+id/textView21"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:fontFamily="@font/inter_font"
+                    android:text="@string/members"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="@+id/guideline9"
+                    app:layout_constraintTop_toBottomOf="@+id/rv_tags" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_members"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView21"
+                    tools:listitem="@layout/item_team_member" />
+
+                <ImageView
+                    android:id="@+id/btn_edit_project_base_details"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="18dp"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/tv_project_name"
+                    app:layout_constraintStart_toEndOf="@+id/tv_project_name"
+                    app:layout_constraintTop_toTopOf="@+id/tv_project_name"
+                    app:srcCompat="@drawable/ic_baseline_edit"
+                    app:tint="@color/grey_primary_selected_color_selector" />
+
+                <ImageView
+                    android:id="@+id/btn_edit_members"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView21"
+                    app:layout_constraintStart_toEndOf="@+id/textView21"
+                    app:layout_constraintTop_toTopOf="@+id/textView21"
+                    app:srcCompat="@drawable/ic_baseline_edit"
+                    app:tint="@color/grey_primary_selected_color_selector" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <ImageView
+            android:id="@+id/btn_back"
+            style="@style/img_btn_style"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_left_arrow" />
+
+        <ImageView
+            android:id="@+id/btn_share"
+            style="@style/img_btn_style"
+            android:layout_width="44dp"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_back"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/btn_back"
+            app:srcCompat="@drawable/ic_share"
+            app:tint="@color/white" />
+
+        <Button
+            android:id="@+id/btn_save_project"
+            android:layout_width="56dp"
+            android:layout_height="44dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:paddingLeft="0dp"
+            android:paddingTop="0dp"
+            android:paddingRight="0dp"
+            android:paddingBottom="0dp"
+            android:text="@string/save"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_share"
+            app:layout_constraintEnd_toStartOf="@+id/btn_share"
+            app:layout_constraintTop_toTopOf="@+id/btn_share" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
