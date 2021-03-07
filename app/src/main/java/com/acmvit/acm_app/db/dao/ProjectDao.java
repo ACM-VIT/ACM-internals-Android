@@ -9,6 +9,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.RewriteQueriesToDropUnusedColumns;
 import androidx.room.Transaction;
+import androidx.room.Update;
 
 import com.acmvit.acm_app.db.model.ProjectDb;
 import com.acmvit.acm_app.model.Project;
@@ -52,5 +53,8 @@ public interface ProjectDao {
     @RewriteQueriesToDropUnusedColumns
     @Query("DELETE FROM Project")
     Completable deleteProjects();
+
+    @Update
+    Completable updateProject(ProjectDb projectDb);
 
 }

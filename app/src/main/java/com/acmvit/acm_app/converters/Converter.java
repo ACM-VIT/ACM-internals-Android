@@ -1,7 +1,4 @@
-package com.acmvit.acm_app.repository.converters;
-
-import com.acmvit.acm_app.db.model.ProjectDb;
-import com.acmvit.acm_app.model.Project;
+package com.acmvit.acm_app.converters;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,13 +1,9 @@
-package com.acmvit.acm_app.repository.converters;
+package com.acmvit.acm_app.converters;
 
 import com.acmvit.acm_app.db.model.ProjectDb;
 import com.acmvit.acm_app.model.Project;
-import com.acmvit.acm_app.repository.converters.Converter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ProjectConverter extends Converter<Project, ProjectDb> {
+public class ProjectProjectDb extends Converter<Project, ProjectDb> {
 
     @Override
     public ProjectDb modelToEntity(Project project) {

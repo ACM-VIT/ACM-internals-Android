@@ -4,6 +4,7 @@ import android.util.Pair;
 
 import com.acmvit.acm_app.model.Project;
 import com.acmvit.acm_app.model.ProjectStatus;
+import com.acmvit.acm_app.model.ProjectUpdateBody;
 import com.acmvit.acm_app.model.ProjectsList;
 import com.acmvit.acm_app.model.Tag;
 import com.acmvit.acm_app.model.UserData;
@@ -13,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -74,4 +76,6 @@ public interface BackendService {
     @GET("/App/v1/project/fetch/byPartialName/{name}/{page}")
     Call<BackendResponse<HashMap<String, List<Project>>>> getProjectsWithName(@Path("name") String name, @Path("page") int page);
 
+    @GET("/App/v1/project/update/byId/{id}")
+    Observable<BackendResponse<Project>> updateProject(@Path("id") String id, @Body ProjectUpdateBody body);
 }

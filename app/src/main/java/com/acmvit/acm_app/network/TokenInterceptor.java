@@ -2,7 +2,7 @@ package com.acmvit.acm_app.network;
 
 import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.model.AuthToken;
-import com.acmvit.acm_app.pref.SessionManager;
+import com.acmvit.acm_app.db.pref.SessionManager;
 import java.io.IOException;
 import okhttp3.Interceptor;
 import okhttp3.Request;

@@ -13,7 +13,7 @@ import com.acmvit.acm_app.network.BackendNetworkCall;
 import com.acmvit.acm_app.network.BackendResponse;
 import com.acmvit.acm_app.network.BackendService;
 import com.acmvit.acm_app.network.ServiceGenerator;
-import com.acmvit.acm_app.pref.SessionManager;
+import com.acmvit.acm_app.db.pref.SessionManager;
 import com.acmvit.acm_app.service.AuthService;
 import com.acmvit.acm_app.util.Constants;
 import com.acmvit.acm_app.util.Resource;

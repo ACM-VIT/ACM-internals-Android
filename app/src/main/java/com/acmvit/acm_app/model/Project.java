@@ -97,6 +97,13 @@ public class Project {
         this.timestamp = timestamp;
     }
 
+    public Project(String id, ProjectStatus status, String name, String disp) {
+        this.project_id = project_id;
+        this.status = status;
+        this.name = name;
+        this.description = description;
+    }
+
     public List<String> getMemberIds() {
         return memberIds;
     }

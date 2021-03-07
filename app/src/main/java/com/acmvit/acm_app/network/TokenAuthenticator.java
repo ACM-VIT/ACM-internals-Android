@@ -4,7 +4,7 @@ import android.util.Log;
 import com.acmvit.acm_app.AcmApp;
 import com.acmvit.acm_app.model.AuthToken;
 import com.acmvit.acm_app.model.UserData;
-import com.acmvit.acm_app.pref.SessionManager;
+import com.acmvit.acm_app.db.pref.SessionManager;
 import com.acmvit.acm_app.repository.AuthRepository;
 import java.io.IOException;
 import okhttp3.Authenticator;

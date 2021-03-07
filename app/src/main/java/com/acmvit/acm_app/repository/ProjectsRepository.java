@@ -1,41 +1,54 @@
 package com.acmvit.acm_app.repository;
 
-import android.util.Log;
-import android.util.Pair;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.LiveDataReactiveStreams;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Transformations;
 import androidx.paging.DataSource;
 
+import com.acmvit.acm_app.converters.ProjectProjectUb;
 import com.acmvit.acm_app.db.AcmDb;
 import com.acmvit.acm_app.db.Converters;
 import com.acmvit.acm_app.db.model.ProjectDb;
+import com.acmvit.acm_app.model.ListChange;
 import com.acmvit.acm_app.model.Project;
 import com.acmvit.acm_app.model.ProjectStatus;
+import com.acmvit.acm_app.model.ProjectUpdateBody;
 import com.acmvit.acm_app.model.ProjectsList;
 import com.acmvit.acm_app.model.Tag;
+import com.acmvit.acm_app.model.User;
 import com.acmvit.acm_app.network.BackendNetworkCall;
 import com.acmvit.acm_app.network.BackendService;
 import com.acmvit.acm_app.network.ServiceGenerator;
-import com.acmvit.acm_app.repository.converters.ProjectConverter;
-import com.acmvit.acm_app.repository.converters.TagConverter;
+import com.acmvit.acm_app.converters.ProjectProjectDb;
+import com.acmvit.acm_app.converters.TagString;
+import com.acmvit.acm_app.util.Constants;
+import com.acmvit.acm_app.util.GeneralUtils;
 import com.acmvit.acm_app.util.PaginatedResource;
 import com.acmvit.acm_app.util.Resource;
+import com.acmvit.acm_app.util.Status;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+import io.reactivex.BackpressureStrategy;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.functions.Action;
+import io.reactivex.functions.Function;
+import io.reactivex.schedulers.Schedulers;
 
 public class ProjectsRepository {
     private static final String TAG = "ProjectsRepository";
-    ProjectConverter projectConverter = new ProjectConverter();
-    TagConverter tagConverter = new TagConverter();
+    private final ProjectProjectDb projectConverter = new ProjectProjectDb();
+    private final TagString tagConverter = new TagString();
+    private final ProjectProjectUb projectUbConverter = new ProjectProjectUb();
+    public static GeneralRepository generalRepository;
     public static ProjectsRepository instance;
     private static ServiceGenerator serviceGenerator;
     private static BackendService tokenizedService;
@@ -44,6 +57,7 @@ public class ProjectsRepository {
     public static ProjectsRepository getInstance(AcmDb db) {
         if (instance == null) {
             instance = new ProjectsRepository();
+            generalRepository = GeneralRepository.getInstance();
             serviceGenerator = ServiceGenerator.getInstance();
             tokenizedService = serviceGenerator.createTokenizedService(BackendService.class);
             localDb = db;
@@ -62,8 +76,7 @@ public class ProjectsRepository {
         return new PaginatedNetworkBoundResource<HashMap<String, List<Project>>, Project>(15, localDb) {
             @Override
             protected Completable saveCallResult(HashMap<String, List<Project>> item) {
-                Log.d(TAG, "saveCallResult: " + item.keySet());
-                return saveProjects(item.get("project"));
+                return addProjectsToDb(item.get("project"));
             }
 
             @Override
@@ -82,8 +95,7 @@ public class ProjectsRepository {
         return new PaginatedNetworkBoundResource<ProjectsList, Project>(15, localDb) {
             @Override
             protected Completable saveCallResult(ProjectsList item) {
-                Log.d(TAG, "saveCallResult: " + item.getAllProjects());
-                return saveProjects(item.getAllProjects());
+                return addProjectsToDb(item.getAllProjects());
             }
 
             @Override
@@ -104,7 +116,7 @@ public class ProjectsRepository {
         return new PaginatedNetworkBoundResource<ProjectsList, Project>(15, localDb) {
             @Override
             protected Completable saveCallResult(ProjectsList item) {
-                return saveProjects(item.getAllProjects());
+                return addProjectsToDb(item.getAllProjects());
             }
 
             @Override
@@ -140,7 +152,9 @@ public class ProjectsRepository {
             @Override
             protected Completable saveCallResult(Map<String, List<Tag>> tagsh) {
                 List<Tag> tags = tagsh.get("allTags");
-                if (tags == null) {return Completable.complete();}
+                if (tags == null) {
+                    return Completable.complete();
+                }
                 return localDb.tagDao().insertTags(tags);
             }
 
@@ -158,8 +172,56 @@ public class ProjectsRepository {
 
     }
 
-    private Completable saveProjects(List<Project> projects) {
-        Log.d(TAG, "saveProjects: " + projects);
+    public LiveData<Status> saveProject(Project project) {
+        return saveProject(project, new Project());
+    }
+
+    public LiveData<Status> saveProject(Project project, Project oldProject) {
+        ProjectUpdateBody bodyNew = projectUbConverter.modelToEntity(project);
+        ProjectUpdateBody bodyOld = projectUbConverter.modelToEntity(oldProject);
+        ListChange<User> userListChange = GeneralUtils.getListDiff(project.getMembers(), oldProject.getMembers());
+        ListChange<String> tagListChange = GeneralUtils.getListDiff(project.getTags(), oldProject.getTags());
+
+        Completable updateProject = Completable.complete();
+        Completable addRemoveUsers;
+
+        if (!Objects.equals(bodyNew, bodyOld)) {
+            Observable<String> saveImgObservable = Observable.just("");
+
+            if (!Objects.equals(project.getIcon(), oldProject.getIcon()) && project.getIcon() != null) {
+                saveImgObservable = generalRepository.saveImageToCloud(
+                        project.getIcon(), Constants.Backend.PROJECT_PIC_STORAGE_LOC, project.getProject_id())
+                        .toObservable();
+            }
+
+            updateProject = saveImgObservable
+                    .switchMap(s -> tokenizedService.updateProject(project.getProject_id(), bodyNew))
+                    .switchMapCompletable(projectBackendResponse -> {
+                        Project projectData= projectBackendResponse.getData();
+                        if (projectData == null) {
+                            return Completable.error(new NullPointerException());
+                        }
+                        return localDb.projectDao()
+                                .updateProject(projectConverter.modelToEntity(projectData))
+                                .mergeWith(localDb.projectTagCrossRefDao()
+                                        .updateProjectTags(project.getProject_id(), tagListChange));
+                    });
+
+        }
+
+        //TODO: Add AddRemoveUsers endpoint
+        addRemoveUsers = Completable.complete()
+                .andThen(localDb.projectMemberCrossRefDao().updateProjectMembers(project.getProject_id(), userListChange));
+
+        return LiveDataReactiveStreams.fromPublisher(updateProject.mergeWith(addRemoveUsers)
+                .toFlowable()
+                .onErrorReturnItem(Status.ERROR)
+                .last(Status.SUCCESS)
+                .cast(Status.class)
+                .toFlowable());
+    }
+
+    private Completable addProjectsToDb(List<Project> projects) {
         if (projects == null) return Completable.complete();
         List<ProjectDb> projectDbs = projectConverter.modelToEntity(projects);
 
@@ -167,9 +229,9 @@ public class ProjectsRepository {
         Completable artifactsCompletable = Observable.fromIterable(projects)
                 .switchMapCompletable(project ->
                         localDb.userDao().insertUsersAndIgnoreIfExists(project.getMembersWithFounder())
-                                .andThen(localDb.tagDao().insertTags(tagConverter.modelToEntity(project.getTags())))
                                 .andThen(localDb.projectMemberCrossRefDao().insert(project))
-                                .andThen(localDb.projectTagCrossRefDao().insert(project)));
+                                .mergeWith(localDb.tagDao().insertTags(tagConverter.modelToEntity(project.getTags()))
+                                .andThen(localDb.projectTagCrossRefDao().insert(project))));
 
         return artifactsCompletable.andThen(projectCompletable);
     }

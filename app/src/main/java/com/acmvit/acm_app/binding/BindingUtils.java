@@ -2,6 +2,7 @@ package com.acmvit.acm_app.binding;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.View;
 
 import androidx.annotation.ColorInt;
 import androidx.arch.core.util.Function;

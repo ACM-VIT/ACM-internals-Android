@@ -1,10 +1,8 @@
-package com.acmvit.acm_app.pref;
+package com.acmvit.acm_app.db.pref;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.preference.Preference;
-import android.util.Log;
 
 public class BasePreferenceManager {
 

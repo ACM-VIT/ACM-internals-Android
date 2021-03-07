@@ -1,11 +1,8 @@
-package com.acmvit.acm_app.repository.converters;
+package com.acmvit.acm_app.converters;
 
 import com.acmvit.acm_app.model.Tag;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class TagConverter extends Converter<String, Tag> {
+public class TagString extends Converter<String, Tag> {
 
     @Override
     public String entityToModel(Tag tag) {

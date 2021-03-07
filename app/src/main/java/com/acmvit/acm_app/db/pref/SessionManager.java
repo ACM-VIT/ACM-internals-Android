@@ -1,11 +1,10 @@
-package com.acmvit.acm_app.pref;
+package com.acmvit.acm_app.db.pref;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 import androidx.annotation.MainThread;
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.acmvit.acm_app.model.AuthToken;
