@@ -98,7 +98,7 @@ public class ProfileViewModel extends BaseViewModel {
                     state = State.STANDBY;
                 }
             }
-            .attachTo(status);
+                .attachTo(status);
         }
     }
 }

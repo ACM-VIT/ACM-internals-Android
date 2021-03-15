@@ -28,7 +28,7 @@ public class ServiceGenerator {
             .addConverterFactory(GsonConverterFactory.create());
 
         OkHttpClient.Builder clientBuilder = new OkHttpClient.Builder()
-        .addInterceptor(loggingInterceptor);
+            .addInterceptor(loggingInterceptor);
 
         baseClient = retrofitBuilder.client(clientBuilder.build()).build();
 

@@ -119,7 +119,7 @@ public class CLIPasswordViewModel extends BaseViewModel {
                     }
                 }
             }
-            .attachTo(userRepository.setCliPassword(password.getValue()));
+                .attachTo(userRepository.setCliPassword(password.getValue()));
 
             dismissDialog();
         }

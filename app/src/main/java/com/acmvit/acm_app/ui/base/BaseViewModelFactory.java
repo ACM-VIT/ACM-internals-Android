@@ -18,7 +18,7 @@ public class BaseViewModelFactory implements ViewModelProvider.Factory {
                 activity,
                 new ViewModelProvider.NewInstanceFactory()
             )
-            .get(ActivityViewModel.class);
+                .get(ActivityViewModel.class);
         application = activity.getApplication();
     }
 

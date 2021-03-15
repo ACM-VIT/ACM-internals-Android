@@ -54,7 +54,7 @@ public class EditProfileFragment extends Fragment {
         );
         viewModel =
             new ViewModelProvider(this, factory)
-            .get(EditProfileViewModel.class);
+                .get(EditProfileViewModel.class);
 
         binding.setViewmodel(viewModel);
         initObservers();

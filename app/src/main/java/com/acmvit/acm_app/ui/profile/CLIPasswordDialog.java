@@ -45,7 +45,7 @@ public class CLIPasswordDialog extends DialogFragment {
         );
         viewModel =
             new ViewModelProvider(this, factory)
-            .get(CLIPasswordViewModel.class);
+                .get(CLIPasswordViewModel.class);
 
         binding.setViewmodel(viewModel);
         initObservers();

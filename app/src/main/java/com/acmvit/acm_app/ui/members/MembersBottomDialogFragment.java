@@ -55,7 +55,7 @@ public class MembersBottomDialogFragment extends BottomSheetDialogFragment {
                 this,
                 new BaseViewModelFactory((BaseActivity) getActivity())
             )
-            .get(MembersBottomViewModel.class);
+                .get(MembersBottomViewModel.class);
         binding.setViewmodel(viewModel);
         binding.searchBar.clearFocus();
 

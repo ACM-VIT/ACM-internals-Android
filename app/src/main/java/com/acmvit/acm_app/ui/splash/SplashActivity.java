@@ -26,7 +26,7 @@ public class SplashActivity extends AppCompatActivity {
                 this,
                 new ViewModelProvider.AndroidViewModelFactory(getApplication())
             )
-            .get(SplashViewModel.class);
+                .get(SplashViewModel.class);
 
         BasePreferenceManager basePreferenceManager = new BasePreferenceManager(
             this

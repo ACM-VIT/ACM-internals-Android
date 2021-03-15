@@ -207,7 +207,7 @@ public abstract class PaginatedNetworkBoundResource<RequestType, ResultModel> {
                     }
                 }
             }
-            .attachTo(response);
+                .attachTo(response);
         }
 
         @SuppressLint("CheckResult")

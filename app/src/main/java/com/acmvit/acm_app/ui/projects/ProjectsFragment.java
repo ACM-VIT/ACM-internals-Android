@@ -75,7 +75,7 @@ public class ProjectsFragment extends Fragment {
                 this,
                 new BaseViewModelFactory((BaseActivity) getActivity())
             )
-            .get(ProjectsViewModel.class);
+                .get(ProjectsViewModel.class);
         binding.setViewmodel(viewModel);
         savedStateHandle =
             navController

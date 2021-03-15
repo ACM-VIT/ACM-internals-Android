@@ -36,7 +36,7 @@ public class LoginActivity extends BaseActivity {
         googleSignInClient = acmApp.getmGoogleSignInClient();
         loginViewModel =
             new ViewModelProvider(this, new BaseViewModelFactory(this))
-            .get(LoginViewModel.class);
+                .get(LoginViewModel.class);
 
         binding.setLifecycleOwner(this);
         binding.setViewmodel(loginViewModel);
